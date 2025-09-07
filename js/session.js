@@ -95,37 +95,17 @@ async function sendHeartbeat() {
     }
 }
 
-// Subscribe to realtime updates for session conflicts
+// SIMPLIFIED: Remove warning system, just monitor for session deletion
 function subscribeToRealtimeUpdates() {
     console.log('Setting up realtime subscription...');
     
-    const keyId = localStorage.getItem('key_id');
     const sessionId = localStorage.getItem('session_id');
-    const deviceFingerprint = localStorage.getItem('device_fingerprint');
     
-    if (!keyId || !sessionId) return;
+    if (!sessionId) return;
     
-    // Subscribe to changes in active_sessions table
+    // Only subscribe to deletion of current session
     realtimeSubscription = supabase
         .channel('session-monitor')
-        .on(
-            'postgres_changes',
-            {
-                event: 'INSERT',
-                schema: 'public',
-                table: 'active_sessions',
-                filter: `key_id=eq.${keyId}`
-            },
-            (payload) => {
-                console.log('New session detected:', payload);
-                
-                // Check if it's a different device
-                if (payload.new.device_fingerprint !== deviceFingerprint) {
-                    console.log('Different device logged in!');
-                    showLogoutWarning();
-                }
-            }
-        )
         .on(
             'postgres_changes',
             {
@@ -136,7 +116,7 @@ function subscribeToRealtimeUpdates() {
             },
             (payload) => {
                 console.log('Session deleted:', payload);
-                forceLogout('Your session has been terminated.');
+                forceLogout('Your session has been terminated by an administrator.');
             }
         )
         .subscribe((status) => {
@@ -144,73 +124,11 @@ function subscribeToRealtimeUpdates() {
         });
 }
 
-// Show logout warning modal
-function showLogoutWarning() {
-    console.log('Showing logout warning...');
-    
-    // Show warning modal
-    const modal = document.getElementById('sessionWarning');
-    modal.style.display = 'flex';
-    
-    // Start countdown
-    let countdown = 15;
-    const countdownElement = document.getElementById('warningCountdown');
-    
-    const countdownInterval = setInterval(() => {
-        countdown--;
-        countdownElement.textContent = countdown;
-        
-        if (countdown <= 0) {
-            clearInterval(countdownInterval);
-            forceLogout('Logged out due to session conflict.');
-        }
-    }, 1000);
-    
-    // Store interval so we can cancel it
-    warningTimeout = countdownInterval;
-}
+// REMOVED: showLogoutWarning function (delete this entire function)
+// REMOVED: cancelLogout function (delete this entire function)
+// REMOVED: deleteOtherSessions function (delete this entire function)
 
-// Cancel logout (user wants to stay)
-function cancelLogout() {
-    console.log('User canceling logout...');
-    
-    // Hide modal
-    document.getElementById('sessionWarning').style.display = 'none';
-    
-    // Stop countdown
-    if (warningTimeout) {
-        clearInterval(warningTimeout);
-    }
-    
-    // Force delete other sessions with same key
-    deleteOtherSessions();
-}
-
-// Delete other sessions using the same key
-async function deleteOtherSessions() {
-    const keyId = localStorage.getItem('key_id');
-    const sessionId = localStorage.getItem('session_id');
-    
-    try {
-        // Delete all sessions with this key except current one
-        const { error } = await supabase
-            .from('active_sessions')
-            .delete()
-            .eq('key_id', keyId)
-            .neq('id', sessionId);
-        
-        if (error) {
-            console.error('Error deleting other sessions:', error);
-        } else {
-            console.log('Other sessions deleted');
-        }
-        
-    } catch (error) {
-        console.error('Failed to delete other sessions:', error);
-    }
-}
-
-// Force logout
+// Keep the forceLogout function as is, but remove warning-related code
 function forceLogout(message) {
     console.log('Forcing logout:', message);
     

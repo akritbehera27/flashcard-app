@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- ADD THESE NEW ELEMENTS -->
+    <!-- Theme toggle button -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode">
+        <span class="icon" id="themeIcon">🌙</span>
+    </button>
+    
+    <!-- Mobile menu toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()" title="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <!-- Sidebar overlay for mobile -->
+    <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+
     <!-- Main app container -->
     <div class="app-container">
         
@@ -100,20 +116,11 @@
         </main>
     </div>
     
-    <!-- Session warning modal (hidden by default) -->
-    <div id="sessionWarning" class="modal" style="display: none;">
-        <div class="modal-content warning">
-            <h2>⚠️ Session Conflict Detected!</h2>
-            <p>Another device is trying to log in with your access key.</p>
-            <p>You will be logged out in <span id="warningCountdown">15</span> seconds.</p>
-            <button onclick="cancelLogout()">Stay Logged In</button>
-        </div>
-    </div>
-    
     <!-- Load required scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/config.js"></script>
     <script src="js/session.js"></script>
     <script src="js/flashcards.js"></script>
+    <script src="js/theme.js"></script>
 </body>
 </html>

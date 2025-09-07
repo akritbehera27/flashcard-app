@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- ADD THIS -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" 
+            style="position: fixed; top: 1rem; right: 1rem; z-index: 1000;">
+        <span class="icon" id="themeIcon">🌙</span>
+    </button>
+
     <!-- Main login container -->
     <div class="login-container">
         <!-- Logo/Title -->
@@ -57,5 +63,6 @@
     
     <!-- Load our authentication logic -->
     <script src="js/auth.js"></script>
+    <script src="js/theme.js"></script>
 </body>
 </html>

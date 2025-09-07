@@ -74,7 +74,7 @@ function toggleLoading(show) {
     }
 }
 
-// Main login function
+// Main login function - UPDATED VERSION
 async function login() {
     // Get the access key from input field
     const keyInput = document.getElementById('accessKey').value.trim();
@@ -96,7 +96,7 @@ async function login() {
             .select('*')
             .eq('key_code', keyInput)
             .eq('is_active', true)
-            .single(); // Expect only one result
+            .single();
         
         if (keyError || !keyData) {
             throw new Error('Invalid or inactive access key');
@@ -113,29 +113,17 @@ async function login() {
             .from('active_sessions')
             .select('*')
             .eq('key_id', keyData.id)
-            .gte('last_heartbeat', new Date(Date.now() - 120000).toISOString()); // Active in last 2 minutes
+            .gte('last_heartbeat', new Date(Date.now() - 120000).toISOString());
         
-        // Step 4: Check if someone else is using this key
+        // Step 4: NEW LOGIC - Just check if key is in use by another device
         if (existingSessions && existingSessions.length > 0) {
             const otherDevice = existingSessions.find(s => s.device_fingerprint !== deviceFingerprint);
             
             if (otherDevice) {
-                // Someone else is logged in with this key
-                showError('This key is already in use on another device. The other device will be logged out in 15 seconds.');
-                
-                // Delete the other session after warning period
-                setTimeout(async () => {
-                    await supabase
-                        .from('active_sessions')
-                        .delete()
-                        .eq('id', otherDevice.id);
-                    
-                    // Try login again
-                    login();
-                }, 15000);
-                
+                // CHANGED: Don't auto-logout, just show error
                 toggleLoading(false);
-                return;
+                showError('This key is currently in use on another device. Please use a different key or wait for the other session to end.');
+                return; // Stop here, don't proceed with login
             }
         }
         
@@ -164,7 +152,7 @@ async function login() {
         
         console.log('Session created:', newSession);
         
-        // Step 7: Store session information in browser's local storage
+        // Step 7: Store session information
         localStorage.setItem('session_id', newSession.id);
         localStorage.setItem('key_id', keyData.id);
         localStorage.setItem('device_fingerprint', deviceFingerprint);
