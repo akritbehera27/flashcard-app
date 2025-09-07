@@ -46,16 +46,34 @@ async function getIPAddress() {
     }
 }
 
-// Show error message to user
+// Show error message to user - IMPROVED VERSION
 function showError(message) {
     const errorDiv = document.getElementById('errorMessage');
-    errorDiv.textContent = message;
-    errorDiv.style.display = 'block';
     
-    // Hide error after 5 seconds
-    setTimeout(() => {
+    if (message) {
+        // Show error with message
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+        
+        // Hide error after 5 seconds
+        setTimeout(() => {
+            errorDiv.style.display = 'none';
+            errorDiv.textContent = '';
+        }, 5000);
+    } else {
+        // Hide error if no message
         errorDiv.style.display = 'none';
-    }, 5000);
+        errorDiv.textContent = '';
+    }
+}
+
+// Also add this function to clear errors
+function clearError() {
+    const errorDiv = document.getElementById('errorMessage');
+    if (errorDiv) {
+        errorDiv.style.display = 'none';
+        errorDiv.textContent = '';
+    }
 }
 
 // Show/hide loading spinner

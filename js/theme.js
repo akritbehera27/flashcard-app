@@ -6,8 +6,19 @@
 // Check for saved theme preference or default to 'light'
 const currentTheme = localStorage.getItem('theme') || 'light';
 
-// Apply the theme on page load
+// Apply the theme on page load - UPDATED
 document.documentElement.setAttribute('data-theme', currentTheme);
+
+// Update theme toggle on page load - UPDATED
+window.addEventListener('DOMContentLoaded', () => {
+    updateThemeIcon(currentTheme);
+    
+    // Set the toggle switch state if it exists
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.checked = currentTheme === 'dark';
+    }
+});
 
 // Update theme icon on page load
 window.addEventListener('DOMContentLoaded', () => {
@@ -31,14 +42,18 @@ function toggleTheme() {
     // Update icon
     updateThemeIcon(newTheme);
     
-    // Add a small animation to the button
-    const button = document.querySelector('.theme-toggle');
-    button.style.transform = 'scale(0.9)';
-    setTimeout(() => {
-        button.style.transform = 'scale(1)';
-    }, 200);
+    // Update toggle switch if it exists
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.checked = newTheme === 'dark';
+    }
+    
+    // Update floating button icon if it exists (for login/admin pages)
+    const floatingIcon = document.getElementById('themeIcon');
+    if (floatingIcon) {
+        floatingIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    }
 }
-
 // Update the theme toggle button icon
 function updateThemeIcon(theme) {
     const icon = document.getElementById('themeIcon');

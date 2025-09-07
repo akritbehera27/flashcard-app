@@ -5,13 +5,18 @@
 let isAdminAuthenticated = false;
 
 // Admin login
+// UPDATE the adminLogin function
 function adminLogin() {
     const password = document.getElementById('adminPassword').value;
+    const errorDiv = document.getElementById('adminError');
     
     if (password === ADMIN_PASSWORD) {
         isAdminAuthenticated = true;
         document.getElementById('adminAuth').style.display = 'none';
         document.getElementById('adminPanel').style.display = 'block';
+        
+        // Hide any error messages
+        errorDiv.style.display = 'none';
         
         // Load data
         loadKeys();
@@ -24,8 +29,14 @@ function adminLogin() {
         }, 10000);
         
     } else {
-        document.getElementById('adminError').textContent = 'Invalid password!';
-        document.getElementById('adminError').style.display = 'block';
+        // Show error message
+        errorDiv.textContent = 'Invalid password!';
+        errorDiv.style.display = 'block';
+        
+        // Hide error after 3 seconds
+        setTimeout(() => {
+            errorDiv.style.display = 'none';
+        }, 3000);
     }
 }
 

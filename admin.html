@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Flashcard App</title>
+    <title>Admin Panel</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,17 +15,23 @@
     <div class="admin-container">
         <h1>🔐 Admin Panel</h1>
         
-        <!-- Admin login -->
+        <!-- IMPROVED ADMIN LOGIN SECTION -->
         <div class="admin-auth" id="adminAuth">
             <h2>Admin Authentication</h2>
-            <input 
-                type="password" 
-                id="adminPassword" 
-                placeholder="Enter admin password"
-                onkeypress="if(event.key==='Enter') adminLogin()"
-            >
-            <button onclick="adminLogin()">Login as Admin</button>
-            <div id="adminError" class="error-message"></div>
+            <div class="auth-form">
+                <input 
+                    type="password" 
+                    id="adminPassword" 
+                    placeholder="Enter admin password"
+                    onkeypress="if(event.key==='Enter') adminLogin()"
+                    autocomplete="off"
+                >
+                <button onclick="adminLogin()">
+                    Login as Admin
+                </button>
+                <!-- Error message (hidden by default) -->
+                <div id="adminError" class="error-message" style="display: none;"></div>
+            </div>
         </div>
         
         <!-- Admin panel (hidden until authenticated) -->
@@ -38,7 +44,7 @@
                         type="text" 
                         id="newKeyInput" 
                         placeholder="Enter new key (e.g., STUDENT-001)"
-                        style="flex: 1;"
+                        style="flex: 1;padding: 4px;border-radius: 14px;"
                     >
                     <button onclick="createKey()">Create Key</button>
                 </div>
@@ -90,8 +96,7 @@
             <!-- Logout button -->
             <button 
                 onclick="adminLogout()" 
-                style="margin-top: 20px; background: #ef4444;"
-            >
+                style="margin-top: 20px; background: #ef4444;padding: 8px;border: 1px solid black;border-radius: 13px;">
                 Logout from Admin Panel
             </button>
         </div>

@@ -6,13 +6,7 @@
     <title>Flashcard Study App</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <!-- ADD THESE NEW ELEMENTS -->
-    <!-- Theme toggle button -->
-    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode">
-        <span class="icon" id="themeIcon">🌙</span>
-    </button>
-    
+<body>    
     <!-- Mobile menu toggle -->
     <button class="mobile-menu-toggle" onclick="toggleSidebar()" title="Toggle menu">
         <span></span>
@@ -47,6 +41,16 @@
                     <small>Access Key:</small>
                     <code id="userKey">...</code>
                 </div>
+
+                <!-- ADD THIS NEW THEME TOGGLE SECTION -->
+                <div class="theme-switcher">
+                    <label class="theme-switch">
+                        <span>🌙 Dark Mode</span>
+                        <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
                 <button class="logout-btn" onclick="logout()">
                     🚪 Logout
                 </button>

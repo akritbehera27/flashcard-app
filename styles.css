@@ -27,6 +27,13 @@
     /* Borders */
     --border-color: #e2e8f0;
     --border-light: #f1f5f9;
+
+    /* Imporved colours */
+    --input-bg: #ffffff;
+    --input-border: #d1d5db;
+    --input-focus: #6366f1;
+    --card-gradient-start: #ffffff;
+    --card-gradient-end: #f9fafb;
     
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -69,6 +76,12 @@
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5);
+
+    --input-bg: #1e293b;
+    --input-border: #475569;
+    --input-focus: #818cf8;
+    --card-gradient-start: #1e293b;
+    --card-gradient-end: #334155;
 }
 
 /* Reset and base styles */
@@ -164,7 +177,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .login-form {
-    background: var(--bg-primary);
+    background: linear-gradient(135deg, var(--card-gradient-start), var(--card-gradient-end));
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: var(--shadow-xl);
@@ -172,25 +185,39 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 400px;
     z-index: 1;
     position: relative;
+    border: 1px solid var(--border-color);
 }
 
-.login-form input {
+.login-form input,
+input[type="text"],
+input[type="password"],
+input[type="email"] {
     width: 100%;
     padding: 0.875rem 1rem;
     font-size: 1rem;
-    border: 2px solid var(--border-color);
+    border: 2px solid var(--input-border);
     border-radius: 0.75rem;
-    background: var(--bg-secondary);
+    background: var(--input-bg);
     color: var(--text-primary);
     transition: var(--transition);
     margin-bottom: 1rem;
 }
 
-.login-form input:focus {
+.login-form input:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
     outline: none;
-    border-color: var(--primary);
+    border-color: var(--input-focus);
     background: var(--bg-primary);
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Dark mode specific input adjustments */
+[data-theme="dark"] .login-form input:focus,
+[data-theme="dark"] input[type="text"]:focus,
+[data-theme="dark"] input[type="password"]:focus {
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
 }
 
 .login-form button {
@@ -539,6 +566,65 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: var(--shadow-sm);
 }
 
+.theme-switcher {
+    margin: 1rem 0;
+}
+
+.theme-switch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: var(--bg-primary);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.theme-switch:hover {
+    background: var(--bg-tertiary);
+}
+
+.theme-switch span:first-child {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.theme-switch .slider {
+    position: relative;
+    width: 48px;
+    height: 24px;
+    background: var(--border-color);
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+.theme-switch .slider::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.theme-switch input:checked + .slider {
+    background: var(--primary);
+}
+
+.theme-switch input:checked + .slider::before {
+    transform: translateX(24px);
+}
+
 /* Flashcard styles */
 .flashcard-container {
     flex: 1;
@@ -709,7 +795,7 @@ h1, h2, h3, h4, h5, h6 {
         right: 1rem;
     }
     
-    /* Sidebar becomes full-screen overlay on mobile */
+    /* Sidebar becomes full-screen overlay on mobile - UPDATED */
     .sidebar {
         position: fixed;
         top: 0;
@@ -720,11 +806,39 @@ h1, h2, h3, h4, h5, h6 {
         transform: translateX(-100%);
         z-index: 998;
         box-shadow: var(--shadow-xl);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden; /* Important: hide overflow on container */
     }
-    
+
     .sidebar.active {
         transform: translateX(0);
     }
+
+    /* Make chapter list scrollable - ADD THIS */
+    .chapter-list {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 1rem;
+        list-style: none;
+        min-height: 0; /* Important for flex scrolling */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+
+    /* Ensure footer stays at bottom - ADD THIS */
+    .sidebar-footer {
+        padding: 1rem;
+        border-top: 1px solid var(--border-color);
+        background: var(--bg-secondary);
+        margin-top: auto; /* Push to bottom */
+        flex-shrink: 0; /* Don't shrink */
+    }
+
+    /* Ensure header doesn't shrink - ADD THIS */
+    .sidebar-header {
+    flex-shrink: 0;
+}
     
     /* Add overlay when sidebar is open */
     .sidebar-overlay {
@@ -944,4 +1058,204 @@ button:active {
         box-shadow: none;
         border: 1px solid #000;
     }
+}
+
+/* ADMIN PANEL IMPROVEMENTS - Add at the end of the file */
+
+/* Button spacing in tables */
+.key-list td button {
+    margin: 0.25rem;
+    display: inline-block;
+}
+
+/* Responsive button layout for small screens */
+@media (max-width: 640px) {
+    .key-list td button {
+        display: block;
+        width: 100%;
+        margin: 0.25rem 0;
+    }
+    
+    .key-list td:last-child {
+        min-width: 120px;
+    }
+}
+
+/* Better spacing for admin auth */
+.admin-auth {
+    background: var(--bg-elevated);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    max-width: 400px;
+    margin: 2rem auto;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+}
+
+.admin-auth h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+}
+
+.admin-auth input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--input-border);
+    border-radius: 0.75rem;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    transition: var(--transition);
+}
+
+.admin-auth input:focus {
+    outline: none;
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.admin-auth button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.admin-auth button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+#adminError {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: var(--danger);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+/* Admin panel header styling */
+.admin-container > h1 {
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* Create key section improvements */
+.key-creation {
+    background: var(--bg-elevated);
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.key-creation h2 {
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.key-creation > div {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.key-creation input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--input-border);
+    border-radius: 0.5rem;
+    background: var(--input-bg);
+    color: var(--text-primary);
+}
+
+.key-creation button {
+    padding: 0.75rem 1.5rem;
+    background: var(--success);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.key-creation button:hover {
+    background: #059669;
+    transform: translateY(-2px);
+}
+
+#createKeyMessage {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+}
+
+/* Table improvements */
+.key-list {
+    background: var(--bg-elevated);
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+    overflow-x: auto;
+}
+
+.key-list h2 {
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.key-list table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1rem;
+}
+
+.key-list th {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.key-list td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.key-list tr:hover td {
+    background: var(--bg-secondary);
+}
+
+/* Code styling in tables */
+.key-list code {
+    padding: 0.25rem 0.5rem;
+    background: var(--bg-tertiary);
+    border-radius: 0.25rem;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.875rem;
+    color: var(--primary);
 }
