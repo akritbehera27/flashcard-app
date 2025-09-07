@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Flashcard App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        <h1>🔐 Admin Panel</h1>
+        
+        <!-- Admin login -->
+        <div class="admin-auth" id="adminAuth">
+            <h2>Admin Authentication</h2>
+            <input 
+                type="password" 
+                id="adminPassword" 
+                placeholder="Enter admin password"
+                onkeypress="if(event.key==='Enter') adminLogin()"
+            >
+            <button onclick="adminLogin()">Login as Admin</button>
+            <div id="adminError" class="error-message"></div>
+        </div>
+        
+        <!-- Admin panel (hidden until authenticated) -->
+        <div id="adminPanel" style="display: none;">
+            <!-- Create new key section -->
+            <div class="key-creation">
+                <h2>Create New Access Key</h2>
+                <div style="display: flex; gap: 10px;">
+                    <input 
+                        type="text" 
+                        id="newKeyInput" 
+                        placeholder="Enter new key (e.g., STUDENT-001)"
+                        style="flex: 1;"
+                    >
+                    <button onclick="createKey()">Create Key</button>
+                </div>
+                <div id="createKeyMessage"></div>
+            </div>
+            
+            <!-- List of existing keys -->
+            <div class="key-list">
+                <h2>Manage Access Keys</h2>
+                <table id="keysTable">
+                    <thead>
+                        <tr>
+                            <th>Key Code</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                            <th>Active Sessions</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="keysTableBody">
+                        <tr>
+                            <td colspan="5" style="text-align: center;">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Active sessions -->
+            <div class="key-list" style="margin-top: 40px;">
+                <h2>Active Sessions</h2>
+                <table id="sessionsTable">
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Device</th>
+                            <th>IP Address</th>
+                            <th>Last Active</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sessionsTableBody">
+                        <tr>
+                            <td colspan="5" style="text-align: center;">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Logout button -->
+            <button 
+                onclick="adminLogout()" 
+                style="margin-top: 20px; background: #ef4444;"
+            >
+                Logout from Admin Panel
+            </button>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard App - Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main login container -->
+    <div class="login-container">
+        <!-- Logo/Title -->
+        <div class="login-header">
+            <h1>📚 Flashcard Study App</h1>
+            <p>Enter your access key to continue</p>
+        </div>
+        
+        <!-- Login form -->
+        <div class="login-form">
+            <!-- Input field for access key -->
+            <input 
+                type="text" 
+                id="accessKey" 
+                placeholder="Enter your access key"
+                onkeypress="handleKeyPress(event)"
+                autocomplete="off"
+            >
+            
+            <!-- Login button -->
+            <button id="loginBtn" onclick="login()">
+                Access Flashcards
+            </button>
+            
+            <!-- Error message display (hidden by default) -->
+            <div id="errorMessage" class="error-message"></div>
+            
+            <!-- Loading spinner (hidden by default) -->
+            <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                <div class="spinner"></div>
+                <p>Verifying access key...</p>
+            </div>
+        </div>
+        
+        <!-- Demo information -->
+        <div class="demo-info">
+            <p>Demo Keys for Testing:</p>
+            <code>TEST-KEY-123</code>
+            <code>DEMO-KEY-456</code>
+        </div>
+    </div>
+    
+    <!-- Load Supabase library from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Load our configuration file -->
+    <script src="js/config.js"></script>
+    
+    <!-- Load our authentication logic -->
+    <script src="js/auth.js"></script>
+</body>
+</html>

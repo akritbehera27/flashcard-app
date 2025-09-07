@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard Study App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main app container -->
+    <div class="app-container">
+        
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <!-- Sidebar header -->
+            <div class="sidebar-header">
+                <h2>📚 Study Decks</h2>
+                <button class="refresh-btn" onclick="loadChapters()" title="Refresh chapters">
+                    🔄
+                </button>
+            </div>
+            
+            <!-- List of available chapters/decks -->
+            <ul id="chapterList" class="chapter-list">
+                <li class="loading">Loading chapters...</li>
+            </ul>
+            
+            <!-- User info and logout -->
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <small>Access Key:</small>
+                    <code id="userKey">...</code>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    🚪 Logout
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header with stats -->
+            <div class="content-header">
+                <h1 id="currentDeck">Welcome! Select a deck to begin</h1>
+                <div class="stats">
+                    <span id="cardCounter">No cards loaded</span>
+                    <span id="sessionTimer">Session: 0:00</span>
+                </div>
+            </div>
+            
+            <!-- Flashcard display area -->
+            <div class="flashcard-container">
+                <!-- The actual flashcard -->
+                <div class="flashcard" id="flashcard" onclick="flipCard()">
+                    <!-- Front of card (Question) -->
+                    <div class="card-face card-front">
+                        <div class="card-label">QUESTION</div>
+                        <div class="card-content" id="questionText">
+                            Select a study deck from the sidebar to begin learning! 📖
+                        </div>
+                    </div>
+                    
+                    <!-- Back of card (Answer) -->
+                    <div class="card-face card-back">
+                        <div class="card-label">ANSWER</div>
+                        <div class="card-content" id="answerText">
+                            The answer will appear here
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip instruction -->
+                <p class="flip-hint" id="flipHint">Click the card to flip</p>
+            </div>
+            
+            <!-- Navigation controls -->
+            <div class="controls">
+                <button class="control-btn" onclick="previousCard()" id="prevBtn" disabled>
+                    ← Previous
+                </button>
+                
+                <div class="progress-indicator">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar"></div>
+                    </div>
+                </div>
+                
+                <button class="control-btn" onclick="nextCard()" id="nextBtn" disabled>
+                    Next →
+                </button>
+            </div>
+            
+            <!-- Keyboard shortcuts hint -->
+            <div class="keyboard-hints">
+                <span>⌨️ Shortcuts:</span>
+                <kbd>Space</kbd> Flip
+                <kbd>←</kbd> Previous
+                <kbd>→</kbd> Next
+            </div>
+        </main>
+    </div>
+    
+    <!-- Session warning modal (hidden by default) -->
+    <div id="sessionWarning" class="modal" style="display: none;">
+        <div class="modal-content warning">
+            <h2>⚠️ Session Conflict Detected!</h2>
+            <p>Another device is trying to log in with your access key.</p>
+            <p>You will be logged out in <span id="warningCountdown">15</span> seconds.</p>
+            <button onclick="cancelLogout()">Stay Logged In</button>
+        </div>
+    </div>
+    
+    <!-- Load required scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/flashcards.js"></script>
+</body>
+</html>
