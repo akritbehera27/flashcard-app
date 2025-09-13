@@ -6,53 +6,62 @@
     <title>Flashcard Study App</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>    
-    <!-- Mobile menu toggle -->
-    <button class="mobile-menu-toggle" onclick="toggleSidebar()" title="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
+<body>
+    <!-- Mobile menu toggle (hidden when sidebar is expanded) -->
+    <button class="mobile-menu-toggle" id="mobileMenuBtn" onclick="toggleSidebar()" title="Toggle menu">
+        <span class="icon menu-icon"></span>
     </button>
     
     <!-- Sidebar overlay for mobile -->
     <div class="sidebar-overlay" onclick="closeSidebar()"></div>
-
+    
     <!-- Main app container -->
     <div class="app-container">
         
         <!-- Left Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <!-- Sidebar header -->
             <div class="sidebar-header">
-                <h2>📚 Study Decks</h2>
-                <button class="refresh-btn" onclick="loadChapters()" title="Refresh chapters">
-                    🔄
-                </button>
+                <h2>Question Decks</h2>
+
+                <div class="sidebar-toggle-btn" onclick="toggleSidebarDesktop()" title="Toggle sidebar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </div>
+
             </div>
             
-            <!-- List of available chapters/decks -->
-            <ul id="chapterList" class="chapter-list">
-                <li class="loading">Loading chapters...</li>
-            </ul>
+            <!-- Sidebar content wrapper for proper scrolling -->
+            <div class="sidebar-content">
+                <!-- List of available chapters/decks -->
+                <ul id="chapterList" class="chapter-list">
+                    <li class="loading">Loading chapters...</li>
+                </ul>
+            </div>
             
-            <!-- User info and logout -->
+            <!-- User info and controls (fixed at bottom) -->
             <div class="sidebar-footer">
                 <div class="user-info">
                     <small>Access Key:</small>
                     <code id="userKey">...</code>
                 </div>
-
-                <!-- ADD THIS NEW THEME TOGGLE SECTION -->
+                
+                <!-- Theme switcher -->
                 <div class="theme-switcher">
                     <label class="theme-switch">
-                        <span>🌙 Dark Mode</span>
+                        <span class="icon theme-icon"></span>
+                        <span>Dark Mode</span>
                         <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
                         <span class="slider"></span>
                     </label>
                 </div>
-
-                <button class="logout-btn" onclick="logout()">
-                    🚪 Logout
+                
+                <button class="logout-btn" onclick="logout()" style="margin-bottom: 10px;">
+                    <span class="icon logout-icon"></span>
+                    <span>Logout</span>
                 </button>
             </div>
         </aside>
@@ -61,10 +70,14 @@
         <main class="main-content">
             <!-- Header with stats -->
             <div class="content-header">
-                <h1 id="currentDeck">Welcome! Select a deck to begin</h1>
+                <h1 id="currentDeck">Welcome!</h1>
+            
                 <div class="stats">
                     <span id="cardCounter">No cards loaded</span>
-                    <span id="sessionTimer">Session: 0:00</span>
+                    <button class="shuffle-btn" id="shuffleBtn" onclick="reshuffleCards()" 
+                    title="Reshuffle cards" style="display: none;display: inline-flex;gap: 0px;padding: 0px;">
+                <span>Reshuffle</span>
+            </button>
                 </div>
             </div>
             
@@ -76,7 +89,7 @@
                     <div class="card-face card-front">
                         <div class="card-label">QUESTION</div>
                         <div class="card-content" id="questionText">
-                            Select a study deck from the sidebar to begin learning! 📖
+                            <p>Select a deck to begin</p>
                         </div>
                     </div>
                     
@@ -96,7 +109,8 @@
             <!-- Navigation controls -->
             <div class="controls">
                 <button class="control-btn" onclick="previousCard()" id="prevBtn" disabled>
-                    ← Previous
+                    <span class="icon prev-icon"></span>
+                    <span>Previous</span>
                 </button>
                 
                 <div class="progress-indicator">
@@ -106,7 +120,8 @@
                 </div>
                 
                 <button class="control-btn" onclick="nextCard()" id="nextBtn" disabled>
-                    Next →
+                    <span>Next</span>
+                    <span class="icon next-icon"></span>
                 </button>
             </div>
             
@@ -123,8 +138,49 @@
     <!-- Load required scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/config.js"></script>
+    <script src="js/icons.js"></script>
     <script src="js/session.js"></script>
     <script src="js/flashcards.js"></script>
     <script src="js/theme.js"></script>
+    
+<!-- UPDATE the initialization script at the bottom of app.html -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set all icon SVGs with error checking
+        const iconElements = [
+            { selector: '.menu-icon', icon: 'menu' },
+            { selector: '.book-icon', icon: 'book' },
+            { selector: '.collapse-icon', icon: 'collapse' },
+            { selector: '.theme-icon', icon: 'moon' },
+            { selector: '.logout-icon', icon: 'logout' },
+            { selector: '.prev-icon', icon: 'chevronLeft' },
+            { selector: '.next-icon', icon: 'chevronRight' },
+            { selector: '.shuffle-icon', icon: 'shuffle' }  // Make sure this is included
+        ];
+        
+        iconElements.forEach(({ selector, icon }) => {
+            const element = document.querySelector(selector);
+            if (element && icons[icon]) {
+                element.innerHTML = icons[icon];
+            } else if (element) {
+                console.warn(`Icon ${icon} not found for ${selector}`);
+            } else {
+                console.warn(`Element ${selector} not found`);
+            }
+        });
+    });
+</script>
+
+
+    <div id="logoutOverlay" class="logout-overlay" style="display: none;">
+        <div class="logout-message" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div class="logout-spinner"></div>
+            <h3>Logging out...</h3>
+            <p>Thank you for studying!</p>
+        </div>
+    </div>
+
+    <!-- Then your existing scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </body>
 </html>

@@ -118,6 +118,7 @@ h1, h2, h3, h4, h5, h6 {
 .login-container {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 1rem;
@@ -165,14 +166,14 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
 }
 
-.login-header h1 {
+.login-header_title {
     font-size: clamp(2rem, 5vw, 3rem);
     margin-bottom: 0.5rem;
     font-weight: 700;
 }
 
 .login-header p {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     opacity: 0.9;
 }
 
@@ -352,7 +353,7 @@ input[type="email"]:focus {
     font-size: 1.25rem;
 }
 
-/* Mobile menu toggle */
+/* MOBILE MENU TOGGLE - IMPROVED VERSION */
 .mobile-menu-toggle {
     display: none;
     position: fixed;
@@ -364,35 +365,68 @@ input[type="email"]:focus {
     border-radius: 0.75rem;
     padding: 0.625rem;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.3s ease;
     box-shadow: var(--shadow-md);
+    color: var(--text-primary);
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
 }
 
 .mobile-menu-toggle:hover {
     transform: scale(1.05);
+    background: var(--primary);
+    color: white;
 }
 
-.mobile-menu-toggle span {
-    display: block;
+.mobile-menu-toggle .icon {
     width: 24px;
-    height: 2px;
-    background: var(--text-primary);
-    margin: 5px 0;
-    transition: var(--transition);
+    height: 24px;
 }
 
+/* Show mobile menu button only on mobile devices */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex !important; /* Always show on mobile by default */
+    }
+    
+    /* Hide when sidebar is active (open) */
+    .sidebar.active ~ .mobile-menu-toggle,
+    body:has(.sidebar.active) .mobile-menu-toggle {
+        display: none !important;
+    }
+}
+
+/* Desktop behavior for menu button */
+@media (min-width: 769px) {
+    .mobile-menu-toggle {
+        display: none; /* Hidden by default on desktop */
+    }
+    
+    /* Show only when sidebar is collapsed on desktop */
+    body:has(.sidebar.collapsed) .mobile-menu-toggle,
+    .sidebar.collapsed ~ .mobile-menu-toggle {
+        display: flex !important;
+    }
+}
 /* Sidebar styles */
+/* IMPROVED SIDEBAR WITH STICKY FOOTER - Replace existing sidebar styles */
+
 .sidebar {
     width: var(--sidebar-width);
     background: var(--bg-primary);
     border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     z-index: 100;
+    height: 100vh;
+    overflow: hidden;
 }
 
+/* Sidebar header - fixed at top */
 .sidebar-header {
     padding: 1.5rem;
     background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
@@ -400,6 +434,71 @@ input[type="email"]:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
+    min-height: 72px;
+}
+
+/* Sidebar content - scrollable middle section */
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
+    padding: 1rem;
+    padding-bottom: 2rem; /* Add padding to prevent content hiding behind footer */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Sidebar footer - ALWAYS at bottom */
+.sidebar-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    border-top: 2px solid var(--border-color);
+    background: var(--bg-primary); /* Changed from secondary to match sidebar */
+    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Ensure it's above content */
+}
+
+/* Adjust content to account for fixed footer */
+.sidebar-content {
+    margin-bottom: 200px; /* Space for footer - adjust based on your footer height */
+}
+
+/* Chapter list text wrapping */
+.chapter-item {
+    display: flex;
+    align-items: center;
+    padding: 0.875rem;
+    margin-bottom: 0.5rem;
+    background: var(--bg-secondary);
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.chapter-name {
+    flex: 1;
+    font-weight: 500;
+    /* TEXT WRAPPING - max 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    max-width: 180px; /* Adjust based on your sidebar width */
+}
+
+.chapter-size {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    margin-left: auto;
+    flex-shrink: 0; /* Don't shrink */
+    padding-left: 0.5rem;
 }
 
 .sidebar-header h2 {
@@ -545,7 +644,7 @@ input[type="email"]:focus {
 }
 
 .content-header h1 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.36rem, 3vw, 1.5rem);
     color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
@@ -689,7 +788,7 @@ input[type="email"]:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    font-size: clamp(1.2rem, 2.5vw, 1.3rem);
     text-align: center;
     line-height: 1.6;
     overflow-y: auto;
@@ -796,24 +895,6 @@ input[type="email"]:focus {
     }
     
     /* Sidebar becomes full-screen overlay on mobile - UPDATED */
-    .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        max-width: 320px;
-        height: 100vh;
-        transform: translateX(-100%);
-        z-index: 998;
-        box-shadow: var(--shadow-xl);
-        display: flex;
-        flex-direction: column;
-        overflow: hidden; /* Important: hide overflow on container */
-    }
-
-    .sidebar.active {
-        transform: translateX(0);
-    }
 
     /* Make chapter list scrollable - ADD THIS */
     .chapter-list {
@@ -873,7 +954,7 @@ input[type="email"]:focus {
     }
     
     .card-content {
-        font-size: 1.125rem;
+        font-size: 1.2rem;
     }
     
     /* Stack controls vertically on mobile */
@@ -897,7 +978,7 @@ input[type="email"]:focus {
     
     /* Adjust stats for mobile */
     .stats {
-        flex-direction: column;
+        flex-direction: row;
     }
     
     .stats span {
@@ -906,11 +987,64 @@ input[type="email"]:focus {
     
     /* Mobile-specific text sizes */
     .content-header h1 {
-        font-size: 1.5rem;
+        font-size: 1.47rem;
     }
     
     .keyboard-hints {
         display: none; /* Hide keyboard hints on mobile */
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: 320px;
+        height: 100vh;
+        transform: translateX(-100%);
+        z-index: 998;
+        box-shadow: var(--shadow-xl);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    /* Hide desktop toggle button on mobile */
+    .sidebar-toggle-btn {
+        display: none;
+    }
+}
+
+/* Desktop collapsed sidebar adjustments */
+@media (min-width: 769px) {
+    .main-content {
+        transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .sidebar.collapsed + .main-content {
+        margin-left: 0;
+    }
+    
+    /* Show floating menu button when sidebar is collapsed */
+    .mobile-menu-toggle {
+        display: none;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 999;
+        background: var(--bg-elevated);
+        border: 2px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 0.625rem;
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: var(--shadow-md);
+        color: var(--text-primary);
+    }
+    
+    .sidebar.collapsed ~ .mobile-menu-toggle {
+        display: flex;
     }
 }
 
@@ -921,7 +1055,7 @@ input[type="email"]:focus {
     }
     
     .card-content {
-        font-size: 1rem;
+        font-size: 1.139rem;
     }
     
     .sidebar {
@@ -969,14 +1103,7 @@ button:active {
     padding: 2rem;
 }
 
-.admin-container h1 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: var(--text-primary);
-}
-
-.admin-auth,
-#adminPanel {
+.admin-auth,#adminPanel {
     background: var(--bg-elevated);
     padding: 2rem;
     border-radius: 1rem;
@@ -1148,11 +1275,11 @@ button:active {
 }
 
 /* Admin panel header styling */
-.admin-container > h1 {
+.admin-container-head-title {
     text-align: center;
     color: var(--text-primary);
     margin-bottom: 2rem;
-    font-size: 2.5rem;
+    font-size: 1.7rem;
     font-weight: 700;
 }
 
@@ -1166,7 +1293,7 @@ button:active {
 }
 
 .key-creation h2 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.6rem;
     color: var(--text-primary);
 }
 
@@ -1220,7 +1347,6 @@ button:active {
 }
 
 .key-list h2 {
-    margin-bottom: 1.5rem;
     color: var(--text-primary);
 }
 
@@ -1258,4 +1384,509 @@ button:active {
     font-family: 'Consolas', 'Monaco', monospace;
     font-size: 0.875rem;
     color: var(--primary);
+}
+
+.subheadings-admin-panel{
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+
+
+/*------------------- Added Things ------------------- */
+/* ADD THESE NEW STYLES at the end of the file */
+
+
+/* Desktop menu button styling */
+@media (min-width: 769px) {
+    .mobile-menu-toggle {
+        width: 48px;
+        height: 48px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .mobile-menu-toggle .icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .mobile-menu-toggle:hover {
+        transform: scale(1.05);
+        background: var(--primary);
+        color: white;
+    }
+}
+
+/* Ensure main content adjusts when sidebar collapses */
+.sidebar.collapsed + .main-content,
+.sidebar.collapsed ~ .main-content {
+    margin-left: 0;
+    width: 100%;
+}
+
+/* Smooth transitions for sidebar collapse */
+.sidebar,
+.sidebar * {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar.collapsed {
+    width: 0 !important;
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* Icon button improvements */
+.control-btn .icon {
+    margin: 0 0.25rem;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.logout-btn .icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Theme switch icon adjustment */
+.theme-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.theme-switch span:first-child {
+    min-width: 20px;
+}
+
+/* ADD THESE NEW STYLES */
+
+/* Deck header with reshuffle button */
+.deck-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.deck-header h1 {
+    margin-bottom: 0;
+}
+
+/* Reshuffle button */
+.reshuffle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--bg-elevated);
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--primary);
+}
+
+.reshuffle-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: rotate(180deg);
+}
+
+.reshuffle-btn .icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Ensure icons display properly */
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}
+
+.icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Icon placeholder for missing icons */
+.icon-placeholder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: var(--danger);
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Mobile adjustments for footer */
+@media (max-width: 768px) {
+    .sidebar-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        max-height: 240px; /* Limit height on mobile */
+    }
+    
+    .sidebar-content {
+        margin-bottom: 240px; /* Match footer max-height */
+    }
+    
+    .chapter-name {
+        max-width: 150px; /* Smaller on mobile */
+    }
+}
+
+/* Improve chapter item hover state */
+.chapter-item:hover {
+    background: var(--bg-tertiary);
+    transform: translateX(4px);
+    border-color: var(--primary-light);
+}
+
+.chapter-item.active {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.chapter-item.active .chapter-name {
+    font-weight: 600;
+}
+
+/* Ensure theme toggle and other footer elements are visible */
+.sidebar-footer .user-info,
+.sidebar-footer .theme-switcher,
+.sidebar-footer .logout-btn {
+    position: relative;
+    z-index: 1;
+}
+
+/* Better logout button styling */
+.logout-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--danger);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.logout-btn:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Control buttons icon alignment */
+.control-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.control-btn .icon {
+    flex-shrink: 0;
+}
+
+
+/* ADD THESE NEW STYLES */
+
+/* Login page icon styles */
+.login-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.login-logo .icon {
+    width: 40px;
+    height: 40px;
+    color: white;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.input-group input {
+    padding-left: 3rem;
+}
+
+/* Shuffle button in stats area */
+.shuffle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--bg-elevated);
+    border: 2px solid var(--primary);
+    border-radius: 0.75rem;
+    color: var(--primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease; /* Faster transition */
+}
+
+.shuffle-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Add a subtle click effect */
+.shuffle-btn:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Admin page button improvements */
+.admin-logout-btn {
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--danger);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.admin-logout-btn:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+}
+
+.create-btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--success);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.create-btn:hover {
+    background: #059669;
+    transform: translateY(-2px);
+}
+
+/* Icon enhancements */
+h1 .icon, h2 .icon {
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+button .icon {
+    flex-shrink: 0;
+}
+
+/* Demo info with icon */
+.demo-info p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Remove session timer specific styles */
+#sessionTimer {
+    display: none !important;
+}
+
+/* Better stats area layout */
+.stats {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Ensure sidebar toggle icon updates properly */
+.sidebar-toggle-btn {
+    transition: transform 0.3s ease;
+}
+
+.sidebar-toggle-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Dark mode adjustments for new elements */
+[data-theme="dark"] .input-icon {
+    color: var(--text-tertiary);
+}
+
+[data-theme="dark"] .login-logo {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .shuffle-btn {
+    background: var(--bg-tertiary);
+    border-color: var(--primary-light);
+}
+
+[data-theme="dark"] .shuffle-btn:hover {
+    background: var(--primary);
+}
+
+
+/* ============================================
+   LOGOUT OVERLAY STYLES
+   ============================================ */
+
+   .logout-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.logout-message {
+    background: var(--bg-elevated);
+    padding: 3rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow-xl);
+    animation: slideUp 0.4s ease;
+    max-width: 400px;
+    margin: 1rem;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.logout-spinner {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 1.5rem;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.logout-message h2 {
+    font-size: 1.75rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.logout-message p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .logout-overlay {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="dark"] .logout-message {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+}
+
+/* Blur effect for main content */
+.app-container.logging-out {
+    filter: blur(5px);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .logout-message {
+        padding: 2rem;
+        margin: 1rem;
+    }
+    
+    .logout-message h2 {
+        font-size: 1.5rem;
+    }
+    
+    .logout-spinner {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Smooth transition for blur effect */
+.app-container {
+    transition: filter 0.3s ease;
+}
+
+/* Prevent interaction during logout */
+.logout-overlay * {
+    pointer-events: none;
 }

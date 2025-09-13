@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcard App - Login</title>
+    <title>Flashcards Login</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- ADD THIS -->
-    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" 
-            style="position: fixed; top: 1rem; right: 1rem; z-index: 1000;">
-        <span class="icon" id="themeIcon">🌙</span>
+    <!-- Theme toggle button -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" style="color: var(--text-primary);">
+        <!-- <span class="icon" id="themeIcon"></span> -->
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
     </button>
 
     <!-- Main login container -->
     <div class="login-container">
         <!-- Logo/Title -->
         <div class="login-header">
-            <h1>📚 Flashcard Study App</h1>
-            <p>Enter your access key to continue</p>
+            <h1 class="login-header_title">Flashcards App</h1>
+            <p>Boost Your Memory In few clicks</p>
         </div>
         
         <!-- Login form -->
@@ -27,7 +37,7 @@
             <input 
                 type="text" 
                 id="accessKey" 
-                placeholder="Enter your access key"
+                placeholder="Passkey"
                 onkeypress="handleKeyPress(event)"
                 autocomplete="off"
             >
@@ -46,23 +56,38 @@
                 <p>Verifying access key...</p>
             </div>
         </div>
-        
-        <!-- Demo information -->
-        <div class="demo-info">
-            <p>Demo Keys for Testing:</p>
-            <code>TEST-KEY-123</code>
-            <code>DEMO-KEY-456</code>
-        </div>
+
     </div>
     
     <!-- Load Supabase library from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
-    <!-- Load our configuration file -->
+    <!-- Load our scripts -->
     <script src="js/config.js"></script>
-    
-    <!-- Load our authentication logic -->
+    <script src="js/icons.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/theme.js"></script>
+    
+    <!-- Initialize icons -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set login page icons
+            const iconMappings = [
+                { selector: '#themeIcon', icon: 'moon' },
+                { selector: '.login-book-icon', icon: 'book' },
+                { selector: '.key-icon', icon: 'key' },
+                { selector: '.login-icon', icon: 'login' },
+                { selector: '.info-icon', icon: 'info' }
+            ];
+            
+            iconMappings.forEach(({ selector, icon }) => {
+                const element = document.querySelector(selector);
+                if (element && icons[icon]) {
+                    element.innerHTML = icons[icon];
+                }
+            });
+        });
+    </script>
+</body>
 </body>
 </html>

@@ -129,6 +129,7 @@ function subscribeToRealtimeUpdates() {
 // REMOVED: deleteOtherSessions function (delete this entire function)
 
 // Keep the forceLogout function as is, but remove warning-related code
+// UPDATED Force logout function - with smooth overlay
 function forceLogout(message) {
     console.log('Forcing logout:', message);
     
@@ -145,17 +146,21 @@ function forceLogout(message) {
     // Clear local storage
     localStorage.clear();
     
-    // Show message and redirect
-    if (message) {
-        alert(message);
-    }
+    // Show logout overlay instead of alert
+    showLogoutOverlay(message);
     
-    window.location.href = 'index.html';
+    // Redirect after a short delay
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 1500); // 1.5 seconds delay for smooth transition
 }
 
-// Manual logout function
+// UPDATED Manual logout function
 async function logout() {
     console.log('User logging out...');
+    
+    // Show logout overlay immediately
+    showLogoutOverlay();
     
     const sessionId = localStorage.getItem('session_id');
     
@@ -171,8 +176,43 @@ async function logout() {
         }
     }
     
-    // Force logout
-    forceLogout('You have been logged out successfully.');
+    // Clear local storage
+    localStorage.clear();
+    
+    // Redirect after animation
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 1500);
+}
+
+// ADD THIS NEW FUNCTION - Show logout overlay
+function showLogoutOverlay(customMessage) {
+    const overlay = document.getElementById('logoutOverlay');
+    if (overlay) {
+        // Update message if custom message provided
+        if (customMessage && customMessage !== 'You have been logged out successfully.') {
+            const messageElement = overlay.querySelector('h2');
+            if (messageElement) {
+                messageElement.textContent = customMessage;
+            }
+        }
+        
+        // Show overlay with fade-in effect
+        overlay.style.display = 'flex';
+        overlay.style.opacity = '0';
+        
+        // Trigger animation
+        setTimeout(() => {
+            overlay.style.opacity = '1';
+        }, 10);
+        
+        // Add blur to main content
+        const appContainer = document.querySelector('.app-container');
+        if (appContainer) {
+            appContainer.style.filter = 'blur(5px)';
+            appContainer.style.transition = 'filter 0.3s ease';
+        }
+    }
 }
 
 // Clean up when page is closed

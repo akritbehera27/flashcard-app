@@ -8,16 +8,28 @@
 </head>
 <body>
     <!-- ADD THIS -->
-    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode">
-        <span class="icon" id="themeIcon">🌙</span>
+    <!-- Theme toggle button for admin page -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" style="color: var(--text-primary);">
+        <!-- <span class="icon" id="themeIcon"></span> -->
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
     </button>
 
     <div class="admin-container">
-        <h1>🔐 Admin Panel</h1>
+        <h1 class="admin-container-head-title">Admin Panel</h1>
         
         <!-- IMPROVED ADMIN LOGIN SECTION -->
         <div class="admin-auth" id="adminAuth">
-            <h2>Admin Authentication</h2>
+            <h2 style="margin-bottom: 1.4rem; font-size: 1.35rem;">Authentication</h2>
             <div class="auth-form">
                 <input 
                     type="password" 
@@ -38,13 +50,13 @@
         <div id="adminPanel" style="display: none;">
             <!-- Create new key section -->
             <div class="key-creation">
-                <h2>Create New Access Key</h2>
+                <h2 class="subheadings-admin-panel">Create New Access Key</h2>
                 <div style="display: flex; gap: 10px;">
                     <input 
                         type="text" 
                         id="newKeyInput" 
                         placeholder="Enter new key (e.g., STUDENT-001)"
-                        style="flex: 1;padding: 4px;border-radius: 14px;"
+                        style="flex: 1;border-radius: 14px; margin-bottom: 0px;"
                     >
                     <button onclick="createKey()">Create Key</button>
                 </div>
@@ -53,7 +65,7 @@
             
             <!-- List of existing keys -->
             <div class="key-list">
-                <h2>Manage Access Keys</h2>
+                <h2 class="subheadings-admin-panel">Manage Access Keys</h2>
                 <table id="keysTable">
                     <thead>
                         <tr>
@@ -74,7 +86,7 @@
             
             <!-- Active sessions -->
             <div class="key-list" style="margin-top: 40px;">
-                <h2>Active Sessions</h2>
+                <h2 class="subheadings-admin-panel">Active Sessions</h2>
                 <table id="sessionsTable">
                     <thead>
                         <tr>
@@ -96,7 +108,7 @@
             <!-- Logout button -->
             <button 
                 onclick="adminLogout()" 
-                style="margin-top: 20px; background: #ef4444;padding: 8px;border: 1px solid black;border-radius: 13px;">
+                style="margin-top: 20px; background: #ef4444;padding: 11px;border: 1px solid #000000b2;border-radius: 13px;color: white;">
                 Logout from Admin Panel
             </button>
         </div>
@@ -104,7 +116,36 @@
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/config.js"></script>
+    <script src="js/icons.js"></script>
     <script src="js/admin.js"></script>
     <script src="js/theme.js"></script>
+    
+    <!-- Initialize admin page icons -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set admin page icons
+            const iconMappings = [
+                { selector: '#themeIcon', icon: 'moon' },
+                { selector: '.admin-lock-icon', icon: 'lock' },
+                { selector: '.shield-icon', icon: 'shield' },
+                { selector: '.password-icon', icon: 'key' },
+                { selector: '.login-admin-icon', icon: 'login' },
+                { selector: '.plus-icon', icon: 'plus' },
+                { selector: '.check-icon', icon: 'check' },
+                { selector: '.list-icon', icon: 'list' },
+                { selector: '.users-icon', icon: 'users' },
+                { selector: '.logout-admin-icon', icon: 'logout' }
+            ];
+            
+            iconMappings.forEach(({ selector, icon }) => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(element => {
+                    if (element && icons[icon]) {
+                        element.innerHTML = icons[icon];
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

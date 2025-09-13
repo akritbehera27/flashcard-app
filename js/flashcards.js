@@ -1,26 +1,40 @@
 // ============================================
-// FLASHCARD LOGIC
+// FLASHCARD LOGIC - CLEANED VERSION
 // ============================================
-// This file handles loading and displaying flashcards
 
 // Global variables to store flashcard data
 let allChapters = [];        // List of all available chapters
-let currentCards = [];       // Cards in current deck
+let currentCards = [];       // Cards in current deck (always shuffled)
 let currentCardIndex = 0;    // Which card we're showing
 let isFlipped = false;       // Is the current card flipped?
 let currentChapterName = ''; // Name of current chapter
 
-// Start session timer
-let sessionStartTime = Date.now();
-let timerInterval;
+// Fisher-Yates shuffle algorithm - ALWAYS USED
+function shuffleArray(array) {
+    const shuffled = [...array]; // Create a copy
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
 
-// Function to update session timer display
-function updateSessionTimer() {
-    const elapsed = Math.floor((Date.now() - sessionStartTime) / 1000);
-    const minutes = Math.floor(elapsed / 60);
-    const seconds = elapsed % 60;
-    document.getElementById('sessionTimer').textContent = 
-        `Session: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+// Reshuffle current deck
+function reshuffleCards() {
+    if (currentCards.length === 0) return;
+    
+    console.log('Reshuffling cards...');
+    
+    // Reshuffle the current cards
+    currentCards = shuffleArray(currentCards);
+    
+    // Reset to first card
+    currentCardIndex = 0;
+    
+    // Display the new first card
+    displayCard();
+    
+    // That's it! No animations or messages
 }
 
 // Load list of available chapters from GitHub
@@ -154,7 +168,7 @@ function parseFlashcards(content, filename) {
     return cards;
 }
 
-// Load flashcards from selected chapter
+// Load flashcards from selected chapter - ALWAYS SHUFFLED
 async function loadFlashcards(file) {
     console.log('Loading flashcards from:', file.name);
     
@@ -169,19 +183,29 @@ async function loadFlashcards(file) {
         const content = await response.text();
         
         // Parse the flashcards
-        currentCards = parseFlashcards(content, file.name);
+        const parsedCards = parseFlashcards(content, file.name);
         
-        if (currentCards.length === 0) {
+        if (parsedCards.length === 0) {
             alert('No valid flashcards found in this file!\n\nMake sure your file uses the format:\nQ: Question here\nA: Answer here');
             return;
         }
+        
+        // ALWAYS SHUFFLE THE CARDS
+        currentCards = shuffleArray(parsedCards);
+        console.log(`Shuffled ${currentCards.length} cards`);
         
         // Reset to first card
         currentCardIndex = 0;
         currentChapterName = file.name.replace('.txt', '');
         
         // Update UI
-        document.getElementById('currentDeck').textContent = `📚 ${currentChapterName}`;
+        document.getElementById('currentDeck').textContent = currentChapterName;
+        
+        // Show shuffle button
+        const shuffleBtn = document.getElementById('shuffleBtn');
+        if (shuffleBtn) {
+            shuffleBtn.style.display = 'inline-flex';
+        }
         
         // Highlight selected chapter in sidebar
         document.querySelectorAll('.chapter-item').forEach((item, index) => {
@@ -199,6 +223,11 @@ async function loadFlashcards(file) {
         document.getElementById('prevBtn').disabled = false;
         document.getElementById('nextBtn').disabled = false;
         document.getElementById('flipHint').style.display = 'block';
+        
+        // AUTO-CLOSE SIDEBAR ON MOBILE after selecting chapter
+        if (window.innerWidth <= 768) {
+            closeSidebar();
+        }
         
     } catch (error) {
         console.error('Error loading flashcards:', error);
@@ -286,9 +315,12 @@ document.addEventListener('keydown', (event) => {
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Flashcard app initializing...');
+    console.log('Automatic shuffle is ENABLED for all decks');
     
     // Check authentication first
-    checkAuth();
+    if (typeof checkAuth === 'function') {
+        checkAuth();
+    }
     
     // Load chapters
     loadChapters();
@@ -296,17 +328,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Display user key
     const userKey = localStorage.getItem('access_key');
     if (userKey) {
-        document.getElementById('userKey').textContent = userKey;
-    }
-    
-    // Start session timer
-    timerInterval = setInterval(updateSessionTimer, 1000);
-    updateSessionTimer();
-});
-
-// Cleanup on page unload
-window.addEventListener('beforeunload', () => {
-    if (timerInterval) {
-        clearInterval(timerInterval);
+        const userKeyElement = document.getElementById('userKey');
+        if (userKeyElement) {
+            userKeyElement.textContent = userKey;
+        }
     }
 });
