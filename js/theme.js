@@ -71,45 +71,41 @@ function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.querySelector('.sidebar-overlay');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const menuIcon = mobileMenuBtn?.querySelector('.icon');
     
     // Check if we're on mobile or desktop
     const isMobile = window.innerWidth <= 768;
     
     if (isMobile) {
-        // Mobile behavior - slide in/out
+        // Mobile behavior - toggle sidebar
         const isOpening = !sidebar.classList.contains('active');
         
         if (isOpening) {
             // Opening sidebar
             sidebar.classList.add('active');
             overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            // Add class to body to prevent scrolling
+            document.body.classList.add('sidebar-open');
             
-            // Hide the menu button with animation
-            if (mobileMenuBtn) {
-                mobileMenuBtn.style.opacity = '0';
-                mobileMenuBtn.style.transform = 'scale(0.8)';
-                setTimeout(() => {
-                    mobileMenuBtn.style.display = 'none';
-                }, 300);
+            // Change icon to close
+            if (menuIcon) {
+                menuIcon.innerHTML = icons.close || icons.collapse;
             }
         } else {
             // Closing sidebar
             closeSidebar();
         }
     } else {
-        // Desktop behavior - expand collapsed sidebar
+        // Desktop behavior remains the same
         sidebar.classList.remove('collapsed');
         sidebarCollapsed = false;
         localStorage.setItem('sidebarCollapsed', false);
         
-        // Update icon
         const collapseIcon = document.querySelector('.collapse-icon');
         if (collapseIcon) {
             collapseIcon.innerHTML = icons.collapse;
         }
         
-        // Hide menu button on desktop
         if (mobileMenuBtn) {
             mobileMenuBtn.style.display = 'none';
         }
@@ -121,23 +117,22 @@ function closeSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.querySelector('.sidebar-overlay');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const menuIcon = mobileMenuBtn?.querySelector('.icon');
     
     // Remove active states
     sidebar.classList.remove('active');
     overlay.classList.remove('active');
-    document.body.style.overflow = '';
+    // Remove body scroll lock
+    document.body.classList.remove('sidebar-open');
     
-    // Show the menu button again on mobile with animation
+    // Change icon back to menu
+    if (menuIcon) {
+        menuIcon.innerHTML = icons.menu;
+    }
+    
+    // Keep button visible on mobile
     if (window.innerWidth <= 768 && mobileMenuBtn) {
         mobileMenuBtn.style.display = 'flex';
-        mobileMenuBtn.style.opacity = '0';
-        mobileMenuBtn.style.transform = 'scale(0.8)';
-        
-        // Animate button appearance
-        setTimeout(() => {
-            mobileMenuBtn.style.opacity = '1';
-            mobileMenuBtn.style.transform = 'scale(1)';
-        }, 100);
     }
 }
 
