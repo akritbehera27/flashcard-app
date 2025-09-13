@@ -436,9 +436,6 @@ input[type="email"]:focus {
     align-items: center;
     flex-shrink: 0;
     min-height: 72px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
 }
 
 /* Sidebar content - scrollable middle section */
@@ -446,50 +443,23 @@ input[type="email"]:focus {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
+    min-height: 0;
     padding: 1rem;
-    /* Remove the margin-bottom that was causing issues */
+    padding-bottom: 2rem; /* Add padding to prevent content hiding behind footer */
     -webkit-overflow-scrolling: touch;
-    /* Add some padding at bottom for last item visibility */
-    padding-bottom: 1rem;
 }
 
 /* Sidebar footer - ALWAYS at bottom */
 .sidebar-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     padding: 1rem;
     border-top: 2px solid var(--border-color);
-    background: var(--bg-primary);
+    background: var(--bg-primary); /* Changed from secondary to match sidebar */
     box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
-    /* Use sticky positioning instead of absolute */
-    position: sticky;
-    bottom: 0;
-    flex-shrink: 0;
-    z-index: 10;
-    /* Ensure it doesn't get too tall */
-    max-height: 40vh;
-    overflow-y: auto;
-}
-
-/* Custom scrollbar for sidebar content */
-.sidebar-content::-webkit-scrollbar,
-.sidebar-footer::-webkit-scrollbar {
-    width: 6px;
-}
-
-.sidebar-content::-webkit-scrollbar-track,
-.sidebar-footer::-webkit-scrollbar-track {
-    background: var(--bg-secondary);
-    border-radius: 3px;
-}
-
-.sidebar-content::-webkit-scrollbar-thumb,
-.sidebar-footer::-webkit-scrollbar-thumb {
-    background: var(--border-color);
-    border-radius: 3px;
-}
-
-.sidebar-content::-webkit-scrollbar-thumb:hover,
-.sidebar-footer::-webkit-scrollbar-thumb:hover {
-    background: var(--text-tertiary);
+    z-index: 10; /* Ensure it's above content */
 }
 
 /* Adjust content to account for fixed footer */
@@ -510,22 +480,17 @@ input[type="email"]:focus {
     border: 2px solid transparent;
 }
 
-.chapter-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
 .chapter-name {
     flex: 1;
     font-weight: 500;
+    /* TEXT WRAPPING - max 2 lines */
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.4;
-    word-break: break-word;
+    max-width: 180px; /* Adjust based on your sidebar width */
 }
 
 .chapter-size {
@@ -539,207 +504,6 @@ input[type="email"]:focus {
 .sidebar-header h2 {
     font-size: 1.25rem;
     font-weight: 700;
-}
-
-
-/* ============================================
-   MOBILE SPECIFIC SIDEBAR STYLES
-   ============================================ */
-
-   @media (max-width: 768px) {
-    .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        max-width: 320px;
-        height: 100vh;
-        height: 100dvh; /* Use dynamic viewport height for mobile */
-        transform: translateX(-100%);
-        z-index: 998;
-        box-shadow: var(--shadow-xl);
-        /* Ensure sidebar has its own scroll context */
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .sidebar.active {
-        transform: translateX(0);
-    }
-    
-    /* Ensure header stays at top on mobile */
-    .sidebar-header {
-        position: sticky;
-        top: 0;
-        flex-shrink: 0;
-    }
-    
-    /* Make content properly scrollable on mobile */
-    .sidebar-content {
-        flex: 1;
-        overflow-y: auto;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-        /* Add safe area for iOS devices */
-        padding-bottom: env(safe-area-inset-bottom, 1rem);
-        /* Ensure content is scrollable */
-        min-height: 0;
-    }
-    
-    /* Keep footer at bottom on mobile */
-    .sidebar-footer {
-        position: sticky;
-        bottom: 0;
-        background: var(--bg-primary);
-        border-top: 2px solid var(--border-color);
-        box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
-        /* Add safe area for iOS devices */
-        padding-bottom: env(safe-area-inset-bottom, 1rem);
-        flex-shrink: 0;
-        max-height: 50vh; /* Limit height on mobile */
-        overflow-y: auto; /* Make footer scrollable if content is too tall */
-    }
-    
-    /* Ensure chapter names wrap properly on mobile */
-    .chapter-name {
-        max-width: 180px;
-    }
-    
-    /* Hide desktop toggle button on mobile */
-    .sidebar-toggle-btn {
-        display: none;
-    }
-    
-    /* Show close button in header on mobile when sidebar is active */
-    .sidebar.active .sidebar-toggle-btn {
-        display: flex;
-        background: rgba(255, 255, 255, 0.2);
-        border: none;
-        width: 36px;
-        height: 36px;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        align-items: center;
-        justify-content: center;
-        color: white;
-    }
-}
-
-/* ============================================
-   DESKTOP COLLAPSED STATE
-   ============================================ */
-
-@media (min-width: 769px) {
-    /* Collapsed sidebar state */
-    .sidebar.collapsed {
-        width: 0;
-        border-right: none;
-    }
-    
-    .sidebar.collapsed * {
-        opacity: 0;
-        pointer-events: none;
-    }
-    
-    /* Ensure proper scrolling on desktop too */
-    .sidebar-content {
-        flex: 1;
-        min-height: 0;
-        overflow-y: auto;
-    }
-    
-    .sidebar-footer {
-        position: sticky;
-        bottom: 0;
-    }
-}
-
-/* ============================================
-   ADDITIONAL FIXES FOR MOBILE VIEWPORT
-   ============================================ */
-
-/* Prevent body scroll when sidebar is open on mobile */
-@media (max-width: 768px) {
-    body.sidebar-open {
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-    }
-}
-
-/* Sidebar overlay */
-.sidebar-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 997;
-}
-
-.sidebar-overlay.active {
-    display: block;
-}
-
-/* Ensure main content doesn't interfere with sidebar */
-.main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    overflow: auto;
-    position: relative;
-    /* Ensure main content has its own scroll context */
-    height: 100vh;
-}
-
-@media (max-width: 768px) {
-    .main-content {
-        padding: 1rem;
-        padding-top: 4rem; /* Space for fixed buttons */
-        /* Don't let main content affect sidebar */
-        z-index: 1;
-    }
-}
-
-/* ============================================
-   ENSURE INDEPENDENT SCROLLING
-   ============================================ */
-
-/* Make sure sidebar and main content scroll independently */
-.app-container {
-    display: flex;
-    height: 100vh;
-    background: var(--bg-secondary);
-    position: relative;
-    overflow: hidden; /* Prevent container from scrolling */
-}
-
-/* Each section handles its own overflow */
-.sidebar,
-.main-content {
-    overflow-y: auto;
-    height: 100vh;
-}
-
-/* On mobile, sidebar should be completely independent */
-@media (max-width: 768px) {
-    .sidebar {
-        /* Create new stacking context */
-        position: fixed;
-        isolation: isolate;
-    }
-    
-    .main-content {
-        /* Full height on mobile */
-        height: 100vh;
-        height: 100dvh;
-        overflow-y: auto;
-    }
 }
 
 .refresh-btn {
@@ -1231,16 +995,15 @@ input[type="email"]:focus {
     }
 
     .sidebar {
-        width: var(--sidebar-width);
-        background: var(--bg-primary);
-        border-right: 1px solid var(--border-color);
-        display: flex;
-        flex-direction: column;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        z-index: 100;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: 320px;
         height: 100vh;
-        overflow: hidden;
+        transform: translateX(-100%);
+        z-index: 998;
+        box-shadow: var(--shadow-xl);
     }
     
     .sidebar.active {
