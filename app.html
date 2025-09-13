@@ -43,7 +43,7 @@
             </div>
             
             <!-- User info and controls (fixed at bottom) -->
-            <div class="sidebar-footer" style="overflow-y: scroll;">
+            <div class="sidebar-footer">
                 <div class="user-info">
                     <small>Access Key:</small>
                     <code id="userKey">...</code>
@@ -84,12 +84,16 @@
             <!-- Flashcard display area -->
             <div class="flashcard-container">
                 <!-- The actual flashcard -->
-                <div class="flashcard" id="flashcard" onclick="flipCard()">
+                <div class="flashcard" id="flashcard" onclick="handleCardClick()">
                     <!-- Front of card (Question) -->
                     <div class="card-face card-front">
                         <div class="card-label">QUESTION</div>
                         <div class="card-content" id="questionText">
-                            <p>Select a deck to begin</p>
+                            <!-- UPDATED INITIAL MESSAGE -->
+                            <div class="initial-prompt" id="initialPrompt">
+                                <h5>Select a study deck.</h5>
+                                <span class="arrow-indicator">→</span>
+                            </div>
                         </div>
                     </div>
                     
@@ -103,7 +107,7 @@
                 </div>
                 
                 <!-- Flip instruction -->
-                <p class="flip-hint" id="flipHint">Click the card to flip</p>
+                <p class="flip-hint" id="flipHint" style="display: none;">Click the card to flip</p>
             </div>
             
             <!-- Navigation controls -->
@@ -155,17 +159,14 @@
             { selector: '.logout-icon', icon: 'logout' },
             { selector: '.prev-icon', icon: 'chevronLeft' },
             { selector: '.next-icon', icon: 'chevronRight' },
-            { selector: '.shuffle-icon', icon: 'shuffle' }  // Make sure this is included
+            { selector: '.shuffle-icon', icon: 'shuffle' },
+            { selector: '.select-deck-icon', icon: 'selectDeck' }  // ADD THIS
         ];
         
         iconElements.forEach(({ selector, icon }) => {
             const element = document.querySelector(selector);
             if (element && icons[icon]) {
                 element.innerHTML = icons[icon];
-            } else if (element) {
-                console.warn(`Icon ${icon} not found for ${selector}`);
-            } else {
-                console.warn(`Element ${selector} not found`);
             }
         });
     });

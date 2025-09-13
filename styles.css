@@ -173,7 +173,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .login-header p {
-    font-size: clamp(1.2rem, 4vw, 1.28rem);
+    font-size: clamp(1.2rem, 4vw, 1.26rem);
     opacity: 0.9;
 }
 
@@ -270,7 +270,7 @@ input[type="email"]:focus {
     justify-content: center;
     align-items: center;
     height: 40px;
-    font-size: 18px;
+    font-size: 1.07em;
     font-weight: 600;
     color: rgb(27, 25, 25);
 }
@@ -458,6 +458,7 @@ input[type="email"]:focus {
 
 /* Sidebar footer - ALWAYS at bottom */
 .sidebar-footer {
+    overflow: scroll !important;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -730,6 +731,148 @@ input[type="email"]:focus {
 .theme-switch input:checked + .slider::before {
     transform: translateX(24px);
 }
+
+
+/* Initial prompt when no deck is selected */
+.initial-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+    padding: 2rem;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+}
+
+.initial-prompt .icon {
+    width: 60px;
+    height: 60px;
+    color: var(--primary);
+    opacity: 0.8;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.initial-prompt h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.initial-prompt p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.arrow-indicator {
+    font-size: 2rem;
+    color: var(--primary);
+    animation: slideRight 1.5s ease-in-out infinite;
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@keyframes slideRight {
+    0%, 100% { transform: translateX(0) translateY(-50%); }
+    50% { transform: translateX(10px) translateY(-50%); }
+}
+
+/* When no cards are loaded, show pointer cursor */
+.flashcard:has(.initial-prompt) {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.flashcard:has(.initial-prompt):hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Add pulsing border when no deck is selected */
+.flashcard:has(.initial-prompt) {
+    position: relative;
+}
+
+.flashcard:has(.initial-prompt)::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    border-radius: inherit;
+    opacity: 0;
+    z-index: -1;
+    animation: pulse-border 2s ease-in-out infinite;
+}
+
+@keyframes pulse-border {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 0.5; }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .initial-prompt h3 {
+        font-size: 1.25rem;
+    }
+    
+    .initial-prompt p {
+        font-size: 0.875rem;
+    }
+    
+    .arrow-indicator {
+        display: none; /* Hide arrow on mobile */
+    }
+    
+    .initial-prompt .icon {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Hide initial prompt when cards are loaded */
+.flashcard:not(:has(.initial-prompt)) {
+    cursor: pointer; /* Still clickable for flipping */
+}
+
+/* Pulse animation for chapter list when opened */
+@keyframes pulse {
+    0%, 100% { 
+        background: var(--bg-secondary);
+    }
+    50% { 
+        background: var(--primary-light);
+        color: white;
+    }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .initial-prompt {
+    background: var(--bg-tertiary);
+    border-radius: 1rem;
+}
+
+[data-theme="dark"] .initial-prompt .icon {
+    color: var(--primary-light);
+}
+
+[data-theme="dark"] .flashcard:has(.initial-prompt)::before {
+    opacity: 0.3;
+}
+
 
 /* Flashcard styles */
 .flashcard-container {

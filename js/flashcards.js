@@ -9,6 +9,42 @@ let currentCardIndex = 0;    // Which card we're showing
 let isFlipped = false;       // Is the current card flipped?
 let currentChapterName = ''; // Name of current chapter
 
+
+function handleCardClick() {
+    // If no cards are loaded, open sidebar instead of flipping
+    if (currentCards.length === 0) {
+        console.log('No deck loaded - opening sidebar');
+        
+        // Check if we're on mobile or desktop
+        if (window.innerWidth <= 768) {
+            // Mobile - open sidebar
+            toggleSidebar();
+        } else {
+            // Desktop - check if sidebar is collapsed
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar && sidebar.classList.contains('collapsed')) {
+                // Expand sidebar
+                toggleSidebarDesktop();
+            }
+        }
+        
+        // Add a small animation to draw attention to sidebar
+        setTimeout(() => {
+            const chapterList = document.getElementById('chapterList');
+            if (chapterList) {
+                chapterList.style.animation = 'pulse 1s ease-in-out';
+                setTimeout(() => {
+                    chapterList.style.animation = '';
+                }, 1000);
+            }
+        }, 300);
+    } else {
+        // Normal behavior - flip the card
+        flipCard();
+    }
+}
+
+
 // Fisher-Yates shuffle algorithm - ALWAYS USED
 function shuffleArray(array) {
     const shuffled = [...array]; // Create a copy
@@ -235,21 +271,74 @@ async function loadFlashcards(file) {
     }
 }
 
+
+function resetToInitialState() {
+    // Clear current cards
+    currentCards = [];
+    currentCardIndex = 0;
+    
+    // Show initial prompt
+    const initialPrompt = document.getElementById('initialPrompt');
+    const questionElement = document.getElementById('questionText');
+    
+    if (initialPrompt) {
+        initialPrompt.style.display = 'flex';
+    } else if (questionElement) {
+        // Fallback if prompt doesn't exist
+        questionElement.innerHTML = `
+            <div class="initial-prompt" id="initialPrompt">
+                <h5>Select a study deck.</h5>
+                <span class="arrow-indicator">→</span>
+            </div>
+        `;
+    }
+    
+    // Reset other UI elements
+    document.getElementById('answerText').textContent = 'The answer will appear here';
+    document.getElementById('currentDeck').textContent = 'Welcome! Select a deck to begin';
+    document.getElementById('cardCounter').textContent = 'No cards loaded';
+    document.getElementById('flipHint').style.display = 'none';
+    
+    // Hide shuffle button
+    const shuffleBtn = document.getElementById('shuffleBtn');
+    if (shuffleBtn) {
+        shuffleBtn.style.display = 'none';
+    }
+    
+    // Disable navigation buttons
+    document.getElementById('prevBtn').disabled = true;
+    document.getElementById('nextBtn').disabled = true;
+}
+
+
 // Display current card
 function displayCard() {
     if (currentCards.length === 0) return;
     
+    // Hide initial prompt when cards are loaded
+    const initialPrompt = document.getElementById('initialPrompt');
+    if (initialPrompt) {
+        initialPrompt.style.display = 'none';
+    }
+    
     // Get current card
     const card = currentCards[currentCardIndex];
     
-    // Update card content
-    document.getElementById('questionText').textContent = card.question;
-    document.getElementById('answerText').textContent = card.answer;
+    // Update card content (show plain text, not the prompt)
+    const questionElement = document.getElementById('questionText');
+    const answerElement = document.getElementById('answerText');
+    
+    // Clear any HTML and set plain text
+    questionElement.textContent = card.question;
+    answerElement.textContent = card.answer;
     
     // Reset flip state (always show question first)
     isFlipped = false;
     const flashcard = document.getElementById('flashcard');
     flashcard.classList.remove('flipped');
+    
+    // Show flip hint when cards are loaded
+    document.getElementById('flipHint').style.display = 'block';
     
     // Update counter
     document.getElementById('cardCounter').textContent = 
