@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcard Study App</title>
+    <title>Pensapedia</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -43,7 +43,7 @@
             </div>
             
             <!-- User info and controls (fixed at bottom) -->
-            <div class="sidebar-footer">
+            <div class="sidebar-footer" style="overflow-y: scroll;">
                 <div class="user-info">
                     <small>Access Key:</small>
                     <code id="userKey">...</code>
@@ -59,7 +59,7 @@
                     </label>
                 </div>
                 
-                <button class="logout-btn" onclick="logout()" style="margin-bottom: 10px;">
+                <button class="logout-btn" onclick="logout()">
                     <span class="icon logout-icon"></span>
                     <span>Logout</span>
                 </button>
@@ -176,7 +176,7 @@
         <div class="logout-message" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <div class="logout-spinner"></div>
             <h3>Logging out...</h3>
-            <p>Thank you for studying!</p>
+            <p>Thank for visiting us!</p>
         </div>
     </div>
 

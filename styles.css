@@ -1,5 +1,5 @@
 /* ============================================
-   MODERN UI - COMPLETE REDESIGN
+   MODERN UI
    ============================================ */
 
    :root {
@@ -112,7 +112,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
-   LOGIN PAGE - MODERN DESIGN
+   LOGIN PAGE
    ============================================ */
 
 .login-container {
@@ -167,19 +167,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .login-header_title {
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(2rem, 7vw, 3rem);
     margin-bottom: 0.5rem;
     font-weight: 700;
 }
 
 .login-header p {
-    font-size: 1.25rem;
+    font-size: clamp(1.2rem, 4vw, 1.28rem);
     opacity: 0.9;
 }
 
 .login-form {
     background: linear-gradient(135deg, var(--card-gradient-start), var(--card-gradient-end));
-    padding: 2rem;
+    padding: 1.6rem;
     border-radius: 1rem;
     box-shadow: var(--shadow-xl);
     width: 100%;
@@ -246,6 +246,34 @@ input[type="email"]:focus {
     transform: translateY(0);
 }
 
+/* Login page icon styles */
+.login-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.login-logo .icon {
+    width: 40px;
+    height: 40px;
+    color: white;
+}
+
+.index-footer{
+    background: var(--accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(27, 25, 25);
+}
 .error-message {
     padding: 0.75rem;
     background: rgba(239, 68, 68, 0.1);
@@ -287,35 +315,14 @@ input[type="email"]:focus {
     to { transform: rotate(360deg); }
 }
 
-.demo-info {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 0.75rem;
-    text-align: center;
-    z-index: 1;
-    position: relative;
-}
 
 [data-theme="dark"] .demo-info {
     background: rgba(30, 41, 59, 0.95);
 }
 
-.demo-info code {
-    display: inline-block;
-    margin: 0.25rem;
-    padding: 0.5rem 1rem;
-    background: var(--bg-tertiary);
-    border-radius: 0.5rem;
-    font-family: 'Consolas', 'Monaco', monospace;
-    font-size: 0.875rem;
-    color: var(--primary);
-    border: 1px solid var(--border-color);
-}
 
 /* ============================================
-   MAIN APP - RESPONSIVE LAYOUT
+   MAIN APP
    ============================================ */
 
 .app-container {
@@ -1615,24 +1622,6 @@ button:active {
 
 
 /* ADD THESE NEW STYLES */
-
-/* Login page icon styles */
-.login-logo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 80px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    margin-bottom: 1rem;
-}
-
-.login-logo .icon {
-    width: 40px;
-    height: 40px;
-    color: white;
-}
 
 .input-group {
     position: relative;
