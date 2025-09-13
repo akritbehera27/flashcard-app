@@ -18,7 +18,7 @@ const GITHUB_CONFIG = {
 };
 
 // Admin password for the admin panel (change this!)
-const ADMIN_PASSWORD = 'admin123';
+const ADMIN_PASSWORD = 'admin2712';
 
 // Initialize Supabase client (this creates our connection to the database)
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
