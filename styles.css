@@ -167,7 +167,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .login-header_title {
-    font-size: clamp(2rem, 7vw, 3rem);
+    /* font-size: clamp(2rem, 7vw, 3rem); */
+    font-size: 2.7em;
     margin-bottom: 0.5rem;
     font-weight: 700;
 }
@@ -270,7 +271,7 @@ input[type="email"]:focus {
     justify-content: center;
     align-items: center;
     height: 40px;
-    font-size: 1.07em;
+    font-size: 1em;
     font-weight: 600;
     color: rgb(27, 25, 25);
 }
@@ -458,12 +459,12 @@ input[type="email"]:focus {
 
 /* Sidebar footer - ALWAYS at bottom */
 .sidebar-footer {
-    overflow: scroll !important;
+    overflow-y: auto;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 1rem;
+    padding: 0.6rem;
     border-top: 2px solid var(--border-color);
     background: var(--bg-primary); /* Changed from secondary to match sidebar */
     box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -472,7 +473,7 @@ input[type="email"]:focus {
 
 /* Adjust content to account for fixed footer */
 .sidebar-content {
-    margin-bottom: 200px; /* Space for footer - adjust based on your footer height */
+    margin-bottom: 200px;
 }
 
 /* Chapter list text wrapping */
@@ -1032,6 +1033,11 @@ input[type="email"]:focus {
    MOBILE RESPONSIVE DESIGN
    ============================================ */
 
+.compact-info{
+    display: none;
+}
+
+
 @media (max-width: 768px) {
     /* Show mobile menu toggle */
     .mobile-menu-toggle {
@@ -1042,6 +1048,18 @@ input[type="email"]:focus {
     .theme-toggle {
         top: 1rem;
         right: 1rem;
+    }
+
+    .compact-info{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: var(--bg-secondary);
+        border-radius: 0.5rem;
+        margin-top: 10px;
+        padding: 0.9rem;
+        color: var(--text-tertiary);
     }
     
     /* Sidebar becomes full-screen overlay on mobile - UPDATED */
@@ -1059,6 +1077,7 @@ input[type="email"]:focus {
 
     /* Ensure footer stays at bottom - ADD THIS */
     .sidebar-footer {
+        height: 39vh;
         padding: 1rem;
         border-top: 1px solid var(--border-color);
         background: var(--bg-secondary);
