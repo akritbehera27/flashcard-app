@@ -1,5 +1,5 @@
 // ============================================
-// FLASHCARD LOGIC - CLEANED VERSION
+// FLASHCARD LOGIC - FIXED VERSION WITH FOLDERS
 // ============================================
 
 // Global variables to store flashcard data
@@ -8,8 +8,19 @@ let currentCards = [];       // Cards in current deck (always shuffled)
 let currentCardIndex = 0;    // Which card we're showing
 let isFlipped = false;       // Is the current card flipped?
 let currentChapterName = ''; // Name of current chapter
-let folderStructure = {};
+let folderStructure = {};    // Store folder structure
 
+// Fisher-Yates shuffle algorithm - ALWAYS USED
+function shuffleArray(array) {
+    const shuffled = [...array]; // Create a copy
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+// Handle card clicks
 function handleCardClick() {
     // If no cards are loaded, open sidebar instead of flipping
     if (currentCards.length === 0) {
@@ -44,18 +55,7 @@ function handleCardClick() {
     }
 }
 
-
-// Fisher-Yates shuffle algorithm - ALWAYS USED
-function shuffleArray(array) {
-    const shuffled = [...array]; // Create a copy
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-}
-
-// Reshuffle current deck
+// Reshuffle current deck - SIMPLIFIED VERSION
 function reshuffleCards() {
     if (currentCards.length === 0) return;
     
@@ -69,11 +69,9 @@ function reshuffleCards() {
     
     // Display the new first card
     displayCard();
-    
-    // That's it! No animations or messages
 }
 
-// Load list of available chapters from GitHub
+// Load list of available chapters from GitHub (WITH FOLDER SUPPORT)
 async function loadChapters() {
     console.log('Loading chapters and folders from GitHub...');
     
@@ -96,9 +94,10 @@ async function loadChapters() {
         
         const items = await response.json();
         
-        // Clear the list
+        // Clear the list and reset arrays
         chapterList.innerHTML = '';
         folderStructure = {};
+        allChapters = [];  // Reset the array
         
         // Separate folders and files
         const folders = items.filter(item => item.type === 'dir');
@@ -112,7 +111,7 @@ async function loadChapters() {
         // Then add root-level files
         if (files.length > 0) {
             // Add a section for root files if there are also folders
-            if (folders.length > 0 && files.length > 0) {
+            if (folders.length > 0) {
                 const generalSection = document.createElement('li');
                 generalSection.className = 'folder-section';
                 generalSection.innerHTML = `
@@ -127,25 +126,25 @@ async function loadChapters() {
                 chapterList.appendChild(generalSection);
                 
                 const generalContents = document.getElementById('folder-general');
-                files.forEach((file, index) => {
-                    addFileToList(file, generalContents, index);
+                files.forEach(file => {
+                    addFileToList(file, generalContents);
                 });
             } else {
                 // Just add files directly if no folders
-                files.forEach((file, index) => {
-                    addFileToList(file, chapterList, index);
+                files.forEach(file => {
+                    addFileToList(file, chapterList);
                 });
             }
+            
+            // Add root files to allChapters
+            allChapters.push(...files);
         }
-        
-        // Store all chapters for reference
-        allChapters = [...files];
         
         if (folders.length === 0 && files.length === 0) {
             chapterList.innerHTML = '<li class="error">No flashcard files or folders found</li>';
         }
         
-        console.log(`Loaded ${folders.length} folders and ${files.length} root files`);
+        console.log(`Loaded ${folders.length} folders and ${allChapters.length} total files`);
         
     } catch (error) {
         console.error('Error loading chapters:', error);
@@ -163,8 +162,7 @@ async function loadChapters() {
     }
 }
 
-
-// NEW FUNCTION: Load contents of a folder
+// Load contents of a folder
 async function loadFolderContents(folder, parentElement) {
     try {
         console.log(`Loading folder: ${folder.name}`);
@@ -210,11 +208,10 @@ async function loadFolderContents(folder, parentElement) {
             await loadFolderContents(subfolder, folderContentsElement);
         }
         
-        // Add files
-        files.forEach((file, index) => {
-            // Store file with folder path for proper loading
-            file.folderPath = folder.name;
-            addFileToList(file, folderContentsElement, index);
+        // Add files with folder path
+        files.forEach(file => {
+            file.folderPath = folder.name;  // Store folder path
+            addFileToList(file, folderContentsElement);
         });
         
         // Update count
@@ -235,43 +232,46 @@ async function loadFolderContents(folder, parentElement) {
     }
 }
 
-// NEW FUNCTION: Add file to the list
-function addFileToList(file, parentElement, index) {
+// Add file to the list - FIXED VERSION
+function addFileToList(file, parentElement) {
     const li = document.createElement('li');
     li.className = 'chapter-item';
     
     // Remove .txt extension for display
     const chapterName = file.name.replace('.txt', '');
     
-    // Add folder path to display if it exists
-    const displayName = file.folderPath ? `${chapterName}` : chapterName;
+    // Create display number based on total files loaded
+    const displayNumber = allChapters.length + 1;
     
     li.innerHTML = `
-        <span class="chapter-number">${index + 1}</span>
-        <span class="chapter-name" title="${displayName}">${displayName}</span>
+        <span class="chapter-number">${displayNumber}</span>
+        <span class="chapter-name" title="${chapterName}">${chapterName}</span>
         <span class="chapter-size">${(file.size / 1024).toFixed(1)}KB</span>
     `;
     
-    // Add click handler
+    // Add click handler - pass the file object directly, not index
     li.onclick = () => loadFlashcards(file);
     
     parentElement.appendChild(li);
 }
 
-// NEW FUNCTION: Toggle folder open/closed
+// Toggle folder open/closed
 function toggleFolder(folderName) {
     const folderContents = document.getElementById(`folder-${folderName}`);
-    const chevron = document.querySelector(`#folder-${folderName}`).previousElementSibling.querySelector('.chevron-icon');
+    const folderHeader = folderContents?.previousElementSibling;
+    const chevron = folderHeader?.querySelector('.chevron-icon');
     
     if (folderContents) {
         if (folderContents.style.display === 'none') {
             folderContents.style.display = 'block';
-            chevron?.classList.add('expanded');
-            chevron?.classList.remove('collapsed');
+            if (chevron) {
+                chevron.innerHTML = icons.chevronDown;
+            }
         } else {
             folderContents.style.display = 'none';
-            chevron?.classList.remove('expanded');
-            chevron?.classList.add('collapsed');
+            if (chevron) {
+                chevron.innerHTML = icons.chevronRight;
+            }
         }
     }
 }
@@ -332,7 +332,7 @@ function parseFlashcards(content, filename) {
     return cards;
 }
 
-// Load flashcards from selected chapter - ALWAYS SHUFFLED
+// Load flashcards from selected chapter - FIXED VERSION
 async function loadFlashcards(file) {
     console.log('Loading flashcards from:', file.name);
     
@@ -341,6 +341,12 @@ async function loadFlashcards(file) {
         document.getElementById('currentDeck').textContent = `Loading ${file.name}...`;
         document.getElementById('questionText').textContent = 'Loading...';
         document.getElementById('answerText').textContent = 'Loading...';
+        
+        // Hide initial prompt if it exists
+        const initialPrompt = document.getElementById('initialPrompt');
+        if (initialPrompt) {
+            initialPrompt.style.display = 'none';
+        }
         
         // Fetch the file content
         const response = await fetch(file.download_url);
@@ -371,9 +377,10 @@ async function loadFlashcards(file) {
             shuffleBtn.style.display = 'inline-flex';
         }
         
-        // Highlight selected chapter in sidebar
-        document.querySelectorAll('.chapter-item').forEach((item, index) => {
-            if (allChapters[index].name === file.name) {
+        // Highlight selected chapter in sidebar - FIXED
+        document.querySelectorAll('.chapter-item').forEach(item => {
+            const chapterNameElement = item.querySelector('.chapter-name');
+            if (chapterNameElement && chapterNameElement.textContent === currentChapterName) {
                 item.classList.add('active');
             } else {
                 item.classList.remove('active');
@@ -398,46 +405,6 @@ async function loadFlashcards(file) {
         alert('Error loading flashcards! Check console for details.');
     }
 }
-
-
-function resetToInitialState() {
-    // Clear current cards
-    currentCards = [];
-    currentCardIndex = 0;
-    
-    // Show initial prompt
-    const initialPrompt = document.getElementById('initialPrompt');
-    const questionElement = document.getElementById('questionText');
-    
-    if (initialPrompt) {
-        initialPrompt.style.display = 'flex';
-    } else if (questionElement) {
-        // Fallback if prompt doesn't exist
-        questionElement.innerHTML = `
-            <div class="initial-prompt" id="initialPrompt">
-                <h5>Select a study deck.</h5>
-                <span class="arrow-indicator">→</span>
-            </div>
-        `;
-    }
-    
-    // Reset other UI elements
-    document.getElementById('answerText').textContent = 'The answer will appear here';
-    document.getElementById('currentDeck').textContent = 'Welcome! Select a deck to begin';
-    document.getElementById('cardCounter').textContent = 'No cards loaded';
-    document.getElementById('flipHint').style.display = 'none';
-    
-    // Hide shuffle button
-    const shuffleBtn = document.getElementById('shuffleBtn');
-    if (shuffleBtn) {
-        shuffleBtn.style.display = 'none';
-    }
-    
-    // Disable navigation buttons
-    document.getElementById('prevBtn').disabled = true;
-    document.getElementById('nextBtn').disabled = true;
-}
-
 
 // Display current card
 function displayCard() {
@@ -509,6 +476,45 @@ function previousCard() {
         currentCardIndex--;
         displayCard();
     }
+}
+
+// Reset to initial state
+function resetToInitialState() {
+    // Clear current cards
+    currentCards = [];
+    currentCardIndex = 0;
+    
+    // Show initial prompt
+    const initialPrompt = document.getElementById('initialPrompt');
+    const questionElement = document.getElementById('questionText');
+    
+    if (initialPrompt) {
+        initialPrompt.style.display = 'flex';
+    } else if (questionElement) {
+        // Fallback if prompt doesn't exist
+        questionElement.innerHTML = `
+            <div class="initial-prompt" id="initialPrompt">
+                <h5>Select a study deck!</h5>
+                <span class="arrow-indicator">→</span>
+            </div>
+        `;
+    }
+    
+    // Reset other UI elements
+    document.getElementById('answerText').textContent = 'The answer will appear here';
+    document.getElementById('currentDeck').textContent = 'Welcome! Select a deck to begin';
+    document.getElementById('cardCounter').textContent = 'No cards loaded';
+    document.getElementById('flipHint').style.display = 'none';
+    
+    // Hide shuffle button
+    const shuffleBtn = document.getElementById('shuffleBtn');
+    if (shuffleBtn) {
+        shuffleBtn.style.display = 'none';
+    }
+    
+    // Disable navigation buttons
+    document.getElementById('prevBtn').disabled = true;
+    document.getElementById('nextBtn').disabled = true;
 }
 
 // Keyboard shortcuts

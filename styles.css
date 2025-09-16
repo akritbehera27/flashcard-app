@@ -2069,7 +2069,6 @@ button .icon {
 
 .folder-header:hover {
     background: var(--primary-light);
-    color: white;
     border-color: var(--primary);
 }
 
@@ -2164,6 +2163,33 @@ button .icon {
     color: var(--danger);
     font-size: 0.85rem;
 }
+
+
+/* Add specific dark mode text color for hover */
+[data-theme="dark"] .folder-header:hover {
+    color: white;
+}
+
+[data-theme="dark"] .chapter-item:hover {
+    color: var(--text-primary);  /* Keep readable in dark mode */
+}
+
+/* Light mode specific - ensure text stays dark on hover */
+[data-theme="light"] .folder-header:hover {
+    background: var(--primary-light);
+    color: var(--text-primary);  /* Keep dark text */
+}
+
+[data-theme="light"] .folder-header:hover .folder-icon {
+    color: var(--primary-dark);  /* Darker icon color */
+}
+
+[data-theme="light"] .chapter-item:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);  /* Keep dark text */
+}
+
+
 
 /* Dark mode adjustments */
 [data-theme="dark"] .folder-header {
