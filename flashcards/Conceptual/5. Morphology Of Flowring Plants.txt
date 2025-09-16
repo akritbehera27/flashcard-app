@@ -1,0 +1,52 @@
+t gene expression and tissue differentiation.
+
+Q: Design a microscopic experiment to confirm that a given filamentous structure at root tip is a root hair (absorption function) rather than a fungal hypha. What observations would you record?
+A: Stain root tip with a cellulose/pectin dye (e.g., toluidine blue) and a fungal chitin stain (e.g., calcofluor/Aniline blue); observe under light/fluorescence microscopy. Root hairs are single-cell extensions of epidermis with cytoplasm continuous with trichoblasts and lack septa; fungal hyphae are multicellular or coenocytic with different wall composition and branching. Record presence of plant organelles (nucleus, plastids), absence/presence of septa, staining patterns, and point of origin from epidermal cell.
+
+Q: Mechanistically explain how root cap cells perceive gravity and direct root curvature (gravitropism). Include auxin dynamics.
+A: Statoliths (starch grains) in columella cells sediment under gravity, triggering asymmetric Ca²⁺ and auxin redistribution; auxin (IAA) is transported to the lower flank, inhibiting cell elongation in roots (via AUX/IAA signaling), while the upper flank elongates—resulting curvature downward. PIN transporters re-localise to mediate auxin flow and the root cap is central to gravity sensing.
+
+Q: Compare and contrast xerophytic modifications of leaves and stems; give two structural adaptations in each and explain their water-saving function.
+A: Leaves: reduced surface area (needles), thick cuticle, sunken stomata, multiple epidermal layers—reduce transpiration by lowering exposed area and boundary layer conductance. Stems: succulence (water storage parenchyma), claviform/flattened stems (cladodes) to perform photosynthesis with reduced surface area, and spines (reduced leaves) limit transpiration. Both strategies lower water loss and maintain photosynthetic capacity adapted to aridity.
+
+Q: Explain the developmental cause and functional significance of pinnate vs palmate compound leaves — relate to light capture and mechanical stress.
+A: Pinnate arrangement (leaflets along a rachis) allows flexible orientation and reduces wind drag; palmate (leaflets from single point) maximises horizontal light capture in low canopy conditions. Developmentally, leaflet primordia initiation pattern differs—auxin maxima at different positions produce these forms—adaptations reflect tradeoffs between light interception and mechanical stress.
+
+Q: Propose a field experiment to test whether leaf venation type (parallel vs reticulate) affects vulnerability to herbivore damage under high wind. Specify controls and expected outcomes.
+A: Select closely related monocot (parallel) and dicot (reticulate) species in similar microhabitats; plant replicated plots and expose to wind treatment vs sheltered controls. Quantify herbivore damage, leaf tearing, and vein failure. Expect parallel venation (with longitudinal support) to resist tearing along vein axis, while reticulate may distribute stress differently; control for leaf toughness and chemical defenses.
+
+Q: Explain how phyllotaxy (arrangement of leaves) is determined at the shoot apical meristem and how it affects light interception and self-shading.
+A: Phyllotaxy arises from auxin maxima and inhibition fields at SAM; new primordia initiate at positions of lowest inhibition leading to alternate/opposite/whorled patterns (Fibonacci phyllotaxy common). Arrangement optimises light capture and minimises self-shading by spatially distributing leaves; divergence angles (≈137.5°) reduce overlap across internodes.
+
+Q: Describe the evolutionary advantages of inflorescence architecture (racemose vs cymose) in terms of pollinator interactions and seed set strategies.
+A: Racemose (indeterminate) produces many flowers acropetally, maintaining continuous display which attracts pollinators repeatedly; cymose (determinate) prioritises early allocation to terminal flowers, possibly ensuring seed set under short pollination windows. Racemose suits opportunistic pollinators, cymose may synchronise with specific pollinators or environmental timing.
+
+Q: Analyze how aestivation patterns (valvate/twisted/imbricate/vexillary) influence flower opening mechanics and pollinator access. Give examples.
+A: Aestivation affects bud protection and the sequence of petal opening. Twisted and imbricate overlap create controlled opening dynamics, sometimes forming corridors guiding pollinators; vexillary (papilionaceous) exposes a landing platform (standard/wings/keel) guiding bees. Patterns are co-adapted with pollinator morphology and timing of anthesis.
+
+Q: Explain the developmental and evolutionary basis for superior vs inferior ovaries and the implications for fruit morphology and dispersal.
+A: Superior ovary arises when other floral parts attach below ovary (thalamus not fused); inferior ovary occurs when thalamus grows up and fuses with ovary. Inferior ovaries can protect developing ovules from herbivory and aid in formation of accessory fruits; superior ovaries often allow more direct expansion of pericarp forming drupes or capsules. Evolution reflects shifts in floral architecture for protection, pollination and dispersal strategies.
+
+Q: Summarize the cellular events from microsporogenesis to mature pollen grain and explain how tetrad arrangement can inform taxonomy.
+A: Microspore mother cell (MMC) undergoes meiosis → tetrad of haploid microspores (arrangement: tetrahedral, isobilateral, linear) → microspores separate and develop exine/intine layers, generative and vegetative cells form (via mitosis) producing mature pollen. Tetrad patterns (tetrahedral vs isobilateral) are conserved in taxa and used in systematics.
+
+Q: Discuss the adaptive significance of different placentation types (marginal, axile, parietal, basal, free central) with respect to ovule number, seed development and fruit form.
+A: Axile placentation allows many ovules in multilocular ovaries suited for many seeds (e.g., tomato), parietal supports ovules on wall in unilocular ovaries (mustard), basal limits to single seed (sunflower), free central combines single chamber with central column. Placentation relates to space allocation, nutrient flow to ovules and final fruit structure impacting dispersal ecology.
+
+Q: Design a genetic cross experiment to test whether parthenocarpy in a cultivar is heritable as a dominant or recessive trait. Outline crosses and expected phenotypes.
+A: Cross parthenocarpic cultivar (P?) with non-parthenocarpic (pp). If F1 shows parthenocarpy → trait likely dominant. Self F1 to get F2 ratios: 3:1 parthenocarpic:non if dominant. Backcross F1 with non-parthenocarpic; observe segregation. Controls: ensure pollination conditions and environment don't induce parthenocarpy.
+
+Q: Explain structural differences between a drupe, berry and capsule and how these differences relate to modes of seed dispersal.
+A: Drupe: single seed with hard endocarp (stone) — adapted to animal ingestion/transport (eaten pulp, seed passed or cached). Berry: fleshy mesocarp with many seeds (tomato) — attractive to frugivores for endozoochory. Capsule: dry dehiscent fruit releasing seeds to wind/animals (e.g., poppy) — suited to abiotic dispersal or explosive mechanisms. Pericarp anatomy determines dispersal vectors.
+
+Q: Evaluate the evolutionary reasons monocot seeds are typically endospermic while many dicot seeds are non-endospermous at maturity.
+A: Monocots often retain endosperm to nourish embryo (scutellum-mediated transfer) because single cotyledon cannot absorb large stores pre-germination. Dicots often transfer reserves into two fleshy cotyledons during seed maturation, making mature seed non-endospermous. Evolutionarily this reflects differences in embryonic storage strategy and germination ecology.
+
+Q: Propose a standardized checklist and order for a semi-technical plant description that would maximise reproducibility among botanists.
+A: Habit → size → root type → stem (surface, modification) → leaf (type, phyllotaxy, venation, stipules) → inflorescence type → flower (symmetry, whorls, perianth, androecium, gynoecium), floral formula/diagram → fruit type → seed type → habitat & distribution → economic uses. Include measurements and phenological stage (anthesis/fruiting).
+
+Q: Explain how floral diagram and floral formula complement each other and why both are useful for rapid taxonomic diagnosis.
+A: Floral formula encodes numeric and positional data compactly (K, C, A, G with symbols for fusion/adhesion/symmetry), while floral diagram visually represents spatial arrangement and relative sizes—both together reveal organ number, arrangement, fusion and ovary position critical for family/genus identification.
+
+Q: For Solanaceae (example family), explain how epipetalous stamens and persistent calyx are adaptive and how these characters are used diagnostically.
+A: Epipetalous stamens (attached to corolla) position anthers relative to corolla tube facilitating pollinator contact and pollen placement; persistent calyx protects developing fruit or aids in dispersal/advertisement. Diagnostic suite (actinomorphic, 5-parted, bicarpellary syncarpous ovary, berry/capsule) distinguishes Solanaceae from similar families.

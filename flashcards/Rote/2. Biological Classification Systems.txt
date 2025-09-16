@@ -1,0 +1,110 @@
+Q: Name the five kingdoms in Whittaker’s classification.
+A: Monera, Protista, Fungi, Plantae, Animalia.
+
+Q: What are the four bacterial shapes shown and their singular/plural forms?
+A: Coccus (cocci), Bacillus (bacilli), Vibrio (vibrios), Spirillum (spirilla).
+
+Q: List three types of Archaebacteria mentioned and their habitats.
+A: Halophiles (highly salty areas), Thermoacidophiles (hot springs, acidic), Methanogens (marshy areas and ruminant guts).
+
+Q: Name two examples of cyanobacteria that form heterocysts.
+A: Nostoc and Anabaena.
+
+Q: What cell wall composition is characteristic of fungi?
+A: Chitin (and polysaccharides).
+
+Q: Give three reproductive spore types in fungi (sexual and asexual).
+A: Asexual: conidia, sporangiospores, zoospores. Sexual: ascospores, basidiospores, oospores.
+
+Q: Define plasmogamy and karyogamy in one line each.
+A: Plasmogamy: fusion of cytoplasms of two gametes or hyphae; Karyogamy: fusion of their nuclei.
+
+Q: What is a dikaryon?
+A: A fungal cell or mycelial stage containing two distinct haploid nuclei (n + n) per cell.
+
+Q: Give three examples of phycomycetes.
+A: Mucor, Rhizopus, Albugo.
+
+Q: Name two ascomycetes mentioned and one lab model among them.
+A: Aspergillus, Neurospora (Neurospora is a genetic/biochemical model).
+
+Q: Name three basidiomycetes given as examples.
+A: Agaricus (mushroom), Ustilago (smut), Puccinia (rust).
+
+Q: What term is used for fungi known only by their asexual stage?
+A: Deuteromycetes (imperfect fungi).
+
+Q: List three examples of deuteromycetes.
+A: Alternaria, Colletotrichum, Trichoderma.
+
+Q: Which kingdom includes single-celled eukaryotes like diatoms, euglenoids and protozoans?
+A: Protista.
+
+Q: What structural feature of diatoms contributes to diatomaceous earth?
+A: Silica-embedded cell walls (frustules) that fossilise as diatomaceous earth.
+
+Q: Which protist has a pellicle instead of a true cell wall and shows mixotrophy?
+A: Euglena (euglenoids).
+
+Q: Name the four major protozoan groups and give one example each.
+A: Amoeboid (Amoeba), Flagellated (Trypanosoma), Ciliated (Paramecium), Sporozoans (Plasmodium).
+
+Q: What infectious agent is smaller than viruses and lacks a protein coat? Who discovered it and when?
+A: Viroids; discovered by T.O. Diener in 1971.
+
+Q: What are prions and name two prion diseases (one animal, one human).
+A: Infectious, abnormally folded proteins causing neurological disease — BSE (mad cow disease) in cattle and Creutzfeldt–Jakob disease (CJD) in humans.
+
+Q: State the three historical scientists associated with early virus research and one contribution each.
+A: Ivanowsky (1892 — filtered tobacco mosaic agent), Beijerinck (1898 — named virus & contagium vivum fluidum), W.M. Stanley (1935 — crystallised TMV).
+
+Q: What does “virus” etymologically mean?
+A: Venom or poisonous fluid.
+
+Q: What is the genetic material composition rule mentioned for most viruses infecting plants vs bacteriophages?
+A: Plant viruses typically have single-stranded RNA; bacteriophages are often double-stranded DNA.
+
+Q: Give the five principal characteristics compared in Table 2.1 (Whittaker table).
+A: Cell type, cell wall, nuclear membrane, body organisation, mode of nutrition.
+
+Q: For each kingdom, state whether a nuclear membrane is present (Monera, Protista, Fungi, Plantae, Animalia).
+A: Monera: absent; Protista/Fungi/Plantae/Animalia: present.
+
+Q: Which kingdoms in Whittaker’s table include organisms that may be autotrophic and heterotrophic?
+A: Monera and Protista (both have autotrophic and heterotrophic members).
+
+Q: What is the mode of nutrition termed for animals (holozoic, saprophytic, etc.)?
+A: Holozoic (by ingestion).
+
+Q: Name two economically important uses of heterotrophic bacteria mentioned implicitly (or in common knowledge in the chapter).
+A: Making curd (fermentation) and antibiotic production.
+
+Q: Which protist group’s rapid blooms cause red tides? Give one genus example.
+A: Dinoflagellates — example Gonyaulax.
+
+Q: What are heterocysts and which group has them?
+A: Specialized nitrogen-fixing cells in some cyanobacteria (e.g., Nostoc, Anabaena).
+
+Q: What structural components make bacterial capsids and how are capsomeres arranged?
+A: Capsid composed of protein subunits called capsomeres, arranged in helical or polyhedral geometries.
+
+Q: Which kingdom contains organisms with tissue/organ/organ system level organisation?
+A: Animalia (and Plantae have tissue/organ levels too).
+
+Q: State three differences between phycomycetes and ascomycetes (mycelium, asexual spores, sexual spores).
+A: Phycomycetes: aseptate coenocytic mycelium, asexual zoospores/aplanospores produced in sporangia, zygospores sexual. Ascomycetes: septate branched mycelium, asexual conidia on conidiophores, sexual ascospores formed in asci.
+
+Q: Which fungal division commonly forms edible morels and truffles?
+A: Ascomycetes.
+
+Q: Name the protist group that is the chief “producer” in oceans.
+A: Diatoms (Chrysophytes).
+
+Q: Give two distinguishing morphological features of bacteriophages shown in the text figure.
+A: Head (capsid), tail with tail fibres and collar/sheath structure.
+
+Q: Define phycobiont and mycobiont in lichens.
+A: Phycobiont = the algal (photosynthetic) partner; mycobiont = the fungal (heterotrophic) partner.
+
+Q: What discovery/feature made Mycoplasma notable in the Monera discussion?
+A: They completely lack a cell wall and are the smallest living cells known; can survive without oxygen and are often pathogenic.

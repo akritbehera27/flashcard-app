@@ -1,0 +1,71 @@
+Q: Explain why classification within the plant kingdom moved from artificial (Linnaean) systems to natural and then to phylogenetic systems.
+A: Artificial systems used few visible vegetative characters (prone to environmental influence) and often grouped unrelated taxa. Natural systems incorporated internal anatomy, embryology and chemistry to reflect affinities. Phylogenetic systems go further, using evolutionary relationships (common ancestry) — the most biologically informative approach.
+
+Q: Design a numerical-taxonomy style approach (steps + data types) to decide whether two ambiguous plant groups belong to the same family.
+A: (1) Compile a large character matrix (morphology, anatomy, embryology, chromosome number, phytochemicals). (2) Code each character numerically, weight equally. (3) Use a cluster algorithm (e.g., UPGMA) to compute similarity coefficients. (4) Produce dendrogram — assess monophyly. (5) Validate with cytotaxonomy and molecular markers.
+
+Q: Mechanistically, why are vegetative characters less reliable than reproductive characters for plant classification? Give two examples.
+A: Vegetative features (leaf size, shape) are plastic and influenced by environment (sun/shade), leading to convergent forms; reproductive structures (flowers, ovules) are developmentally constrained and more conserved evolutionarily. Example: leaf shape varies seasonally; floral organ number is genetically conserved.
+
+Q: Outline the complete life cycle of Spirogyra emphasizing the type of sexual reproduction and where meiosis occurs.
+A: Vegetative filamentous thallus → conjugation tubes between filaments form → gametes (isogamous) move and fuse (plasmogamy → karyogamy) producing a zygospore → zygospore undergoes meiosis on germination, producing haploid filaments. Meiosis occurs during germination of zygospore producing haploid cells.
+
+Q: Compare pigment composition, storage product and ecological depth distribution between Chlorophyceae, Phaeophyceae and Rhodophyceae — explain how pigments determine habitat depth.
+A: Chlorophyceae (chlorophyll a,b; store starch) dominate well-lit, shallow waters. Phaeophyceae (chl a,c + fucoxanthin; store laminarin/mannitol) occur in marine, often mid-depths; fucoxanthin masks green. Rhodophyceae (chl a + phycoerythrin; store floridean starch) can live at greater depths because phycoerythrin absorbs blue-green light that penetrates deeper.
+
+Q: Propose an experiment to demonstrate that Marchantia gemmae are clonal propagules and state controls and expected outcomes.
+A: Isolate gemmae aseptically into sterile moist substrate; also isolate gemmae exposed to varying light/water as controls. If clonal, each gemma develops into genetically identical thalli (morphologically same). Use a genetic marker or morphology to confirm identity. Controls: no-gemma plates to check contamination; gemmae from different thalli to compare.
+
+Q: Explain the adaptive significance of protonema in mosses and how its morphology relates to spore dispersal and establishment.
+A: Protonema (filamentous stage) increases surface area for photosynthesis and rapid colonisation. Its creeping habit helps anchor spores, allows asexual budding into leafy gametophytes, and ensures that spores landing on substrate can quickly form photosynthetic tissue for establishment.
+
+Q: Why are pteridophytes considered a key evolutionary step between bryophytes and seed plants? Discuss vascular tissue and life-cycle dominance.
+A: Pteridophytes developed true vascular tissues (xylem/phloem) enabling larger sporophytes, transport of water/nutrients, and true roots/stems/leaves. Their life cycle shifted to sporophyte dominance, a precursor to seed-plant life histories where sporophyte is dominant and gametophyte reduced.
+
+Q: Explain heterospory’s evolutionary significance and describe two concrete consequences for plant reproduction and evolution.
+A: Heterospory (microspores & megaspores) leads to differentiated male/female gametophytes, fosters retention/nourishment of female gametophyte (precursor to seed), reduces gametophyte vulnerability, and promotes pollen (male gametophyte) dispersal — facilitating terrestrial reproduction and eventual seed evolution.
+
+Q: Trace the ontogeny of an ovule in gymnosperms from nucellus cell → seed, indicating where and when meiosis occurs and how the female gametophyte forms.
+A: Nucellus cell → megaspore mother cell in nucellus undergoes meiosis → produces four megaspores (usually 3 degenerate) → surviving megaspore develops into multicellular female gametophyte within the megasporangium (retained) → archegonia form within gametophyte → after fertilisation zygote develops into embryo and ovule matures into seed.
+
+Q: Compare pollen development and pollination strategies in gymnosperms vs many angiosperms; explain how pollen grain structure suits wind pollination in gymnosperms.
+A: Gymnosperm pollen grains are often small, lightweight, with air sacs or wing-like structures to catch air currents (anemophily), and male gametophyte reduced. Many angiosperms use biotic pollinators and have heavier, sticky pollen; angiosperm pollen often adapted to particular pollinators. Gymnosperm pollen structure facilitates long-distance wind dispersal.
+
+Q: Explain the functional and ecological importance of coralloid roots in Cycas and their symbiotic interaction with cyanobacteria.
+A: Coralloid roots host N₂-fixing cyanobacteria in their cortical tissues; cyanobacteria fix atmospheric N, supplying nitrogen to Cycas in nutrient-poor soils. This symbiosis enhances survival in oligotrophic habitats and contributes to plant nitrogen economy.
+
+Q: Give a developmental explanation for why fern gametophytes (prothalli) require moist conditions for sexual reproduction. Relate to sperm architecture and fertilisation.
+A: Prothalli produce motile, flagellated antherozoids that swim through water films to reach archegonia-held eggs. Moist conditions provide the medium for sperm motility; without water, flagellated sperm cannot reach eggs — hence dependence on water.
+
+Q: Analyze why gymnosperms retain free archegonia with retained female gametophytes, while angiosperms have more reduced gametophytes and enclosed ovules. Provide evolutionary advantages.
+A: Retention of female gametophyte within ovule (gymnosperms) protects gametophyte and embryo from desiccation and allows direct nutrient provision. Angiosperms reduced gametophytes further and enclose ovules in ovary (fruit post-fertilisation) — providing additional protection, targeted fertilisation (double fertilisation) and aided dispersal of enclosed seeds.
+
+Q: Explain how laminarin and mannitol as storage products affect brown algal physiology compared to starch in green algae.
+A: Laminarin (polysaccharide) and mannitol (polyol) provide soluble carbohydrate reserves that influence osmotic balance, buoyancy and energy mobilisation in marine environments; starch in green algae is stored in plastids and is less osmotically active — differences reflect marine adaptation.
+
+Q: Design a field sampling protocol to estimate the relative abundance of bryophytes on a slope, including sampling units, controls for microhabitat, and metrics to record.
+A: Use stratified random sampling: lay transects along slope levels; at each transect place quadrats (e.g., 10×10 cm) at regular intervals; record bryophyte species, percent cover, substrate (rock/soil/tree), moisture, shade index. Controls: same time of day/season, avoid disturbed sites. Metrics: species richness, cover %, frequency.
+
+Q: Discuss how mycorrhizal associations in gymnosperms and angiosperms influence nutrient uptake and plant community structure.
+A: Mycorrhizae increase root absorptive surface, enhance P and micronutrient uptake, water absorption, and pathogen resistance; they can connect plants via common mycelial networks, influencing nutrient sharing, competition, and community dynamics — important in nutrient-poor soils (e.g., many gymnosperm forests).
+
+Q: Explain why kelps (large brown algae) have specialized holdfasts, stipes and blades — relate structure to function in a high-energy marine environment.
+A: Holdfast anchors to substrate against strong waves; stipe provides flexible support and buoyancy; blades (fronds) maximise photosynthetic area. These structures allow large thalli to withstand currents and access light while remaining anchored.
+
+Q: Using the chapter’s bryophyte and pteridophyte life-cycles, explain where reduction division (meiosis) occurs in each group and why that differs between them.
+A: Bryophytes: meiosis occurs in sporophyte capsule (sporogenous cells) producing haploid spores — gametophyte dominant. Pteridophytes: meiosis occurs in sporangia on sporophylls of the sporophyte producing spores — sporophyte dominant. Difference reflects dominant generation shift through evolution.
+
+Q: Propose molecular or cytological data (3 types) that would help resolve whether a problematic taxon belongs to Pteridophyta or primitive Gymnosperms.
+A: (1) Chloroplast and nuclear gene phylogenies (rbcL, matK, 18S rDNA), (2) chromosome number and karyotype analysis, (3) presence/absence of seed structures (ovules) by developmental gene expression (e.g., MADS-box expression patterns).
+
+Q: Explain why some algae (e.g., Porphyra) can live at greater depths than most green algae. Provide a photobiological explanation.
+A: Porphyra has phycoerythrin which absorbs blue-green light that penetrates deeper in seawater; this pigment allows efficient photosynthesis at lower light wavelengths and depths inaccessible to green-algal chlorophyll-dominated species.
+
+Q: Describe the sequence of events (cellular & tissue) during the transition from free-living fern gametophyte to young sporophyte.
+A: Sperm swims to archegonium → fertilisation forms zygote → zygote divides; an embryonic sporophyte develops, forming rhizoid/foot attached to prothallus and erect shoot; initial sporophyte depends on gametophyte for nutrients until it forms its own photosynthetic tissues and root/rhizome.
+
+Q: Critically evaluate the role of chemotaxonomy in angiosperm classification — state strengths and pitfalls.
+A: Strengths: chemical markers (alkaloids, flavonoids) can reveal relationships not obvious morphologically and are useful for cryptic taxa. Pitfalls: secondary metabolites can converge due to ecological pressures, and expression may vary with environment or developmental stage.
+
+Q: Explain the structural and evolutionary reasons why fern sporophylls may aggregate into strobili in some taxa (e.g., Selaginella) but not in others.
+A: Aggregation into strobili concentrates reproductive units, facilitating synchronous sporangia production/dispersal and potentially wind dispersal efficiency. Evolutionarily, it may reflect selection for efficient reproduction in certain environments or to protect developing sporangia.

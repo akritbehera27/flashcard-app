@@ -1,0 +1,65 @@
+Q: Who introduced the system of binomial nomenclature?
+A: Carolus Linnaeus.
+
+Q: Write the correct scientific name of mango, including author citation.
+A: Mangifera indica Linn.
+
+Q: State the universal rules of biological nomenclature.
+A: 1.Names are in Latin/Latinised and italicised.   2.First word (genus) starts with a capital letter; second word (species) starts with a small letter.   3.When handwritten, names are underlined.   4.Author’s name follows in abbreviated form.
+
+Q: What does ICBN stand for?
+A: International Code for Botanical Nomenclature.
+
+Q: What does ICZN stand for?
+A: International Code of Zoological Nomenclature.
+
+Q: What is the scientific term for classification categories?
+A: Taxa (singular: taxon).
+
+Q: Give an example of species, genus, and family from animals.
+A: Species: Panthera leo; Genus: Panthera; Family: Felidae.
+
+Q: Give an example of species, genus, and family from plants.
+A: Species: Solanum tuberosum (potato); Genus: Solanum; Family: Solanaceae.
+
+Q: Arrange taxonomic categories in ascending order.
+A: Species → Genus → Family → Order → Class → Phylum/Division → Kingdom.
+
+Q: Which genus includes potato and brinjal?
+A: Solanum.
+
+Q: Name three species belonging to genus Panthera.
+A: Panthera leo (lion), Panthera tigris (tiger), Panthera pardus (leopard).
+
+Q: Which family includes both lions and domestic cats?
+A: Felidae.
+
+Q: Which animal family includes dogs?
+A: Canidae.
+
+Q: Name an order of animals that includes both Felidae and Canidae.
+A: Carnivora.
+
+Q: Which class includes both Primata and Carnivora?
+A: Mammalia.
+
+Q: Which phylum includes fishes, amphibians, reptiles, birds, and mammals?
+A: Chordata.
+
+Q: What is the division in which wheat belongs?
+A: Angiospermae (Monocotyledonae).
+
+Q: Complete the taxonomic hierarchy of man.
+A: Species: Homo sapiens → Genus: Homo → Family: Hominidae → Order: Primata → Class: Mammalia → Phylum: Chordata → Kingdom: Animalia.
+
+Q: What is the family of mango (Mangifera indica)?
+A: Anacardiaceae.
+
+Q: What is the order of wheat (Triticum aestivum)?
+A: Poales.
+
+Q: Which categories are broader: order or family?
+A: Order.
+
+Q: Who used Systema Naturae as the title of his publication?
+A: Linnaeus.

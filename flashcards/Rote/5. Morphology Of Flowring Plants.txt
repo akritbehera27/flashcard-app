@@ -1,0 +1,104 @@
+Q: What are the two main systems of a flowering plant?
+A: Root system (underground) and shoot system (above ground).
+
+Q: Name the three main regions at a root tip (apex → shoot direction).
+A: Root cap → region of meristematic activity (apical meristem) → region of elongation → region of maturation (with root hairs).
+
+Q: What is the function of root cap?
+A: Protect tender apex and aid in gravity perception (gravitropism).
+
+Q: Define adventitious root.
+A: Roots arising from parts other than the radicle (e.g., stem, leaf).
+
+Q: Which root system is typical of dicots and which of monocots?
+A: Dicots — tap root system; Monocots — fibrous root system.
+
+Q: What are root hairs and where do they arise?
+A: Fine unicellular extensions of epidermal cells arising in the region of maturation; involved in absorption.
+
+Q: Name three functions of stems.
+A: Support/spread branches, transport water/minerals/photosynthates, storage, vegetative propagation, protection.
+
+Q: Define node and internode.
+A: Node — region of stem where leaves/buds attach; internode — stem portion between two nodes.
+
+Q: Give four examples of modified stems and one function each.
+A: Rhizome (horizontal underground stem; storage/spreading), Stolon (runner; vegetative propagation), Tuber (storage; e.g., potato), Bulb (storage & perennation; e.g., onion).
+
+Q: What three main parts constitute a typical leaf?
+A: Leaf base, petiole, lamina (blade).
+
+Q: Define pinnately compound and palmately compound leaves.
+A: Pinnately compound — leaflets on a common rachis (midrib of leaf); Palmately compound — leaflets attached at a common point at the tip of petiole.
+
+Q: What is phyllotaxy? Name its three types.
+A: Pattern of leaf arrangement on stem: alternate, opposite, whorled.
+
+Q: What is venation and name the two principal types.
+A: Pattern of veins in lamina: reticulate (netted) and parallel.
+
+Q: Define inflorescence.
+A: Arrangement of flowers on the floral axis (the shoot bearing flowers).
+
+Q: Distinguish racemose and cymose inflorescences.
+A: Racemose = indeterminate apex continues to grow; flowers acropetally (younger at tip). Cymose = determinate apex ends in flower; flowers produced basipetally (older at tip).
+
+Q: List the four floral whorls.
+A: Calyx, Corolla, Androecium, Gynoecium.
+
+Q: What is perianth?
+A: When calyx and corolla are indistinct or the same (e.g., lily), collectively called perianth.
+
+Q: Define actinomorphic and zygomorphic flowers with one example each.
+A: Actinomorphic = radially symmetrical (mustard); Zygomorphic = bilaterally symmetrical (pea).
+
+Q: What is aestivation? Name four types.
+A: Arrangement of sepals/petals in a bud: valvate, twisted, imbricate, vexillary.
+
+Q: What does epipetalous mean? Give a family/example.
+A: Stamens attached to petals (epipetalous) — occurs in Solanaceae (brinjal).
+
+Q: Give the three main parts of a carpel.
+A: Stigma, style, ovary.
+
+Q: Define placentation and list major types.
+A: Arrangement of ovules within ovary: marginal, axile, parietal, basal, free central, central (as in the chapter).
+
+Q: What is a drupe? Give two examples.
+A: A fleshy fruit with stony endocarp and one seed (e.g., mango, coconut).
+
+Q: What are the three layers of pericarp?
+A: Epicarp (outer), Mesocarp (middle), Endocarp (inner).
+
+Q: Name parts of a dicot seed.
+A: Seed coat (testa & tegmen), hilum, micropyle, embryo (radicle, plumule, embryonal axis), two cotyledons.
+
+Q: Describe a typical monocot seed (terms scutellum, coleoptile, coleorhiza).
+A: Monocot seed (e.g., maize) has a large endosperm, scutellum (shield-shaped cotyledon) absorbing reserves, coleoptile (sheath protecting plumule), coleorhiza (sheath protecting radicle).
+
+Q: What is endospermous vs non-endospermous seed? Give an example of each.
+A: Endospermous = endosperm persists in mature seed (maize); Non-endospermous = reserves transferred to cotyledons (pea).
+
+Q: What is parthenocarpy? Give an example where fruits can form without fertilisation.
+A: Fruit development without fertilisation (seedless fruits) — examples: some varieties of banana, seedless grape (general concept mentioned).
+
+Q: What symbols are typically used in floral formulae for actinomorphic and zygomorphic flowers?
+A: ⊕ for actinomorphic and ⚶ (or similar) for zygomorphic as used in the chapter.
+
+Q: In the semi-technical description order, what follows vegetative characters?
+A: Inflorescence and floral characters, then floral diagram and formula.
+
+Q: Give the key vegetative and floral characters of Solanaceae as in the chapter (five points).
+A: Vegetative: herbs/shrubs, alternate leaves, exstipulate; Floral: bisexual, actinomorphic, 5 united petals (gamopetalous) with valvate aestivation, 5 epipetalous stamens, bicarpellary syncarpous ovary, axile placentation; fruit often berry or capsule.
+
+Q: What is a staminode?
+A: A sterile or modified stamen that does not produce pollen.
+
+Q: Where is the micropyle located and what is its function?
+A: Small pore above the hilum on seed coat; was the opening for pollen tube entry into ovule (in seed) and for water uptake during germination.
+
+Q: Name two economic uses of plants from Solanaceae mentioned.
+A: Food (tomato, brinjal, potato), spice (chilli), medicine (belladonna), tobacco (fumigatory), ornamentals (petunia).
+
+Q: What is a floral diagram used to show?
+A: Number, arrangement, and relative position of floral parts and their cohesion/adhesion relationships.

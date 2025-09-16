@@ -1,0 +1,92 @@
+Q: Explain why the two-kingdom system (Plantae and Animalia) became inadequate — give three concrete biological problems it failed to address.
+A: It grouped prokaryotes and eukaryotes together (no distinction), mixed unicellular and multicellular organisms inappropriately, and failed to separate autotrophs (green algae) from heterotrophs (fungi) despite major differences in cell structure, wall chemistry and nutrition.
+
+Q: Describe Whittaker’s rationale for proposing five kingdoms — which criteria did he prioritize and why do these better reflect biological reality?
+A: Whittaker prioritized cell structure (prokaryote vs eukaryote), level of organisation (cellular vs tissue/organ systems), mode of nutrition (autotrophy/heterotrophy), reproduction and phylogenetic relationships — these integrate morphological, physiological and evolutionary differences so groups are more biologically meaningful.
+
+Q: Compare and contrast the cell-wall composition and implications for classification in Monera, Fungi and Plantae.
+A: Monera have non-cellulosic walls (polysaccharide+amino acid components), Fungi have chitinous walls, Plantae have cellulose walls — differences reflect chemistry, evolutionary lineage and nutrition, justifying their separation into distinct kingdoms.
+
+Q: Provide a mechanistic explanation for why cyanobacteria (blue-green algae) were separated from true algae in Whittaker’s system.
+A: Cyanobacteria are prokaryotic (no nucleus, different cell wall and internal organisation) despite being photosynthetic; true algae are eukaryotic, so cell type difference warranted placing cyanobacteria in Monera and algae in Plantae/Protista.
+
+Q: Design an experiment (outline) to demonstrate nitrogen fixation by Nostoc heterocysts. What observable outcomes would confirm fixation?
+A: Grow Nostoc in nitrogen-free medium and in N-containing control; measure growth and perform acetylene reduction assay (detect ethylene); nitrogenase activity (ethylene production) and continued growth only in N-free medium indicate nitrogen fixation by heterocysts.
+
+Q: Explain the evolutionary/functional significance of a dikaryotic (n + n) stage in ascomycetes and basidiomycetes.
+A: Dikaryotic stage separates plasmogamy and karyogamy, allowing prolonged pairing of genetically distinct nuclei within cells; this increases genetic diversity generation timing and supports complex fruiting body development before meiosis.
+
+Q: Why are diatom frustules (silica walls) important ecologically and economically? Give two ecological and two economic consequences.
+A: Ecologically, frustules make diatoms major oceanic primary producers (food webs) and create long-term silica deposits affecting carbon burial. Economically, diatomaceous earth (fossil frustules) is used for filtration, polishing and industrial abrasives.
+
+Q: Explain how life cycles exhibiting alternation of generations vary across plant groups and why this matters for classification.
+A: The relative prominence and independence of gametophyte vs sporophyte differs (e.g., bryophytes gametophyte dominant, angiosperms sporophyte dominant); these life-cycle traits reflect evolution and are used to group plant divisions.
+
+Q: Using the Whittaker table (cell type, wall, nuclear membrane, organisation, nutrition), justify placing protozoa in Protista rather than Animalia.
+A: Protists are single-celled eukaryotes with organelles and sometimes walls; protozoa are unicellular eukaryotes (cellular organisation), often aquatic, reproducing both asexually and sexually — their unicellularity and organelle presence suit Protista rather than multicellular, tissue-organ Animalia.
+
+Q: Give a physiological explanation for why slime moulds are placed in Protista even though they form large plasmodia and fruiting bodies.
+A: Despite macroscopic plasmodia, slime moulds are fundamentally single-celled (amoeboid) eukaryotes that aggregate; their cell biology (eukaryotic organelles) and life cycle (unicellular feeding stage + aggregation) align with Protista.
+
+Q: Explain the biochemical/structural reasons fungi absorb rather than ingest food, and how that impacts their ecological role.
+A: Fungi secrete extracellular enzymes that break down complex organic matter, then absorb soluble nutrients through hyphae; this saprophytic strategy makes them key decomposers and nutrient recyclers.
+
+Q: Describe the sequence and cellular meaning of plasmogamy, karyogamy and meiosis in fungal sexual reproduction — why is separating plasmogamy and karyogamy evolutionarily advantageous?
+A: Plasmogamy = cytoplasmic fusion (n + n stage possible); karyogamy = nuclear fusion forming 2n; meiosis = reduction division producing haploid spores. Separating plasmogamy and karyogamy allows prolonged dikaryotic life, fostering genetic recombination and complex fruiting body formation before meiosis.
+
+Q: Explain why mycoplasmas present classification challenges and state two features that distinguish them from typical bacteria.
+A: Mycoplasmas lack cell walls (unusual for bacteria) and are extremely small; these features complicate staining and phylogenetic placement yet they are prokaryotic and thus placed within Monera.
+
+Q: Articulate the arguments for and against considering viruses “living”. Use three criteria for each side (metabolism, reproduction, cell structure).
+A: For living: viruses reproduce (inside hosts), have genetic material and evolve. Against: lack cell structure/metabolism outside host, inert crystals outside cells, cannot self-replicate — thus many systems exclude them from true living kingdoms.
+
+Q: Propose diagnostic features that differentiate diatoms from dinoflagellates under light microscopy and state what functional consequences arise from these differences.
+A: Diatoms: rigid silica frustules with two overlapping shells, non-flagellated vegetative cells; dinoflagellates: cellulose plates, two flagella (longitudinal & transverse). Functionally, diatoms sediment as frustules; dinoflagellates swim and can form red tides/toxin production.
+
+Q: Explain how red tides form and why some dinoflagellate blooms are toxic to higher trophic levels.
+A: Rapid multiplication under favorable conditions (nutrients, light) creates dense blooms; some species produce toxins that bioaccumulate and can kill fish or poison shellfish consumers, disrupting ecosystems.
+
+Q: Describe the life strategy differences between saprophytic, parasitic and symbiotic fungi, with an example of each.
+A: Saprophytes decompose dead matter (e.g., Aspergillus), parasites feed on living hosts harming them (e.g., Puccinia causing rust), symbionts live mutualistically (e.g., mycorrhizae with plant roots or lichens with algae).
+
+Q: Explain why deuteromycetes were historically grouped separately and how molecular/systematic advances alter their placement.
+A: Deuteromycetes were “imperfect fungi” known only by asexual stages; once sexual (perfect) stages were discovered or DNA data available, many were reassigned to Ascomycetes/Basidiomycetes based on reproductive/phylogenetic traits.
+
+Q: Provide a mechanistic account of how bacteriophages differ in genome type and structure from most plant viruses, and the implications for host range.
+A: Bacteriophages often have double-stranded DNA packaged in protein capsids (sometimes complex tails) adapted to infect prokaryotes; many plant viruses are single-stranded RNA and rely on plant cell entry vectors — genome type and capsid adaptation determine host specificity and infection strategy.
+
+Q: Discuss the ecological role of bacteria as decomposers and nutrient recyclers, and the metabolic diversity that enables this.
+A: Bacteria’s metabolic diversity (heterotrophy, photosynthesis, chemosynthesis, nitrogen fixation) allows them to decompose organic matter, oxidize inorganic substrates and recycle N, P, S, Fe — driving biogeochemical cycles.
+
+Q: Analyze how protistan diversity (e.g., Euglena, dinoflagellates, diatoms) complicates attempts to make clear plant/animal boundaries — give two examples.
+A: Euglena are photosynthetic yet can be heterotrophic; some dinoflagellates are photosynthetic but motile with animal-like behavior; such mixotrophy blurs strict plant/animal categories and motivates the Protista kingdom.
+
+Q: Explain the functional advantage of hyphal septation in fungi and contrast with coenocytic hyphae.
+A: Septate hyphae have cross walls that compartmentalize cells, allowing damage control and specialised cell functions; coenocytic (aseptate) hyphae allow rapid cytoplasmic streaming and growth but are more vulnerable to injury.
+
+Q: Evaluate Whittaker’s five-kingdom system in light of molecular phylogenetics (brief argument). What major revision does molecular data necessitate?
+A: Molecular data show that prokaryotic Monera splits into two domains (Archaea and Bacteria), suggesting a three-domain system (Bacteria, Archaea, Eukarya). Thus Whittaker’s Monera is paraphyletic and needs splitting.
+
+Q: Explain how slime mould spore formation and long-lived spores aid survival and dispersal — relate to ecological niches.
+A: Fruiting bodies produce resistant spores that can withstand adverse conditions and disperse widely by air, enabling slime moulds to colonize new substrates when conditions improve.
+
+Q: Design a flowchart (textual) to classify an unknown microorganism using Whittaker’s criteria (cell type → wall → organisation → nutrition).
+A: Step1: Check for membrane-bound nucleus → no → Monera; yes → Protista/Fungi/Plantae/Animalia. Step2 (if eukaryote): cell wall? none → Animalia; cellulose → Plantae; chitin → Fungi; present in some & unicellular → Protista. Step3: organisation: unicellular → Protista; tissue/organ systems → Plantae/Animalia. Step4: nutrition: autotrophic → Plantae/Protista (algae); heterotrophic saprophytic → Fungi; holozoic → Animalia.
+
+Q: Explain the biological basis for placing Mycoplasma among bacteria despite lacking a cell wall.
+A: Mycoplasma are prokaryotic (no nucleus), have bacterial ribosomes, gene sequences and metabolic pathways similar to bacteria; cell wall absence is a derived trait, not excluding bacterial phylogenetic placement.
+
+Q: Why are lichens considered important pollution indicators? Provide the physiological basis.
+A: Lichens absorb nutrients and water directly from air; many are sensitive to air pollutants (e.g., sulfur dioxide) which disrupt algal photosynthesis and fungal metabolism, so their absence indicates air pollution.
+
+Q: Discuss the role of zoospores vs aplanospores in phycomycetes — what ecological function does motility provide?
+A: Zoospores are motile (flagellated) aiding dispersal in aquatic/damp habitats to find substrates; aplanospores are non-motile and rely on passive dispersal — motility increases colonization success in water films.
+
+Q: Give a systems-level reason why Protista is considered a “catch-all” kingdom and what taxonomic approaches could improve it.
+A: Protista groups diverse, mainly unicellular eukaryotes lacking clear synapomorphies; molecular phylogenetics and subdivision into monophyletic clades (e.g., excavates, SAR, unikonts) yield more natural groupings.
+
+Q: Explain how basidiomycete basidia produce four spores — describe the nuclear events leading to this.
+A: After karyogamy in the basidium, a diploid nucleus undergoes meiosis producing four haploid nuclei; these are partitioned and develop into four basidiospores externally on basidium.
+
+Q: Contrast plasmogamy in basidiomycetes vs ascomycetes in terms of timing and morphological consequence.
+A: Both undergo plasmogamy before karyogamy; in basidiomycetes plasmogamy often yields long-lived dikaryotic mycelium that forms basidiocarps, while many ascomycetes form dikaryotic structures within ascocarps before karyogamy in asci.

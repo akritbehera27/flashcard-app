@@ -1,0 +1,149 @@
+Q: Define “level of organisation” and name the four principal levels used in animal classification.
+A: Degree of structural complexity—cellular, tissue, organ, organ-system.
+
+Q: What body symmetry do adult echinoderms show?
+A: Radial symmetry (often pentaradial).
+
+Q: Which phylum has choanocytes and spicules?
+A: Porifera (sponges).
+
+Q: Name the cells that contain stinging capsules (nematocysts) in Cnidaria.
+A: Cnidoblasts (or cnidocytes).
+
+Q: Give two examples of Cnidaria that show alternation of generations.
+A: Obelia (polyp and medusa phases), Aurelia (jellyfish).
+
+Q: What are the comb plates in Ctenophora made of?
+A: Rows of fused cilia (ctenes).
+
+Q: List two medically important Platyhelminthes genera mentioned in the chapter.
+A: Taenia (tapeworm), Fasciola (liver fluke).
+
+Q: What is the excretory unit in Platyhelminthes called?
+A: Flame cell (protonephridium).
+
+Q: Name three human-parasitic Aschelminthes (nematodes) from the chapter.
+A: Ascaris, Wuchereria (filaria), Ancylostoma (hookworm).
+
+Q: What is the principal locomotory appendage of a polychaete annelid?
+A: Parapodia.
+
+Q: Name the excretory organ typical to Annelida.
+A: Nephridium (pl. nephridia).
+
+Q: What exoskeleton material characterises Arthropoda?
+A: Chitin (cuticle).
+
+Q: Which arthropod respiratory structures are used by many terrestrial forms?
+A: Tracheal system (and in some, book lungs).
+
+Q: Name the organ used for excretion in many arthropods.
+A: Malpighian tubules.
+
+Q: Give three economically important insects listed in the chapter.
+A: Apis (honey bee), Bombyx (silkworm), Laccifer (lac insect).
+
+Q: Name one living fossil arthropod mentioned.
+A: Limulus (king crab / horseshoe crab).
+
+Q: What are the three main body parts of a typical mollusc?
+A: Head, muscular foot, visceral hump (mantle covers hump).
+
+Q: What feeding organ is characteristic of most molluscs (except bivalves)?
+A: Radula.
+
+Q: Give two examples of cephalopod molluscs from the chapter.
+A: Sepia (cuttlefish), Loligo (squid), Octopus.
+
+Q: What distinctive system does Echinodermata possess for locomotion and feeding?
+A: Water-vascular system with tube feet.
+
+Q: Name three echinoderm examples from the chapter.
+A: Asterias (starfish), Echinus (sea urchin), Cucumaria (sea cucumber).
+
+Q: Which phylum has a stomochord?
+A: Hemichordata.
+
+Q: Give two examples of hemichordate genera.
+A: Balanoglossus, Saccoglossus.
+
+Q: List the three chordate hallmarks shown in Figure 4.16.
+A: Notochord, dorsal hollow nerve cord, paired pharyngeal gill slits (and post-anal tail).
+
+Q: Name the three subphyla of Chordata.
+A: Urochordata (Tunicata), Cephalochordata, Vertebrata.
+
+Q: Example genera for Urochordata and Cephalochordata?
+A: Urochordata: Ascidia, Salpa, Doliolum. Cephalochordata: Branchiostoma (Amphioxus).
+
+Q: What do Cyclostomata lack that Gnathostomata have?
+A: Jaws (Cyclostomata are jawless—Agnatha).
+
+Q: Give two examples of Cyclostomata.
+A: Petromyzon (lamprey), Myxine (hagfish).
+
+Q: What material composes the skeleton of Chondrichthyes?
+A: Cartilage (cartilaginous endoskeleton).
+
+Q: Name one cartilaginous fish with a sting and one with electric organs.
+A: Trygon (sting ray) — sting; Torpedo — electric organ.
+
+Q: What covers the gills in Osteichthyes?
+A: Operculum.
+
+Q: Which structure regulates buoyancy in bony fishes (Osteichthyes)?
+A: Air bladder (swim bladder).
+
+Q: Examples of freshwater bony fishes given in the chapter?
+A: Labeo (Rohu), Catla (Katla), Clarias (Magur).
+
+Q: Name two amphibian genera from the chapter.
+A: Rana (frog), Bufo (toad).
+
+Q: Give one life-history characteristic typical of amphibians.
+A: Dual life: aquatic larvae (gilled tadpoles) and terrestrial adult—indirect development with external fertilisation.
+
+Q: What integumentary feature helps reptiles conserve water?
+A: Dry, cornified epidermal scales (scutes).
+
+Q: Which reptile group has a four-chambered heart unlike other reptiles?
+A: Crocodiles (Crocodilia).
+
+Q: Name four bird features listed as adaptations for flight.
+A: Feathers, hollow pneumatic bones, fused sternum/keel in many, forelimbs modified to wings, air sacs supplementing lungs.
+
+Q: What distinguishes birds’ heart and thermoregulation from reptiles?
+A: Birds have a four-chambered heart and are homoiothermous (warm-blooded), enabling high metabolic rates for sustained flight.
+
+Q: What unique mammalian features are emphasised in the chapter?
+A: Hair (fur), mammary glands (milk production), heterodont dentition, endothermy (homoiothermy), viviparity (mostly).
+
+Q: Name an oviparous mammal given as example.
+A: Ornithorhynchus (platypus).
+
+Q: Give two examples of marine mammals included in the chapter.
+A: Delphinus (dolphin), Balaenoptera (blue whale).
+
+Q: In the summary table (Table 4.2), which phyla are shown as having organ-system level organisation?
+A: Platyhelminthes? (Table shows organ level for Platyhelminthes and organ-system for Aschelminthes onward; in general: Aschelminthes, Annelida, Arthropoda, Mollusca, Echinodermata, Hemichordata, Chordata.)
+
+Q: Which phylum is described as mostly asymmetrical and with water canal system for feeding?
+A: Porifera.
+
+Q: What are common modes of development listed across many phyla? (direct vs indirect)
+A: Direct development (young resemble adults) and indirect development (with larval stages different from adult).
+
+Q: Which phylum shows a complete digestive system for the first time among the groups listed?
+A: Aschelminthes (roundworms) show a complete alimentary canal; many earlier groups had incomplete or absent digestive tracts.
+
+Q: Match: parapodia — ? (which phylum)
+A: Annelida (e.g., Nereis).
+
+Q: Match: radula — ? (which phylum)
+A: Mollusca.
+
+Q: Match: water vascular system — ? (which phylum)
+A: Echinodermata.
+
+Q: Match: malpighian tubules — ? (which phylum)
+A: Arthropoda (insect excretory system).

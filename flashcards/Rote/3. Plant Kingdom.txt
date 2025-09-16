@@ -1,0 +1,104 @@
+Q: List the five major groups included in the plant kingdom in this chapter.
+A: Algae, Bryophytes, Pteridophytes, Gymnosperms, Angiosperms.
+
+Q: Define “algae” in one line (chapter definition).
+A: Chlorophyll-bearing, simple, thalloid, autotrophic and largely aquatic organisms.
+
+Q: Name the three classes of algae described and one characteristic storage product for each.
+A: Chlorophyceae — starch; Phaeophyceae — laminarin or mannitol; Rhodophyceae — floridean starch.
+
+Q: Give an example of an algal form for each sexual reproduction type: isogamy, anisogamy, oogamy.
+A: Isogamy — Ulothrix; Anisogamy — Eudorina; Oogamy — Volvox, Fucus.
+
+Q: What pigment gives brown algae their colour and what is its ecological consequence?
+A: Fucoxanthin (a xanthophyll) — allows absorption of blue-green wavelengths; contributes to occupying specific marine niches.
+
+Q: Which algae produce agar and which are sources of algin and carrageenan?
+A: Agar — Gelidium and Gracilaria; Algin — brown algae (e.g., Laminaria); Carrageenan — red algae.
+
+Q: Name five common green algae from the chapter.
+A: Chlamydomonas, Volvox, Ulothrix, Spirogyra, Chara.
+
+Q: What are gemmae and where are they found?
+A: Gemmae are multicellular asexual buds for vegetative reproduction found in gemma cups of liverworts (e.g., Marchantia).
+
+Q: Define “protonema” and identify the group that has it.
+A: Protonema is the filamentous first stage developing from a moss spore; found in mosses (Bryophytes).
+
+Q: Name two bryophyte genera given as examples.
+A: Marchantia (liverwort), Funaria and Sphagnum (mosses).
+
+Q: What term is applied to bryophytes as ecological pioneers and why?
+A: They are first colonisers on rocks/soil (pioneer species) because they help decompose rocks and form soil suitable for higher plants.
+
+Q: Give the structural parts of a sporophyte common to bryophytes listed in the text.
+A: Foot, seta, capsule.
+
+Q: State whether bryophyte gametophyte or sporophyte is dominant.
+A: Gametophyte is dominant.
+
+Q: Name the four classes of pteridophytes mentioned.
+A: Psilopsida (Psilotum), Lycopsida (Selaginella, Lycopodium), Sphenopsida (Equisetum), Pteropsida (ferns: Dryopteris, Pteris, Adiantum).
+
+Q: Define homospory and heterospory and give one example of each from the chapter.
+A: Homospory — production of spores of one kind all similar (most ferns) ; Heterospory — production of microspores and megaspores (Selaginella, Salvinia).
+
+Q: In which plant group does the sporophyte have true roots, stems and leaves for the first time in plant evolution?
+A: Pteridophytes (first with vascular tissues).
+
+Q: What does “gymnosperm” literally mean?
+A: “Naked seed” (gymnos = naked, sperma = seed).
+
+Q: Name three gymnosperm genera illustrated in the chapter.
+A: Cycas, Pinus, Ginkgo.
+
+Q: What specialized root is associated with cyanobacterial N₂ fixation in Cycas?
+A: Coralloid roots.
+
+Q: Where are microsporangia and megasporangia borne in gymnosperms?
+A: On sporophylls arranged spirally along an axis to form male and female strobili (cones).
+
+Q: What is the reduced male gametophyte in gymnosperms called?
+A: Pollen grain.
+
+Q: In gymnosperms, are male and female gametophytes free-living?
+A: No — they are retained within the sporangia of sporophytes (not free-living).
+
+Q: Give two adaptive leaf features of conifers that reduce water loss.
+A: Needle-like leaves, thick cuticle, and sunken stomata.
+
+Q: Name the two classes into which angiosperms are divided (chapter).
+A: Dicotyledons and Monocotyledons.
+
+Q: Give two example uses of algae mentioned (economic importance).
+A: Food (Porphyra, Laminaria, Sargassum), commercial hydrocolloids (algin, carrageenan, agar), protein supplement (Chlorella).
+
+Q: Where (in which plant organ/structure) does reduction division (meiosis) occur in: (a) liverwort, (b) moss, (c) fern, (d) gymnosperm, (e) angiosperm?
+A: (a) In the sporophyte capsule (sporogenous cells) of liverworts; (b) in the capsule (sporogenous cells) of mosses; (c) in sporangia on sporophylls of ferns; (d) in megaspore/microspore mother cells within megasporangia/microsporangia of gymnosperms; (e) in megaspore/microspore mother cells in ovules/anthers of angiosperms.
+
+Q: Match: (a) Chlamydomonas (b) Cycas (c) Selaginella (d) Sphagnum — with (i) Moss (ii) Pteridophyte (iii) Algae (iv) Gymnosperm.
+A: (a) Chlamydomonas — (iii) Algae; (b) Cycas — (iv) Gymnosperm; (c) Selaginella — (ii) Pteridophyte; (d) Sphagnum — (i) Moss.
+
+Q: Name three structural portions of a typical fern sporophyte illustrated in the chapter.
+A: Rhizome, frond (leaf), sporophylls/strobili (in some), roots.
+
+Q: What is the ploidy of a gametophyte cell and a sporophyte cell respectively? Give an example (general rule).
+A: Gametophyte cells are haploid (n) — e.g., gametophyte cells of moss; sporophyte cells are diploid (2n) — e.g., fern sporophyte cells.
+
+Q: What feature distinguishes red algae (Rhodophyceae) in terms of gamete motility?
+A: Red algal gametes and spores are typically non-motile (no flagella).
+
+Q: What is the ecological importance of Sphagnum moss?
+A: Sphagnum forms peat used as fuel and packing material (retains water); contributes to peatland ecosystems and carbon sequestration.
+
+Q: Which pteridophytes form strobili (cones)? Give two examples.
+A: Selaginella and Equisetum (also Lycopodium species form strobili).
+
+Q: State one major morphological difference between liverwort thallus and moss leafy stage.
+A: Liverwort thallus is dorsiventral and closely appressed (thalloid), while moss leafy stage has upright axes with spirally arranged leaves.
+
+Q: What kind of spores do brown algae produce asexually and how many flagella do they have?
+A: Brown algae produce biflagellate zoospores with two unequal laterally attached flagella.
+
+Q: Give two botanical reasons gymnosperms are economically important (chapter mentions or implies).
+A: Timber and resin production (conifers like Pinus, Sequoia), and some provide ornamental/landscape trees; seeds (conifers) used as food in some cases (e.g., pine nuts).

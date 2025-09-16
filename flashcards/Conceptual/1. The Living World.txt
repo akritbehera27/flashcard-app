@@ -1,0 +1,44 @@
+Q: Why did early humans find it difficult to distinguish between living and non-living things?
+A: Early humans perceived both inanimate matter (like wind, sea, fire) and living organisms with awe and fear; systematic differentiation came later through biology.
+
+Q: How did anthropocentric views limit the progress of biological knowledge?
+A: Focusing only on human-centered understanding restricted objective classification and broader study of biodiversity.
+
+Q: What revelation did systematic study of life forms bring about?
+A: It revealed that all present-day organisms are related to each other and to all organisms that ever lived.
+
+Q: How does biodiversity conservation relate to our understanding of the living world?
+A: Recognizing shared evolutionary relationships humbled humans and inspired cultural movements for biodiversity conservation.
+
+Q: Why is identification crucial before naming an organism?
+A: Correct description and identification ensure that the scientific name refers to the right organism universally.
+
+Q: Explain why binomial nomenclature is preferred over other naming systems.
+A: It provides a standard, simple, and universally accepted two-word format for each organism, reducing confusion.
+
+Q: Why are biological names in Latin or Latinised forms?
+A: Latin is a ‘dead’ language, unchanging and universally recognised, ensuring uniformity across regions.
+
+Q: How does classification simplify biological studies?
+A: It groups organisms into convenient categories (taxa) based on observable characteristics, making recognition and study systematic.
+
+Q: Differentiate between taxonomy and systematics.
+A: Taxonomy deals with characterisation, identification, nomenclature, and classification, while systematics also incorporates evolutionary relationships.
+
+Q: Why is classification described as a hierarchy of steps?
+A: Each step represents a taxonomic category (species, genus, etc.), and all categories together form a taxonomic hierarchy.
+
+Q: Why does the number of shared characteristics decrease as we move from species to kingdom?
+A: Lower taxa have more specific similarities, while higher taxa combine more diverse groups with fewer common traits.
+
+Q: What is the scientific basis for distinguishing families in plants and animals?
+A: In plants, both vegetative and reproductive features are used; in animals, morphological and anatomical traits are considered.
+
+Q: How does order differ from family in taxonomic classification?
+A: Orders group families with fewer similarities, while families group genera with more similarities.
+
+Q: Why is species called the “basic unit of classification”?
+A: Because species represents a group with fundamental similarities, capable of being distinguished from others.
+
+Q: How does evolutionary history influence systematics?
+A: It establishes relationships among organisms based on shared ancestry rather than superficial similarities.
