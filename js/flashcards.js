@@ -8,7 +8,7 @@ let currentCards = [];       // Cards in current deck (always shuffled)
 let currentCardIndex = 0;    // Which card we're showing
 let isFlipped = false;       // Is the current card flipped?
 let currentChapterName = ''; // Name of current chapter
-
+let folderStructure = {};
 
 function handleCardClick() {
     // If no cards are loaded, open sidebar instead of flipping
@@ -75,7 +75,7 @@ function reshuffleCards() {
 
 // Load list of available chapters from GitHub
 async function loadChapters() {
-    console.log('Loading chapters from GitHub...');
+    console.log('Loading chapters and folders from GitHub...');
     
     // Show loading state in sidebar
     const chapterList = document.getElementById('chapterList');
@@ -87,49 +87,65 @@ async function loadChapters() {
         
         console.log('Fetching from:', apiUrl);
         
-        // Fetch the list of files
+        // Fetch the root flashcards folder
         const response = await fetch(apiUrl);
         
         if (!response.ok) {
             throw new Error(`GitHub API error: ${response.status}`);
         }
         
-        const files = await response.json();
-        
-        // Filter for .txt files only
-        const textFiles = files.filter(file => file.name.endsWith('.txt'));
-        
-        if (textFiles.length === 0) {
-            chapterList.innerHTML = '<li class="error">No flashcard files found</li>';
-            return;
-        }
+        const items = await response.json();
         
         // Clear the list
         chapterList.innerHTML = '';
-        allChapters = textFiles;
+        folderStructure = {};
         
-        // Add each chapter to the sidebar
-        textFiles.forEach((file, index) => {
-            const li = document.createElement('li');
-            li.className = 'chapter-item';
-            
-            // Remove .txt extension for display
-            const chapterName = file.name.replace('.txt', '');
-            
-            // Create chapter button
-            li.innerHTML = `
-                <span class="chapter-number">${index + 1}</span>
-                <span class="chapter-name">${chapterName}</span>
-                <span class="chapter-size">${(file.size / 1024).toFixed(1)}KB</span>
-            `;
-            
-            // Add click handler
-            li.onclick = () => loadFlashcards(file);
-            
-            chapterList.appendChild(li);
-        });
+        // Separate folders and files
+        const folders = items.filter(item => item.type === 'dir');
+        const files = items.filter(item => item.type === 'file' && item.name.endsWith('.txt'));
         
-        console.log(`Loaded ${textFiles.length} chapters`);
+        // Process folders first
+        for (const folder of folders) {
+            await loadFolderContents(folder, chapterList);
+        }
+        
+        // Then add root-level files
+        if (files.length > 0) {
+            // Add a section for root files if there are also folders
+            if (folders.length > 0 && files.length > 0) {
+                const generalSection = document.createElement('li');
+                generalSection.className = 'folder-section';
+                generalSection.innerHTML = `
+                    <div class="folder-header" onclick="toggleFolder('general')">
+                        <span class="icon folder-icon"></span>
+                        <span class="folder-name">General</span>
+                        <span class="icon chevron-icon expanded"></span>
+                    </div>
+                    <ul class="folder-contents" id="folder-general">
+                    </ul>
+                `;
+                chapterList.appendChild(generalSection);
+                
+                const generalContents = document.getElementById('folder-general');
+                files.forEach((file, index) => {
+                    addFileToList(file, generalContents, index);
+                });
+            } else {
+                // Just add files directly if no folders
+                files.forEach((file, index) => {
+                    addFileToList(file, chapterList, index);
+                });
+            }
+        }
+        
+        // Store all chapters for reference
+        allChapters = [...files];
+        
+        if (folders.length === 0 && files.length === 0) {
+            chapterList.innerHTML = '<li class="error">No flashcard files or folders found</li>';
+        }
+        
+        console.log(`Loaded ${folders.length} folders and ${files.length} root files`);
         
     } catch (error) {
         console.error('Error loading chapters:', error);
@@ -141,9 +157,121 @@ async function loadChapters() {
             </li>
         `;
         
-        // Show helpful error info
         if (GITHUB_CONFIG.owner === 'YOUR-GITHUB-USERNAME') {
             alert('Please update GITHUB_CONFIG in js/config.js with your GitHub username!');
+        }
+    }
+}
+
+
+// NEW FUNCTION: Load contents of a folder
+async function loadFolderContents(folder, parentElement) {
+    try {
+        console.log(`Loading folder: ${folder.name}`);
+        
+        // Create folder section
+        const folderSection = document.createElement('li');
+        folderSection.className = 'folder-section';
+        
+        // Create folder header
+        folderSection.innerHTML = `
+            <div class="folder-header" onclick="toggleFolder('${folder.name}')">
+                <span class="icon folder-icon"></span>
+                <span class="folder-name">${folder.name}</span>
+                <span class="icon chevron-icon expanded"></span>
+                <span class="folder-count" id="count-${folder.name}">...</span>
+            </div>
+            <ul class="folder-contents" id="folder-${folder.name}">
+                <li class="loading">Loading...</li>
+            </ul>
+        `;
+        
+        parentElement.appendChild(folderSection);
+        
+        // Fetch folder contents
+        const response = await fetch(folder.url);
+        if (!response.ok) {
+            throw new Error(`Failed to load folder ${folder.name}`);
+        }
+        
+        const contents = await response.json();
+        const files = contents.filter(item => item.type === 'file' && item.name.endsWith('.txt'));
+        const subfolders = contents.filter(item => item.type === 'dir');
+        
+        // Update folder structure
+        folderStructure[folder.name] = files;
+        
+        // Update the folder contents
+        const folderContentsElement = document.getElementById(`folder-${folder.name}`);
+        folderContentsElement.innerHTML = '';
+        
+        // Add subfolders first
+        for (const subfolder of subfolders) {
+            await loadFolderContents(subfolder, folderContentsElement);
+        }
+        
+        // Add files
+        files.forEach((file, index) => {
+            // Store file with folder path for proper loading
+            file.folderPath = folder.name;
+            addFileToList(file, folderContentsElement, index);
+        });
+        
+        // Update count
+        const countElement = document.getElementById(`count-${folder.name}`);
+        if (countElement) {
+            countElement.textContent = `(${files.length})`;
+        }
+        
+        // Add files to global chapters array
+        allChapters.push(...files);
+        
+    } catch (error) {
+        console.error(`Error loading folder ${folder.name}:`, error);
+        const folderContentsElement = document.getElementById(`folder-${folder.name}`);
+        if (folderContentsElement) {
+            folderContentsElement.innerHTML = '<li class="error">Error loading folder contents</li>';
+        }
+    }
+}
+
+// NEW FUNCTION: Add file to the list
+function addFileToList(file, parentElement, index) {
+    const li = document.createElement('li');
+    li.className = 'chapter-item';
+    
+    // Remove .txt extension for display
+    const chapterName = file.name.replace('.txt', '');
+    
+    // Add folder path to display if it exists
+    const displayName = file.folderPath ? `${chapterName}` : chapterName;
+    
+    li.innerHTML = `
+        <span class="chapter-number">${index + 1}</span>
+        <span class="chapter-name" title="${displayName}">${displayName}</span>
+        <span class="chapter-size">${(file.size / 1024).toFixed(1)}KB</span>
+    `;
+    
+    // Add click handler
+    li.onclick = () => loadFlashcards(file);
+    
+    parentElement.appendChild(li);
+}
+
+// NEW FUNCTION: Toggle folder open/closed
+function toggleFolder(folderName) {
+    const folderContents = document.getElementById(`folder-${folderName}`);
+    const chevron = document.querySelector(`#folder-${folderName}`).previousElementSibling.querySelector('.chevron-icon');
+    
+    if (folderContents) {
+        if (folderContents.style.display === 'none') {
+            folderContents.style.display = 'block';
+            chevron?.classList.add('expanded');
+            chevron?.classList.remove('collapsed');
+        } else {
+            folderContents.style.display = 'none';
+            chevron?.classList.remove('expanded');
+            chevron?.classList.add('collapsed');
         }
     }
 }

@@ -164,14 +164,26 @@
             { selector: '.prev-icon', icon: 'chevronLeft' },
             { selector: '.next-icon', icon: 'chevronRight' },
             { selector: '.shuffle-icon', icon: 'shuffle' },
-            { selector: '.select-deck-icon', icon: 'selectDeck' }  // ADD THIS
+            { selector: '.select-deck-icon', icon: 'selectDeck' },
+            { selector: '.folder-icon', icon: 'folder' },  // ADD THIS
+            { selector: '.chevron-icon', icon: 'chevronDown' }  // ADD THIS
         ];
         
         iconElements.forEach(({ selector, icon }) => {
-            const element = document.querySelector(selector);
-            if (element && icons[icon]) {
-                element.innerHTML = icons[icon];
-            }
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(element => {
+                if (element && icons[icon]) {
+                    element.innerHTML = icons[icon];
+                }
+            });
+        });
+        
+        // Set initial chevron states
+        document.querySelectorAll('.chevron-icon.expanded').forEach(el => {
+            el.innerHTML = icons.chevronDown;
+        });
+        document.querySelectorAll('.chevron-icon.collapsed').forEach(el => {
+            el.innerHTML = icons.chevronRight;
         });
     });
 </script>

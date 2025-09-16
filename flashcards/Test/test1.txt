@@ -1,0 +1,8 @@
+Q: What is the scientific name of mango?
+A: Mangifera indica
+
+Q: What is the scientific name of potato?
+A: Solanum tuberosum
+
+Q: What is the scientific name of lion?
+A: Panthera leo

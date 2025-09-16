@@ -2041,3 +2041,186 @@ button .icon {
 .logout-overlay * {
     pointer-events: none;
 }
+
+
+/* ============================================
+   FOLDER SUPPORT STYLES
+   ============================================ */
+
+/* Folder section container */
+.folder-section {
+    margin-bottom: 0.5rem;
+    list-style: none;
+}
+
+/* Folder header (clickable) */
+.folder-header {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    background: var(--bg-tertiary);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    margin-bottom: 0.25rem;
+    border: 2px solid transparent;
+}
+
+.folder-header:hover {
+    background: var(--primary-light);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Folder icon */
+.folder-header .folder-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+    color: var(--primary);
+}
+
+.folder-header:hover .folder-icon {
+    color: white;
+}
+
+/* Folder name */
+.folder-name {
+    flex: 1;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* File count badge */
+.folder-count {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin-left: 0.5rem;
+}
+
+/* Chevron icon for expand/collapse */
+.folder-header .chevron-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s ease;
+    margin-left: auto;
+}
+
+.chevron-icon.expanded {
+    transform: rotate(90deg);
+}
+
+.chevron-icon.collapsed {
+    transform: rotate(0deg);
+}
+
+/* Folder contents (list of files) */
+.folder-contents {
+    list-style: none;
+    padding-left: 1.5rem;
+    margin: 0;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+/* Nested folders */
+.folder-contents .folder-section {
+    margin-left: 0;
+}
+
+.folder-contents .folder-header {
+    background: rgba(var(--primary-rgb), 0.05);
+    font-size: 0.9rem;
+}
+
+/* Files inside folders */
+.folder-contents .chapter-item {
+    margin-bottom: 0.25rem;
+    background: var(--bg-primary);
+    border-left: 3px solid var(--primary-light);
+}
+
+.folder-contents .chapter-item:hover {
+    border-left-color: var(--primary);
+}
+
+/* Collapsed folder */
+.folder-contents[style*="display: none"] {
+    display: none;
+}
+
+/* Loading state inside folder */
+.folder-contents .loading {
+    padding: 0.5rem;
+    text-align: center;
+    color: var(--text-tertiary);
+    font-style: italic;
+}
+
+/* Error state inside folder */
+.folder-contents .error {
+    padding: 0.5rem;
+    color: var(--danger);
+    font-size: 0.85rem;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .folder-header {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .folder-header:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary);
+}
+
+[data-theme="dark"] .folder-contents .chapter-item {
+    background: var(--bg-tertiary);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .folder-contents {
+        padding-left: 1rem;
+    }
+    
+    .folder-header {
+        padding: 0.625rem;
+    }
+    
+    .folder-name {
+        font-size: 0.875rem;
+    }
+}
+
+/* Animation for folder toggle */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.folder-contents {
+    animation: slideDown 0.3s ease;
+}
+
+/* Indentation for nested structure */
+.folder-contents .folder-contents {
+    padding-left: 1rem;
+}
+
+/* Visual hierarchy with colors */
+.folder-section > .folder-header {
+    background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+}
+
+.folder-contents .folder-section > .folder-header {
+    background: var(--bg-secondary);
+}
