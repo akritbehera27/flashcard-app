@@ -560,10 +560,53 @@ input[type="email"]:focus {
 }
 
 .chapter-item.active {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-    color: white;
     box-shadow: var(--shadow-md);
+    font-weight: 600;
+    position: relative;
+    transition: all 0.3s ease;
 }
+
+[data-theme="light"] .chapter-item.active {
+    background: var(--bg-primary);
+    color: var(--primary-dark);  /* Dark text */
+    border: 3px solid var(--primary);
+    border-left-width: 6px;  /* Thicker left border */
+}
+
+/* Add a subtle gradient overlay */
+[data-theme="light"] .chapter-item.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        rgba(99, 102, 241, 0.1) 0%, 
+        rgba(99, 102, 241, 0.05) 100%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+/* Dark mode - keep the gradient background */
+[data-theme="dark"] .chapter-item.active {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--accent) 100%);
+    color: white;
+    border: none;
+}
+
+/* Number styling for active items */
+[data-theme="light"] .chapter-item.active .chapter-number {
+    background: var(--primary);
+    color: white;
+}
+
+[data-theme="dark"] .chapter-item.active .chapter-number {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
 
 .chapter-number {
     display: flex;
@@ -2136,7 +2179,7 @@ button .icon {
 /* Files inside folders */
 .folder-contents .chapter-item {
     margin-bottom: 0.25rem;
-    background: var(--bg-primary);
+    /* background: var(--bg-primary); */
     border-left: 3px solid var(--primary-light);
 }
 
@@ -2250,3 +2293,4 @@ button .icon {
 .folder-contents .folder-section > .folder-header {
     background: var(--bg-secondary);
 }
+

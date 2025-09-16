@@ -9,6 +9,7 @@ let currentCardIndex = 0;    // Which card we're showing
 let isFlipped = false;       // Is the current card flipped?
 let currentChapterName = ''; // Name of current chapter
 let folderStructure = {};    // Store folder structure
+let globalFileCounter = 0; 
 
 // Fisher-Yates shuffle algorithm - ALWAYS USED
 function shuffleArray(array) {
@@ -94,10 +95,10 @@ async function loadChapters() {
         
         const items = await response.json();
         
-        // Clear the list and reset arrays
+        // Clear the list and reset
         chapterList.innerHTML = '';
         folderStructure = {};
-        allChapters = [];  // Reset the array
+        allChapters = [];
         
         // Separate folders and files
         const folders = items.filter(item => item.type === 'dir');
@@ -119,6 +120,7 @@ async function loadChapters() {
                         <span class="icon folder-icon"></span>
                         <span class="folder-name">General</span>
                         <span class="icon chevron-icon expanded"></span>
+                        <span class="folder-count">(${files.length})</span>
                     </div>
                     <ul class="folder-contents" id="folder-general">
                     </ul>
@@ -126,12 +128,23 @@ async function loadChapters() {
                 chapterList.appendChild(generalSection);
                 
                 const generalContents = document.getElementById('folder-general');
+                
+                // Per-folder numbering for General section
+                let generalCounter = 0;  // Counter for general section
                 files.forEach(file => {
+                    generalCounter++;
+                    file.displayNumber = generalCounter;  // Number within General folder
+                    file.folderPath = 'General';  // Mark as general folder
                     addFileToList(file, generalContents);
                 });
+                
             } else {
-                // Just add files directly if no folders
+                // Just add files directly if no folders exist
+                let rootCounter = 0;
                 files.forEach(file => {
+                    rootCounter++;
+                    file.displayNumber = rootCounter;
+                    file.folderPath = null;  // No folder path for root files
                     addFileToList(file, chapterList);
                 });
             }
@@ -163,7 +176,7 @@ async function loadChapters() {
 }
 
 // Load contents of a folder
-async function loadFolderContents(folder, parentElement) {
+async function loadFolderContents(folder, parentElement, parentPath = '') {
     try {
         console.log(`Loading folder: ${folder.name}`);
         
@@ -171,15 +184,19 @@ async function loadFolderContents(folder, parentElement) {
         const folderSection = document.createElement('li');
         folderSection.className = 'folder-section';
         
+        // Generate unique folder ID (handle nested folders)
+        const folderId = parentPath ? `${parentPath}-${folder.name}` : folder.name;
+        const folderIdSafe = folderId.replace(/[^a-zA-Z0-9-]/g, '_');
+        
         // Create folder header
         folderSection.innerHTML = `
-            <div class="folder-header" onclick="toggleFolder('${folder.name}')">
+            <div class="folder-header" onclick="toggleFolder('${folderIdSafe}')">
                 <span class="icon folder-icon"></span>
                 <span class="folder-name">${folder.name}</span>
                 <span class="icon chevron-icon expanded"></span>
-                <span class="folder-count" id="count-${folder.name}">...</span>
+                <span class="folder-count" id="count-${folderIdSafe}">...</span>
             </div>
-            <ul class="folder-contents" id="folder-${folder.name}">
+            <ul class="folder-contents" id="folder-${folderIdSafe}">
                 <li class="loading">Loading...</li>
             </ul>
         `;
@@ -199,40 +216,45 @@ async function loadFolderContents(folder, parentElement) {
         // Update folder structure
         folderStructure[folder.name] = files;
         
-        // Update the folder contents
-        const folderContentsElement = document.getElementById(`folder-${folder.name}`);
+        // Update the folder contents element
+        const folderContentsElement = document.getElementById(`folder-${folderIdSafe}`);
         folderContentsElement.innerHTML = '';
         
-        // Add subfolders first
+        // Add subfolders first (recursive)
         for (const subfolder of subfolders) {
-            await loadFolderContents(subfolder, folderContentsElement);
+            await loadFolderContents(subfolder, folderContentsElement, folderId);
         }
         
-        // Add files with folder path
+        // Add files with per-folder numbering
+        let folderFileCounter = 0;  // Local counter for this specific folder
         files.forEach(file => {
-            file.folderPath = folder.name;  // Store folder path
+            folderFileCounter++;  // Increment folder-specific counter
+            file.folderPath = folder.name;  // Store which folder this file is in
+            file.displayNumber = folderFileCounter;  // Use folder-specific number (1, 2, 3...)
             addFileToList(file, folderContentsElement);
         });
         
-        // Update count
-        const countElement = document.getElementById(`count-${folder.name}`);
+        // Update count in folder header
+        const countElement = document.getElementById(`count-${folderIdSafe}`);
         if (countElement) {
             countElement.textContent = `(${files.length})`;
         }
         
-        // Add files to global chapters array
+        // Add files to global chapters array (for search/reference)
         allChapters.push(...files);
         
     } catch (error) {
         console.error(`Error loading folder ${folder.name}:`, error);
-        const folderContentsElement = document.getElementById(`folder-${folder.name}`);
+        const folderIdSafe = folder.name.replace(/[^a-zA-Z0-9-]/g, '_');
+        const folderContentsElement = document.getElementById(`folder-${folderIdSafe}`);
         if (folderContentsElement) {
             folderContentsElement.innerHTML = '<li class="error">Error loading folder contents</li>';
         }
     }
 }
 
-// Add file to the list - FIXED VERSION
+
+// Add file to the list - USING STORED NUMBER
 function addFileToList(file, parentElement) {
     const li = document.createElement('li');
     li.className = 'chapter-item';
@@ -240,24 +262,28 @@ function addFileToList(file, parentElement) {
     // Remove .txt extension for display
     const chapterName = file.name.replace('.txt', '');
     
-    // Create display number based on total files loaded
-    const displayNumber = allChapters.length + 1;
+    // Use the stored display number (per-folder numbering)
+    const displayNumber = file.displayNumber || '?';
+    
+    // Optional: Show folder path in tooltip for clarity
+    const tooltipText = file.folderPath ? `${file.folderPath} / ${chapterName}` : chapterName;
     
     li.innerHTML = `
         <span class="chapter-number">${displayNumber}</span>
-        <span class="chapter-name" title="${chapterName}">${chapterName}</span>
+        <span class="chapter-name" title="${tooltipText}">${chapterName}</span>
         <span class="chapter-size">${(file.size / 1024).toFixed(1)}KB</span>
     `;
     
-    // Add click handler - pass the file object directly, not index
+    // Add click handler - pass the file object directly
     li.onclick = () => loadFlashcards(file);
     
     parentElement.appendChild(li);
 }
 
+
 // Toggle folder open/closed
-function toggleFolder(folderName) {
-    const folderContents = document.getElementById(`folder-${folderName}`);
+function toggleFolder(folderIdSafe) {
+    const folderContents = document.getElementById(`folder-${folderIdSafe}`);
     const folderHeader = folderContents?.previousElementSibling;
     const chevron = folderHeader?.querySelector('.chevron-icon');
     
@@ -265,12 +291,12 @@ function toggleFolder(folderName) {
         if (folderContents.style.display === 'none') {
             folderContents.style.display = 'block';
             if (chevron) {
-                chevron.innerHTML = icons.chevronDown;
+                chevron.innerHTML = icons.chevronDown || '▼';
             }
         } else {
             folderContents.style.display = 'none';
             if (chevron) {
-                chevron.innerHTML = icons.chevronRight;
+                chevron.innerHTML = icons.chevronRight || '▶';
             }
         }
     }
