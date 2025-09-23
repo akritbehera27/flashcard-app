@@ -1273,6 +1273,12 @@ input[type="email"]:focus {
     .sidebar {
         max-width: 100%;
     }
+    #answerText{
+        padding-top: 1rem;
+    }
+    #answer-lable{
+        margin-bottom: 0 !important;
+    }
 }
 
 /* ============================================
