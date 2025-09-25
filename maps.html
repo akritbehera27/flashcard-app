@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maps Viewer - Study Materials</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Maps specific styles */
+        .map-viewer {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .map-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .map-content {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            padding: 2rem;
+        }
+        
+        .no-map-selected {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-secondary);
+        }
+        
+        .map-chapter-item {
+            display: flex;
+            align-items: center;
+            padding: 0.875rem;
+            margin-bottom: 0.5rem;
+            background: var(--bg-secondary);
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .map-chapter-item:hover {
+            background: var(--bg-tertiary);
+            transform: translateX(4px);
+            border-color: var(--primary-light);
+        }
+        
+        .map-chapter-item.active {
+            background: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-switcher">
+        <label class="theme-switch">
+            <span class="icon theme-icon"></span>
+            <span>Dark Mode</span>
+            <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="sidebar-content">
+        <!-- List of available maps -->
+        <ul id="mapsList" class="chapter-list">
+            <li class="loading">Loading maps...</li>
+        </ul>
+    </div>
+                
+
+    <!-- Load required scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/icons.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/maps.js"></script>
+    
+    <!-- Initialize icons -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set all icon SVGs
+            const iconElements = [
+                { selector: '.menu-icon', icon: 'menu' },
+                { selector: '.map-icon', icon: 'map' },
+                { selector: '.collapse-icon', icon: 'collapse' },
+                { selector: '.theme-icon', icon: 'moon' },
+                { selector: '.logout-icon', icon: 'logout' },
+                { selector: '.cards-icon', icon: 'layers' },
+                { selector: '.map-large-icon', icon: 'map' }
+            ];
+            
+            iconElements.forEach(({ selector, icon }) => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(element => {
+                    if (element && icons[icon]) {
+                        element.innerHTML = icons[icon];
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
