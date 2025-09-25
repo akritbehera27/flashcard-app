@@ -145,17 +145,21 @@ async function loadMapFolder(folder, parentElement, parentPath = '') {
         const folderContentsElement = document.getElementById(`map-folder-${folderIdSafe}`);
         folderContentsElement.innerHTML = '';
         
-        // Add subfolders
+        // Add subfolders with proper path tracking
         for (const subfolder of subfolders) {
-            await loadMapFolder(subfolder, folderContentsElement, folderId);
+            // Build the correct path for nested folders
+            const subfolderPath = parentPath ? `${parentPath}/${folder.name}` : folder.name;
+            await loadMapFolder(subfolder, folderContentsElement, subfolderPath);
         }
         
-        // Add HTML files
+        // Add HTML files with correct folder path
         let folderFileCounter = 0;
         files.forEach(file => {
             folderFileCounter++;
-            file.folderPath = folder.name;
+            // Store the complete folder path for URL construction
+            file.folderPath = parentPath ? `${parentPath}/${folder.name}` : folder.name;
             file.displayNumber = folderFileCounter;
+            file.webPath = `${file.folderPath}/${file.name}`;
             addMapToList(file, folderContentsElement);
         });
         
@@ -178,6 +182,9 @@ function addMapToList(file, parentElement) {
     
     const mapName = file.name.replace('.html', '').replace('.htm', '');
     const tooltipText = file.folderPath ? `${file.folderPath} / ${mapName}` : mapName;
+    
+    // Store the file path for URL construction
+    file.webPath = file.folderPath ? `${file.folderPath}/${file.name}` : file.name;
     
     li.innerHTML = `
         <span class="chapter-number">${file.displayNumber}</span>
@@ -235,60 +242,40 @@ function toggleMapFolder(folderIdSafe) {
 // Open HTML map file in new tab
 function openMapFile(file) {
     console.log('Opening map file:', file.name);
-    console.log('Download URL:', file.download_url);
     
     try {
-        // Open the file directly in a new tab
-        const newWindow = window.open(file.download_url, '_blank');
+        // Construct the URL based on your website structure
+        let mapUrl;
+        
+        // Check if SITE_CONFIG exists and has domain
+        if (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.domain) {
+            // Use your website URL structure
+            if (file.webPath) {
+                mapUrl = `${SITE_CONFIG.domain}/maps/${file.webPath}`;
+            } else if (file.folderPath) {
+                mapUrl = `${SITE_CONFIG.domain}/maps/${file.folderPath}/${file.name}`;
+            } else {
+                mapUrl = `${SITE_CONFIG.domain}/maps/${file.name}`;
+            }
+        } else {
+            // Fallback to GitHub raw URL if SITE_CONFIG not defined
+            mapUrl = file.download_url;
+        }
+        
+        console.log('Opening URL:', mapUrl);
+        
+        // Open the file in a new tab
+        const newWindow = window.open(mapUrl, '_blank');
         
         if (newWindow) {
             newWindow.focus();
         } else {
-            // If popup was blocked, show message
-            alert('Please allow popups for this site to open maps in new tabs.');
+            // If popup was blocked, show alternative
+            showDirectLink(mapUrl, file.name);
         }
         
         // Update UI to show which map was opened
-        const currentMapTitle = document.getElementById('currentMap');
-        const mapInfo = document.getElementById('mapInfo');
-        const mapName = file.name.replace('.html', '').replace('.htm', '');
-        
-        if (currentMapTitle) {
-            currentMapTitle.textContent = `Opened: ${mapName}`;
-        }
-        
-        if (mapInfo) {
-            mapInfo.textContent = `${file.folderPath || 'General'} / ${mapName}`;
-        }
-        
-        // Update the display area
-        const mapDisplay = document.getElementById('mapDisplay');
-        if (mapDisplay) {
-            mapDisplay.innerHTML = `
-                <div class="no-map-selected" style="text-align: center; padding: 2rem;">
-                    <div style="font-size: 60px; margin-bottom: 1rem;">↗️</div>
-                    <h3>Map opened in new tab</h3>
-                    <p><strong>${mapName}</strong></p>
-                    <p style="color: var(--text-tertiary); margin-top: 1rem;">
-                        The map has been opened in a new browser tab.<br>
-                        Select another map from the sidebar to continue.
-                    </p>
-                    <button class="nav-btn" onclick="window.open('${file.download_url}', '_blank')" style="margin-top: 1rem; padding: 0.75rem 1.5rem; background: var(--primary); color: white; border: none; border-radius: 0.5rem; cursor: pointer;">
-                        Open Again ↗
-                    </button>
-                </div>
-            `;
-        }
-        
-        // Highlight selected map
-        document.querySelectorAll('.map-chapter-item').forEach(item => {
-            const nameElement = item.querySelector('.chapter-name');
-            if (nameElement && nameElement.textContent === mapName) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
-        });
+        updateUIAfterOpen(file, mapUrl);
         
         // Close sidebar on mobile
         if (window.innerWidth <= 768 && typeof closeSidebar === 'function') {
@@ -300,6 +287,7 @@ function openMapFile(file) {
         alert('Error opening map: ' + error.message);
     }
 }
+
 
 // Initialize chevron icons
 function initializeChevronIcons() {
@@ -335,6 +323,77 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load maps immediately - no authentication needed
     loadMaps();
 });
+
+
+function showDirectLink(url, fileName) {
+    const mapDisplay = document.getElementById('mapDisplay');
+    const mapName = fileName.replace('.html', '').replace('.htm', '');
+    
+    if (mapDisplay) {
+        mapDisplay.innerHTML = `
+            <div class="no-map-selected" style="text-align: center; padding: 2rem;">
+                <h3>Popup Blocked</h3>
+                <p>Click the link below to open the map:</p>
+                <a href="${url}" target="_blank" 
+                   style="display: inline-block; margin: 1rem 0; padding: 0.75rem 1.5rem; 
+                          background: var(--primary); color: white; text-decoration: none; 
+                          border-radius: 0.5rem;">
+                    Open ${mapName} ↗
+                </a>
+                <p style="color: var(--text-tertiary); font-size: 0.875rem;">
+                    URL: <code>${url}</code>
+                </p>
+            </div>
+        `;
+    }
+}
+
+// ADD THIS NEW FUNCTION - Update UI after opening
+function updateUIAfterOpen(file, url) {
+    const currentMapTitle = document.getElementById('currentMap');
+    const mapInfo = document.getElementById('mapInfo');
+    const mapDisplay = document.getElementById('mapDisplay');
+    const mapName = file.name.replace('.html', '').replace('.htm', '');
+    
+    if (currentMapTitle) {
+        currentMapTitle.textContent = `Opened: ${mapName}`;
+    }
+    
+    if (mapInfo) {
+        mapInfo.textContent = `${file.folderPath || 'General'} / ${mapName}`;
+    }
+    
+    if (mapDisplay) {
+        mapDisplay.innerHTML = `
+            <div class="no-map-selected" style="text-align: center; padding: 2rem;">
+                <div style="font-size: 60px; margin-bottom: 1rem;">↗️</div>
+                <h3>Map opened in new tab</h3>
+                <p><strong>${mapName}</strong></p>
+                <div style="margin: 2rem 0; padding: 1rem; background: var(--bg-secondary); 
+                            border-radius: 0.5rem; word-break: break-all;">
+                    <small style="color: var(--text-tertiary);">URL:</small><br>
+                    <code style="font-size: 0.875rem;">${url}</code>
+                </div>
+                <button class="nav-btn" onclick="window.open('${url}', '_blank')" 
+                        style="margin-top: 1rem; padding: 0.75rem 1.5rem; 
+                               background: var(--primary); color: white; border: none; 
+                               border-radius: 0.5rem; cursor: pointer;">
+                    Open Again ↗
+                </button>
+            </div>
+        `;
+    }
+    
+    // Highlight selected map
+    document.querySelectorAll('.map-chapter-item').forEach(item => {
+        const nameElement = item.querySelector('.chapter-name');
+        if (nameElement && nameElement.textContent === mapName) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+}
 
 // Make functions globally available
 window.toggleMapFolder = toggleMapFolder;

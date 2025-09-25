@@ -17,6 +17,10 @@ const GITHUB_CONFIG = {
     folder: 'flashcards'             // Folder containing .txt files
 };
 
+const SITE_CONFIG = {
+    domain: 'https://pensapedia.pages.dev'
+};
+
 // Admin password for the admin panel (change this!)
 const ADMIN_PASSWORD = 'admin2712';
 
@@ -31,3 +35,4 @@ if (SUPABASE_URL.includes('YOUR-PROJECT-ID')) {
 if (SUPABASE_ANON_KEY === 'YOUR-ANON-KEY-HERE') {
     console.error('⚠️ Please update SUPABASE_ANON_KEY in js/config.js with your actual Supabase key');
 }
+

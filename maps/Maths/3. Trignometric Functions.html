@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>Markmap</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+.markmap-dark {
+  background: #27272a;
+  color: white;
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/style.css">
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.12/dist/browser/index.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/index.js"></script><script>(()=>{setTimeout(()=>{const{markmap:S,mm:Q}=window,$=new S.Toolbar;$.attach(Q);const I=$.render();I.setAttribute("style","position:absolute;bottom:20px;right:20px"),document.body.append(I)})})()</script><script>((l,U,M,R)=>{const N=l();window.mm=N.Markmap.create("svg#mindmap",(U||N.deriveOptions)(R),M),window.matchMedia("(prefers-color-scheme: dark)").matches&&document.documentElement.classList.add("markmap-dark")})(()=>window.markmap,null,{"content":"Trignometric Funtctions","children":[{"content":"1. INTRODUCTION","children":[{"content":"<strong>Definition</strong>: &quot;Measuring triangle sides&quot; (Greek: <em>trigon</em> + <em>metron</em>)","children":[],"payload":{"tag":"li","lines":"3,4"}},{"content":"<strong>Applications</strong>:","children":[{"content":"<em>Historical</em>: Navigation, surveying, engineering","children":[],"payload":{"tag":"li","lines":"5,6"}},{"content":"<em>Modern</em>: Seismology, circuits, atomic states, tides, music","children":[],"payload":{"tag":"li","lines":"6,7"}}],"payload":{"tag":"li","lines":"4,7"}},{"content":"<strong>Core Concept</strong>: Generalization from acute angles &#x2192; any angle","children":[],"payload":{"tag":"li","lines":"7,9"}}],"payload":{"tag":"h2","lines":"2,3"}},{"content":"2. ANGLES","children":[{"content":"<strong>Definition</strong>:","children":[{"content":"Rotation measure (ray &#x2192; initial side &#x2192; terminal side)","children":[],"payload":{"tag":"li","lines":"11,12"}},{"content":"Vertex: Rotation point","children":[],"payload":{"tag":"li","lines":"12,13"}},{"content":"Sign:","children":[{"content":"(+) anticlockwise","children":[],"payload":{"tag":"li","lines":"14,15"}},{"content":"(-) clockwise","children":[],"payload":{"tag":"li","lines":"15,16"}}],"payload":{"tag":"li","lines":"13,16"}}],"payload":{"tag":"li","lines":"10,16"}},{"content":"<strong>Units</strong>:","children":[{"content":"<strong>Revolution</strong>: 1 full turn","children":[],"payload":{"tag":"li","lines":"17,18"}},{"content":"<strong>Degrees</strong>:","children":[{"content":"1&#xb0; = 1/360 revolution","children":[],"payload":{"tag":"li","lines":"19,20"}},{"content":"1&#xb0; = 60&apos; (Babylonian base-60 system)","children":[],"payload":{"tag":"li","lines":"20,21"}},{"content":"1&apos; = 60&quot;","children":[],"payload":{"tag":"li","lines":"21,22"}}],"payload":{"tag":"li","lines":"18,22"}},{"content":"<strong>Radians</strong>:","children":[{"content":"Angle subtended by unit arc: &#x3b8; ( Radians ) = l (arc length) / r( Radius )","children":[],"payload":{"tag":"li","lines":"23,24"}},{"content":"Full circle = 2&#x3c0; rad","children":[],"payload":{"tag":"li","lines":"24,25"}},{"content":"Arc length: s = r&#x3b8;","children":[],"payload":{"tag":"li","lines":"25,26"}}],"payload":{"tag":"li","lines":"22,26"}}],"payload":{"tag":"li","lines":"16,26"}},{"content":"<strong>Key Relations</strong>:","children":[{"content":"Radian &#x2194; Real numbers: Bijective via unit circle","children":[],"payload":{"tag":"li","lines":"27,28"}},{"content":"Degree &#x2194; Radian: &#x3c0; rad = 180&#xb0;","children":[{"content":"Conversion: <code>rad = (&#x3c0;/180) &#xd7; deg</code>","children":[],"payload":{"tag":"li","lines":"29,30"}},{"content":"Common conversions:\n<table data-lines=\"31,37\">\n<thead data-lines=\"31,32\">\n<tr data-lines=\"31,32\">\n<th>Degrees</th>\n<th>Radians</th>\n</tr>\n</thead>\n<tbody data-lines=\"33,37\">\n<tr data-lines=\"33,34\">\n<td>30&#xb0;</td>\n<td>&#x3c0;/6</td>\n</tr>\n<tr data-lines=\"34,35\">\n<td>45&#xb0;</td>\n<td>&#x3c0;/4</td>\n</tr>\n<tr data-lines=\"35,36\">\n<td>90&#xb0;</td>\n<td>&#x3c0;/2</td>\n</tr>\n<tr data-lines=\"36,37\">\n<td>180&#xb0;</td>\n<td>&#x3c0;</td>\n</tr>\n</tbody>\n</table>","children":[],"payload":{"tag":"li","lines":"30,37"}}],"payload":{"tag":"li","lines":"28,37"}}],"payload":{"tag":"li","lines":"26,37"}},{"content":"<strong>Notation</strong>: Omit &quot;radian&quot; for Greek letters","children":[],"payload":{"tag":"li","lines":"37,39"}}],"payload":{"tag":"h2","lines":"9,10"}},{"content":"3. TRIGONOMETRIC FUNCTIONS","children":[{"content":"<strong>Unit Circle Definition</strong>:","children":[{"content":"P(a,b) on circle &#x2192; <code>cos x = a</code>, <code>sin x = b</code>","children":[],"payload":{"tag":"li","lines":"41,42"}},{"content":"Fundamental identity: <code>cos&#xb2;x + sin&#xb2;x = 1</code>","children":[],"payload":{"tag":"li","lines":"42,43"}}],"payload":{"tag":"li","lines":"40,43"}},{"content":"<strong>Quadrantal Angles</strong>:","children":[{"content":"0&#xb0;: (1,0)","children":[],"payload":{"tag":"li","lines":"44,45"}},{"content":"90&#xb0;: (0,1)","children":[],"payload":{"tag":"li","lines":"45,46"}},{"content":"180&#xb0;: (-1,0)","children":[],"payload":{"tag":"li","lines":"46,47"}},{"content":"270&#xb0;: (0,-1)","children":[],"payload":{"tag":"li","lines":"47,48"}}],"payload":{"tag":"li","lines":"43,48"}},{"content":"<strong>Functions</strong>:<br>\n<mark>Please Refer to you notes.</mark>","children":[],"payload":{"tag":"li","lines":"48,50"}}],"payload":{"tag":"h2","lines":"39,40"}}],"payload":{"tag":"h1","lines":"0,1"}},null)</script>
+</body>
+</html>
