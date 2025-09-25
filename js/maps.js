@@ -278,9 +278,9 @@ function openMapFile(file) {
         updateUIAfterOpen(file, mapUrl);
         
         // Close sidebar on mobile
-        if (window.innerWidth <= 768 && typeof closeSidebar === 'function') {
-            closeSidebar();
-        }
+        // if (window.innerWidth <= 768 && typeof closeSidebar === 'function') {
+        //     closeSidebar();
+        // }
         
     } catch (error) {
         console.error('Error opening map:', error);
