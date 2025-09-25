@@ -1,5 +1,5 @@
 // ============================================
-// MAPS VIEWER LOGIC
+// PUBLIC MAPS VIEWER (NO AUTH REQUIRED)
 // ============================================
 
 // Global variables
@@ -9,7 +9,7 @@ let folderStructureMaps = {};
 
 // Load list of available maps from GitHub
 async function loadMaps() {
-    console.log('Loading maps from GitHub...');
+    console.log('Loading public maps from GitHub...');
     
     const mapsList = document.getElementById('mapsList');
     mapsList.innerHTML = '<li class="loading">Loading maps...</li>';
@@ -29,7 +29,7 @@ async function loadMaps() {
             }
             throw new Error(`GitHub API error: ${response.status}`);
         }
-        
+
         const items = await response.json();
         
         mapsList.innerHTML = '';
@@ -56,10 +56,10 @@ async function loadMaps() {
                     <div class="folder-header" onclick="toggleMapFolder('general')">
                         <span class="icon folder-icon"></span>
                         <span class="folder-name">General Maps</span>
-                        <span class="icon chevron-icon expanded"></span>
+                        <span class="icon chevron-icon collapsed"></span>
                         <span class="folder-count">(${files.length})</span>
                     </div>
-                    <ul class="folder-contents" id="map-folder-general"></ul>
+                    <ul class="folder-contents" id="map-folder-general" style="display: none;"></ul>
                 `;
                 mapsList.appendChild(generalSection);
                 
@@ -89,12 +89,16 @@ async function loadMaps() {
         
         console.log(`Loaded ${folders.length} folders and ${allMaps.length} map files`);
         
+        // Initialize chevron icons
+        initializeChevronIcons();
+        
     } catch (error) {
         console.error('Error loading maps:', error);
         mapsList.innerHTML = `
             <li class="error">
                 Error loading maps!<br>
-                <small>${error.message}</small>
+                <small>${error.message}</small><br>
+                <small>Check console for details</small>
             </li>
         `;
     }
@@ -111,14 +115,15 @@ async function loadMapFolder(folder, parentElement, parentPath = '') {
         const folderId = parentPath ? `${parentPath}-${folder.name}` : folder.name;
         const folderIdSafe = folderId.replace(/[^a-zA-Z0-9-]/g, '_');
         
+        // Create folder with COLLAPSED state by default
         folderSection.innerHTML = `
             <div class="folder-header" onclick="toggleMapFolder('${folderIdSafe}')">
                 <span class="icon folder-icon"></span>
                 <span class="folder-name">${folder.name}</span>
-                <span class="icon chevron-icon expanded"></span>
+                <span class="icon chevron-icon collapsed" id="chevron-${folderIdSafe}"></span>
                 <span class="folder-count" id="map-count-${folderIdSafe}">...</span>
             </div>
-            <ul class="folder-contents" id="map-folder-${folderIdSafe}">
+            <ul class="folder-contents" id="map-folder-${folderIdSafe}" style="display: none;">
                 <li class="loading">Loading...</li>
             </ul>
         `;
@@ -178,60 +183,102 @@ function addMapToList(file, parentElement) {
         <span class="chapter-number">${file.displayNumber}</span>
         <span class="chapter-name" title="${tooltipText}">${mapName}</span>
         <span class="chapter-size">${(file.size / 1024).toFixed(1)}KB</span>
+        <span class="external-indicator">↗</span>
     `;
     
-    li.onclick = () => loadMapFile(file);
+    // Add click handler
+    li.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        openMapFile(file);
+    };
     
     parentElement.appendChild(li);
 }
 
 // Toggle folder open/closed
 function toggleMapFolder(folderIdSafe) {
+    console.log('Toggling folder:', folderIdSafe);
+    
     const folderContents = document.getElementById(`map-folder-${folderIdSafe}`);
-    const folderHeader = folderContents?.previousElementSibling;
-    const chevron = folderHeader?.querySelector('.chevron-icon');
+    const chevron = document.getElementById(`chevron-${folderIdSafe}`);
     
     if (folderContents) {
-        if (folderContents.style.display === 'none') {
+        if (folderContents.style.display === 'none' || folderContents.style.display === '') {
+            // Open folder
             folderContents.style.display = 'block';
-            if (chevron) chevron.innerHTML = icons.chevronDown || '▼';
+            if (chevron) {
+                chevron.classList.remove('collapsed');
+                chevron.classList.add('expanded');
+                if (typeof icons !== 'undefined' && icons.chevronDown) {
+                    chevron.innerHTML = icons.chevronDown;
+                } else {
+                    chevron.innerHTML = '▼';
+                }
+            }
         } else {
+            // Close folder
             folderContents.style.display = 'none';
-            if (chevron) chevron.innerHTML = icons.chevronRight || '▶';
+            if (chevron) {
+                chevron.classList.remove('expanded');
+                chevron.classList.add('collapsed');
+                if (typeof icons !== 'undefined' && icons.chevronRight) {
+                    chevron.innerHTML = icons.chevronRight;
+                } else {
+                    chevron.innerHTML = '▶';
+                }
+            }
         }
     }
 }
 
-// Load and display HTML map file
-async function loadMapFile(file) {
-    console.log('Loading map file:', file.name);
+// Open HTML map file in new tab
+function openMapFile(file) {
+    console.log('Opening map file:', file.name);
+    console.log('Download URL:', file.download_url);
     
     try {
-        const mapDisplay = document.getElementById('mapDisplay');
+        // Open the file directly in a new tab
+        const newWindow = window.open(file.download_url, '_blank');
+        
+        if (newWindow) {
+            newWindow.focus();
+        } else {
+            // If popup was blocked, show message
+            alert('Please allow popups for this site to open maps in new tabs.');
+        }
+        
+        // Update UI to show which map was opened
         const currentMapTitle = document.getElementById('currentMap');
         const mapInfo = document.getElementById('mapInfo');
-        
-        // Update UI
-        currentMapTitle.textContent = `Loading ${file.name}...`;
-        mapDisplay.innerHTML = '<div class="loading">Loading map...</div>';
-        
-        // Fetch the HTML content
-        const response = await fetch(file.download_url);
-        const htmlContent = await response.text();
-        
-        // Update title
         const mapName = file.name.replace('.html', '').replace('.htm', '');
-        currentMapTitle.textContent = mapName;
-        mapInfo.textContent = `${file.folderPath || 'General'} / ${mapName}`;
         
-        // Display HTML content in iframe for isolation
-        const iframe = document.createElement('iframe');
-        iframe.className = 'map-iframe';
-        iframe.srcdoc = htmlContent;
-        iframe.sandbox = 'allow-scripts allow-same-origin';
+        if (currentMapTitle) {
+            currentMapTitle.textContent = `Opened: ${mapName}`;
+        }
         
-        mapDisplay.innerHTML = '';
-        mapDisplay.appendChild(iframe);
+        if (mapInfo) {
+            mapInfo.textContent = `${file.folderPath || 'General'} / ${mapName}`;
+        }
+        
+        // Update the display area
+        const mapDisplay = document.getElementById('mapDisplay');
+        if (mapDisplay) {
+            mapDisplay.innerHTML = `
+                <div class="no-map-selected" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 60px; margin-bottom: 1rem;">↗️</div>
+                    <h3>Map opened in new tab</h3>
+                    <p><strong>${mapName}</strong></p>
+                    <p style="color: var(--text-tertiary); margin-top: 1rem;">
+                        The map has been opened in a new browser tab.<br>
+                        Select another map from the sidebar to continue.
+                    </p>
+                    <button class="nav-btn" onclick="window.open('${file.download_url}', '_blank')" style="margin-top: 1rem; padding: 0.75rem 1.5rem; background: var(--primary); color: white; border: none; border-radius: 0.5rem; cursor: pointer;">
+                        Open Again ↗
+                    </button>
+                </div>
+            `;
+        }
         
         // Highlight selected map
         document.querySelectorAll('.map-chapter-item').forEach(item => {
@@ -243,43 +290,52 @@ async function loadMapFile(file) {
             }
         });
         
-        // Store current map
-        currentMapFile = file;
-        
         // Close sidebar on mobile
-        if (window.innerWidth <= 768) {
+        if (window.innerWidth <= 768 && typeof closeSidebar === 'function') {
             closeSidebar();
         }
         
     } catch (error) {
-        console.error('Error loading map:', error);
-        document.getElementById('mapDisplay').innerHTML = `
-            <div class="error">
-                <h3>Error loading map</h3>
-                <p>${error.message}</p>
-            </div>
-        `;
+        console.error('Error opening map:', error);
+        alert('Error opening map: ' + error.message);
     }
 }
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Maps viewer initializing...');
-    
-    // Check authentication
-    if (typeof checkAuth === 'function') {
-        checkAuth();
-    }
-    
-    // Load maps
-    loadMaps();
-    
-    // Display user key
-    const userKey = localStorage.getItem('access_key');
-    if (userKey) {
-        const userKeyElement = document.getElementById('userKey');
-        if (userKeyElement) {
-            userKeyElement.textContent = userKey;
+// Initialize chevron icons
+function initializeChevronIcons() {
+    document.querySelectorAll('.chevron-icon').forEach(chevron => {
+        if (chevron.classList.contains('collapsed')) {
+            if (typeof icons !== 'undefined' && icons.chevronRight) {
+                chevron.innerHTML = icons.chevronRight;
+            } else {
+                chevron.innerHTML = '▶';
+            }
+        } else if (chevron.classList.contains('expanded')) {
+            if (typeof icons !== 'undefined' && icons.chevronDown) {
+                chevron.innerHTML = icons.chevronDown;
+            } else {
+                chevron.innerHTML = '▼';
+            }
         }
+    });
+}
+
+// Initialize on page load (NO AUTH CHECK)
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Public maps viewer initializing...');
+    
+    // Check if config exists
+    if (typeof GITHUB_CONFIG === 'undefined') {
+        console.error('GITHUB_CONFIG not found. Please check config.js');
+        document.getElementById('mapsList').innerHTML = 
+            '<li class="error">Configuration error. Please check console.</li>';
+        return;
     }
+    
+    // Load maps immediately - no authentication needed
+    loadMaps();
 });
+
+// Make functions globally available
+window.toggleMapFolder = toggleMapFolder;
+window.openMapFile = openMapFile;

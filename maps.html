@@ -60,6 +60,95 @@
             background: var(--primary);
             color: white;
         }
+
+        .map-chapter-item::after {
+            content: "↗";
+            margin-left: auto;
+            opacity: 0.5;
+            font-size: 0.875rem;
+            padding-left: 0.5rem;
+        }
+
+        .map-chapter-item:hover::after {
+            opacity: 1;
+            transform: translate(2px, -2px);
+        }
+
+        /* Style for "opened in new tab" message */
+        .no-map-selected button {
+            margin-top: 1rem;
+        }
+
+        /* Cursor to indicate clickable external link */
+        .map-chapter-item {
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Tooltip on hover */
+        .map-chapter-item:hover::before {
+            content: "Opens in new tab";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+
+        /* External link indicator */
+        .external-indicator {
+            margin-left: auto;
+            opacity: 0.5;
+            font-size: 1rem;
+            padding-left: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .map-chapter-item:hover .external-indicator {
+            opacity: 1;
+            transform: translate(2px, -2px);
+        }
+
+        /* Ensure map items are clickable */
+        .map-chapter-item {
+            cursor: pointer !important;
+            user-select: none;
+        }
+
+        .map-chapter-item:active {
+            transform: scale(0.98);
+        }
+
+        /* Collapsed folders by default */
+        .folder-contents {
+            transition: all 0.3s ease;
+        }
+
+        .chevron-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .chevron-icon.collapsed {
+            transform: rotate(0deg);
+        }
+
+        .chevron-icon.expanded {
+            transform: rotate(90deg);
+        }
     </style>
 </head>
 <body>
@@ -80,10 +169,8 @@
                 
 
     <!-- Load required scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/config.js"></script>
     <script src="js/icons.js"></script>
-    <script src="js/session.js"></script>
     <script src="js/theme.js"></script>
     <script src="js/maps.js"></script>
     
@@ -92,13 +179,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Set all icon SVGs
             const iconElements = [
-                { selector: '.menu-icon', icon: 'menu' },
                 { selector: '.map-icon', icon: 'map' },
-                { selector: '.collapse-icon', icon: 'collapse' },
                 { selector: '.theme-icon', icon: 'moon' },
-                { selector: '.logout-icon', icon: 'logout' },
-                { selector: '.cards-icon', icon: 'layers' },
-                { selector: '.map-large-icon', icon: 'map' }
+                { selector: '.map-large-icon', icon: 'map' },
+                { selector: '.external-link-icon', icon: 'externalLink' }
             ];
             
             iconElements.forEach(({ selector, icon }) => {
