@@ -93,13 +93,6 @@
             box-shadow: var(--shadow-md);
         }
         
-        .view-btn {
-            background: var(--success);
-        }
-        
-        .view-btn:hover {
-            background: #059669;
-        }
         
         .pdf-info {
             padding: 1.5rem;
@@ -133,6 +126,54 @@
             color: var(--text-primary);
             font-weight: 500;
         }
+
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        .download-animation {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        /* PDF item hover effect to indicate clickable */
+        .pdf-item {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .pdf-item:hover {
+            background: var(--primary-light);
+            transform: translateX(4px);
+        }
+
+        .pdf-item:hover .download-indicator {
+            animation: bounce 0.5s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(4px); }
+        }
+
+        /* Active PDF item */
+        .pdf-item.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .pdf-item.active .chapter-size,
+        .pdf-item.active .chapter-name {
+            color: white;
+        }
+
     </style>
 </head>
 <body> 
@@ -149,7 +190,7 @@
     <div class="sidebar-content">
         <!-- List of available PDFs -->
         <ul id="pdfList" class="chapter-list">
-            <li class="loading">Loading study materials...</li>
+            <li class="loading">Loading ...</li>
         </ul>
     </div>
 
@@ -160,31 +201,6 @@
     <script src="js/theme.js"></script>
     <script src="js/ssm-public.js"></script>
     
-    <!-- Simple theme toggle without auth -->
-    <!-- <script>
-        // Simple theme management
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-        }
-        
-        function updateThemeIcon(theme) {
-            const icon = document.getElementById('themeIcon');
-            if (icon) {
-                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
-            }
-        }
-        
-        // Apply saved theme on load
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        updateThemeIcon(savedTheme);
-    </script> -->
-    
-    <!-- Initialize icons -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Set all icon SVGs

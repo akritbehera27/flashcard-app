@@ -1,5 +1,5 @@
 // ============================================
-// PUBLIC SSM VIEWER (PDF DOWNLOADS)
+// PUBLIC SSM VIEWER (DIRECT PDF DOWNLOADS)
 // ============================================
 
 // Global variables
@@ -173,16 +173,13 @@ async function loadSSMFolder(folder, parentElement, parentPath = '') {
     }
 }
 
-// Add PDF file to the list
+// Add PDF file to the list - CLICK TO DOWNLOAD DIRECTLY
 function addPDFToList(file, parentElement) {
     const li = document.createElement('li');
     li.className = 'pdf-item';
     
     const pdfName = file.name.replace('.pdf', '').replace('.PDF', '');
     const tooltipText = file.folderPath ? `${file.folderPath} / ${pdfName}` : pdfName;
-    
-    // Store the file path for URL construction
-    file.webPath = file.folderPath ? `${file.folderPath}/${file.name}` : file.name;
     
     li.innerHTML = `
         <span class="chapter-number">${file.displayNumber}</span>
@@ -192,11 +189,11 @@ function addPDFToList(file, parentElement) {
         <span class="download-indicator">⬇</span>
     `;
     
-    // Add click handler
+    // Add click handler - DIRECT DOWNLOAD
     li.onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
-        showPDFOptions(file);
+        downloadPDF(file);
     };
     
     parentElement.appendChild(li);
@@ -245,41 +242,37 @@ function toggleSSMFolder(folderIdSafe) {
     }
 }
 
-// Show PDF options (download/view)
-function showPDFOptions(file) {
-    console.log('Selected PDF:', file.name);
+// SIMPLIFIED - Download PDF file directly
+function downloadPDF(file) {
+    console.log('Downloading:', file.name);
     
+    // Update UI to show which file is being downloaded
     const currentPDFTitle = document.getElementById('currentPDF');
     const pdfInfo = document.getElementById('pdfInfo');
     const pdfDisplay = document.getElementById('pdfDisplay');
     const pdfName = file.name.replace('.pdf', '').replace('.PDF', '');
     
-    // Construct URLs
-    let downloadUrl = file.download_url;
-    let viewUrl;
-    
-    if (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.domain) {
-        viewUrl = `${SITE_CONFIG.domain}/ssm/${file.webPath}`;
-    } else {
-        viewUrl = file.download_url;
-    }
-    
-    // Update UI
+    // Update header
     if (currentPDFTitle) {
-        currentPDFTitle.textContent = pdfName;
+        currentPDFTitle.textContent = `Downloading: ${pdfName}`;
     }
     
     if (pdfInfo) {
         pdfInfo.textContent = `${file.folderPath || 'General'} / ${pdfName}`;
     }
     
+    // Show download status
     if (pdfDisplay) {
         pdfDisplay.innerHTML = `
             <div class="no-pdf-selected">
-                <span class="icon pdf-large-icon" style="width: 80px; height: 80px; margin-bottom: 1rem;"></span>
+                <div class="download-animation">
+                    <span class="icon download-icon-large" style="width: 80px; height: 80px; color: var(--primary);"></span>
+                </div>
                 
-                <div class="pdf-info">
-                    <h3>${pdfName}</h3>
+                <h3>Downloading...</h3>
+                <p style="font-size: 1.25rem; font-weight: 600; margin: 1rem 0;">${pdfName}</p>
+                
+                <div class="pdf-info" style="max-width: 400px;">
                     <div class="pdf-info-item">
                         <span class="pdf-info-label">File Name:</span>
                         <span class="pdf-info-value">${file.name}</span>
@@ -294,34 +287,19 @@ function showPDFOptions(file) {
                     </div>
                 </div>
                 
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <button class="download-btn" onclick="downloadPDF('${downloadUrl}', '${file.name}')">
-                        <span class="icon download-icon"></span>
-                        <span>Download PDF</span>
-                    </button>
-                    
-                    <button class="download-btn view-btn" onclick="viewPDF('${viewUrl}')">
-                        <span class="icon view-icon"></span>
-                        <span>View in Browser</span>
-                    </button>
-                </div>
-                
                 <p style="color: var(--text-tertiary); font-size: 0.875rem; margin-top: 2rem;">
-                    Click "Download" to save the file to your device<br>
-                    Click "View" to open in a new browser tab
+                    The file will be saved to your Downloads folder
                 </p>
             </div>
         `;
         
-        // Re-initialize icons for the new content
+        // Add download animation
         setTimeout(() => {
-            const downloadIcon = pdfDisplay.querySelector('.download-icon');
-            const viewIcon = pdfDisplay.querySelector('.view-icon');
-            const pdfIcon = pdfDisplay.querySelector('.pdf-large-icon');
-            
-            if (downloadIcon && icons.download) downloadIcon.innerHTML = icons.download;
-            if (viewIcon && icons.eye) viewIcon.innerHTML = icons.eye;
-            if (pdfIcon && icons.fileText) pdfIcon.innerHTML = icons.fileText;
+            const iconElement = pdfDisplay.querySelector('.download-icon-large');
+            if (iconElement && icons.download) {
+                iconElement.innerHTML = icons.download;
+                iconElement.style.animation = 'pulse 1s ease-in-out infinite';
+            }
         }, 0);
     }
     
@@ -335,6 +313,20 @@ function showPDFOptions(file) {
         }
     });
     
+    // Create download link and trigger it
+    const a = document.createElement('a');
+    a.href = file.download_url;
+    a.download = file.name;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    
+    // Show success message after a short delay
+    setTimeout(() => {
+        showDownloadSuccess(file);
+    }, 1500);
+    
     // Store current PDF
     currentPDFFile = file;
     
@@ -344,66 +336,47 @@ function showPDFOptions(file) {
     }
 }
 
-// Download PDF file
-function downloadPDF(url, filename) {
-    console.log('Downloading:', filename);
-    
-    // Create a temporary anchor element and trigger download
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    
-    // Show confirmation
-    showDownloadConfirmation(filename);
-}
-
-// View PDF in new tab
-function viewPDF(url) {
-    console.log('Opening PDF:', url);
-    
-    const newWindow = window.open(url, '_blank');
-    
-    if (newWindow) {
-        newWindow.focus();
-    } else {
-        alert('Please allow popups to view PDFs in a new tab.');
-    }
-}
-
-// Show download confirmation
-function showDownloadConfirmation(filename) {
+// Show download success message
+function showDownloadSuccess(file) {
     const pdfDisplay = document.getElementById('pdfDisplay');
-    const originalContent = pdfDisplay.innerHTML;
+    const pdfName = file.name.replace('.pdf', '').replace('.PDF', '');
     
-    // Show confirmation message
-    const confirmationHTML = `
-        <div class="no-pdf-selected" style="background: var(--success); color: white; padding: 2rem; border-radius: 1rem;">
-            <div style="font-size: 48px; margin-bottom: 1rem;">✓</div>
-            <h3>Download Started!</h3>
-            <p>${filename}</p>
-            <p style="opacity: 0.9; margin-top: 1rem;">Check your downloads folder</p>
-        </div>
-    `;
-    
-    pdfDisplay.innerHTML = confirmationHTML;
-    
-    // Restore original content after 3 seconds
-    setTimeout(() => {
-        pdfDisplay.innerHTML = originalContent;
+    if (pdfDisplay) {
+        pdfDisplay.innerHTML = `
+            <div class="no-pdf-selected" style="text-align: center;">
+                <div style="font-size: 80px; color: var(--success); margin-bottom: 1rem;">✓</div>
+                <h3 style="color: var(--success);">Download Complete!</h3>
+                <p style="font-size: 1.25rem; font-weight: 600; margin: 1rem 0;">${pdfName}</p>
+                <p style="color: var(--text-tertiary); margin-top: 1rem;">
+                    Check your Downloads folder for the file
+                </p>
+                
+                <button class="download-btn" onclick="downloadPDF(${JSON.stringify(file).replace(/"/g, '&quot;')})" 
+                        style="margin-top: 2rem;">
+                    <span class="icon download-icon"></span>
+                    <span>Download Again</span>
+                </button>
+                
+                <p style="color: var(--text-tertiary); font-size: 0.875rem; margin-top: 2rem;">
+                    Select another PDF from the sidebar to continue
+                </p>
+            </div>
+        `;
         
-        // Re-initialize icons
-        const downloadIcon = pdfDisplay.querySelector('.download-icon');
-        const viewIcon = pdfDisplay.querySelector('.view-icon');
-        const pdfIcon = pdfDisplay.querySelector('.pdf-large-icon');
-        
-        if (downloadIcon && icons.download) downloadIcon.innerHTML = icons.download;
-        if (viewIcon && icons.eye) viewIcon.innerHTML = icons.eye;
-        if (pdfIcon && icons.fileText) pdfIcon.innerHTML = icons.fileText;
-    }, 3000);
+        // Re-initialize download icon
+        setTimeout(() => {
+            const downloadIcon = pdfDisplay.querySelector('.download-icon');
+            if (downloadIcon && icons.download) {
+                downloadIcon.innerHTML = icons.download;
+            }
+        }, 0);
+    }
+    
+    // Update header
+    const currentPDFTitle = document.getElementById('currentPDF');
+    if (currentPDFTitle) {
+        currentPDFTitle.textContent = `Downloaded: ${pdfName}`;
+    }
 }
 
 // Initialize chevron icons
@@ -451,4 +424,3 @@ document.addEventListener('DOMContentLoaded', () => {
 // Make functions globally available
 window.toggleSSMFolder = toggleSSMFolder;
 window.downloadPDF = downloadPDF;
-window.viewPDF = viewPDF;
