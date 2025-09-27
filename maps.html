@@ -119,13 +119,23 @@
             <span class="slider"></span>
         </label>
     </div>
+    
     <div class="sidebar-content">
         <!-- List of available maps -->
         <ul id="mapsList" class="chapter-list">
             <li class="loading">Loading maps...</li>
         </ul>
     </div>
-                
+    
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <a href="index.html" style="width: 30%; min-width: 150px;">
+            <button class="resources-btn">
+            <span class="icon resources-icon"></span>
+            <span>Home</span>
+        </button>
+        </a>
+    </div>
+    
 
     <!-- Load required scripts -->
     <script src="js/config.js"></script>
@@ -141,7 +151,8 @@
                 { selector: '.map-icon', icon: 'map' },
                 { selector: '.theme-icon', icon: 'moon' },
                 { selector: '.map-large-icon', icon: 'map' },
-                { selector: '.external-link-icon', icon: 'externalLink' }
+                { selector: '.external-link-icon', icon: 'externalLink' },
+                { selector: '.resources-icon', icon: 'resources' } 
             ];
             
             iconElements.forEach(({ selector, icon }) => {

@@ -14,7 +14,11 @@ const GITHUB_CONFIG = {
     owner: 'akritbehera27',  // Replace with your GitHub username
     repo: 'flashcard-app',           // Your repository name
     branch: 'main',                  // Branch name (usually 'main' or 'master')
+<<<<<<< HEAD
     folder: 'flashcards'             // Folder containing .txt files
+=======
+    folder: 'flashcards',       // Folder containing .txt files         
+>>>>>>> 34ffc20 (add resource menu)
 };
 
 const SITE_CONFIG = {

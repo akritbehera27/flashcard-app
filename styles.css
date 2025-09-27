@@ -2300,3 +2300,233 @@ button .icon {
     background: var(--bg-secondary);
 }
 
+/* ============================================
+   RESOURCES MENU STYLES
+   ============================================ */
+
+/* Resources button in sidebar */
+.resources-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.resources-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Resources overlay */
+.resources-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 1rem;
+}
+
+/* Resources menu container */
+.resources-menu {
+    background: var(--bg-elevated);
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-xl);
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Close button */
+.close-menu-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    color: var(--text-secondary);
+}
+
+.close-menu-btn:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* Menu header */
+.resources-menu h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.resources-menu > p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* Resources grid */
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Resource card */
+.resource-card {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.resource-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+/* Resource icon */
+.resource-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--primary-light);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.resource-icon .icon {
+    width: 30px;
+    height: 30px;
+}
+
+/* Resource content */
+.resource-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.resource-card p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+/* Resource badge */
+.resource-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--success);
+    color: white;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Coming soon state */
+.resource-card.coming-soon {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.resource-card.coming-soon .resource-badge {
+    background: var(--text-tertiary);
+}
+
+/* Resources footer */
+.resources-footer {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.resources-footer p {
+    color: var(--text-tertiary);
+    font-size: 0.875rem;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .resources-menu {
+    background: var(--bg-elevated);
+}
+
+[data-theme="dark"] .resource-card {
+    background: var(--bg-tertiary);
+}
+
+[data-theme="dark"] .resource-icon {
+    background: rgba(99, 102, 241, 0.2);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .resources-menu {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .resources-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .resources-menu h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Smooth transitions */
+.resources-overlay * {
+    transition: all 0.3s ease;
+}

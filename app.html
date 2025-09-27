@@ -59,6 +59,11 @@
                     </label>
                 </div>
                 
+                <button class="resources-btn" onclick="openResourcesMenu()">
+                    <span class="icon resources-icon"></span>
+                    <span>Resources</span>
+                </button>
+
                 <button class="logout-btn" onclick="logout()">
                     <span class="icon logout-icon"></span>
                     <span>Logout</span>
@@ -150,6 +155,7 @@
     <script src="js/session.js"></script>
     <script src="js/flashcards.js"></script>
     <script src="js/theme.js"></script>
+    <script src="js/resources-menu.js"></script>
     
 <!-- UPDATE the initialization script at the bottom of app.html -->
 <script>
@@ -166,7 +172,9 @@
             { selector: '.shuffle-icon', icon: 'shuffle' },
             { selector: '.select-deck-icon', icon: 'selectDeck' },
             { selector: '.folder-icon', icon: 'folder' },  // ADD THIS
-            { selector: '.chevron-icon', icon: 'chevronDown' }  // ADD THIS
+            { selector: '.chevron-icon', icon: 'chevronDown' },  // ADD THIS
+            { selector: '.resources-icon', icon: 'resources' }  // ADD THIS
+            
         ];
         
         iconElements.forEach(({ selector, icon }) => {
@@ -199,5 +207,50 @@
 
     <!-- Then your existing scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <div id="resourcesOverlay" class="resources-overlay" style="display: none;">
+    <div class="resources-menu">
+        <!-- Close button -->
+        <button class="close-menu-btn" onclick="closeResourcesMenu()">
+            <span class="icon close-icon"></span>
+        </button>
+        
+        <h2>Study Resources</h2>
+        <p>Access additional study materials</p>
+        
+        <div class="resources-grid">
+            <!-- Maps Button -->
+            <a href="maps.html" class="resource-card">
+                <div class="resource-icon">
+                    <span class="icon map-large-icon"></span>
+                </div>
+                <h3>Study Maps</h3>
+                <p>Interactive HTML mind maps and diagrams</p>
+                <span class="resource-badge">Access Now</span>
+            </a>
+            
+            <!-- SSM Button -->
+            <a href="ssm.html" class="resource-card">
+                <div class="resource-icon">
+                    <span class="icon pdf-large-icon"></span>
+                </div>
+                <h3>SSM's</h3>
+                <p>Download Student Study Materials</p>
+                <span class="resource-badge">Free Download</span>
+            </a>
+            
+            <!-- Optional: Add more resources -->
+            <div class="resource-card coming-soon">
+                <div class="resource-icon">
+                    <span class="icon quiz-icon"></span>
+                </div>
+                <h3>Previous Year Question</h3>
+                <p>Coming soon...</p>
+                <span class="resource-badge">Coming Soon</span>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
