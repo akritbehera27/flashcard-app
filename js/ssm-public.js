@@ -136,7 +136,7 @@ async function loadPDFs() {
 
 // Load contents of a folder
 async function loadSSMFolder(folder, parentElement, parentPath = '') {
-    await new Promise(resolve => setTimeout(resolve, 200));
+    await new Promise(resolve => setTimeout(resolve, 1000));
     try {
         console.log(`Loading folder: ${folder.name}`);
         

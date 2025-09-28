@@ -473,7 +473,7 @@ input[type="email"]:focus {
 
 /* Adjust content to account for fixed footer */
 .sidebar-content {
-    margin-bottom: 200px;
+    margin-bottom: 300px;
 }
 
 /* Chapter list text wrapping */

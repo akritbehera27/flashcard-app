@@ -187,20 +187,22 @@
     </div>
 
     <!-- Sidebar content wrapper -->
-    <div class="sidebar-content">
+    <div class="sidebar-content" style="margin: 0px;">
         <!-- List of available PDFs -->
         <ul id="pdfList" class="chapter-list">
             <li class="loading">Loading ...</li>
         </ul>
     </div>
-
-        <div style="display: flex; justify-content: center; align-items: center;">
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
         <a href="index.html" style="width: 30%; min-width: 150px;">
             <button class="resources-btn">
             <span class="icon resources-icon"></span>
             <span>Home</span>
         </button>
         </a>
+        <div class="compact-info">
+            <h4>Compact View</h4>
+        </div>
     </div>
     
     <!-- Load required scripts -->
